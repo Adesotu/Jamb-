@@ -588,6 +588,35 @@
     background: #eaf5e6;
   }
 
+  .show-explanation-btn {
+    background: #f0f8e6;
+    border: 1px solid #4caf50;
+    color: #2e7d32;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    transition: 0.2s;
+  }
+
+  .show-explanation-btn:hover {
+    background: #d4edda;
+  }
+
+  .explanation-text {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-left: 4px solid #4caf50;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .feedback-text {
+    margin-bottom: 10px;
+  }
+
   footer {
     text-align: center;
     margin-top: 28px;
@@ -663,6 +692,10 @@
     <div id="subjectSelectPanel" class="subject-select-panel hidden">
       <h2>✅ Exam Completed!</h2>
       <p>Select another subject to continue testing</p>
+      <div id="failedTopicsPanel" class="failed-topics-panel hidden">
+        <h3>❌ Missed Question Topics</h3>
+        <ul id="failedTopicsText" style="margin:0 0 16px 16px; padding-left: 16px; color:#b91c1c;"></ul>
+      </div>
       <div class="subject-select-wrapper">
         <select id="anotherSubjectSelect">
           <option value="">📚 Choose another subject</option>
@@ -690,6 +723,11 @@
           <div class="summary-stat-label">Best Subject</div>
           <div class="summary-stat-value" id="bestSubject" style="font-size: 1.2rem;">-</div>
         </div>
+      </div>
+
+      <div id="failedTopicsSummary" class="failed-topics-summary" style="margin-bottom:16px; display:none;">
+        <h3>❌ Last Exam Missed Topics</h3>
+        <ul id="failedTopicsSummaryList" style="margin:0 0 0 16px; padding-left:16px; color:#b91c1c;"></ul>
       </div>
 
       <div class="results-table-wrapper">
@@ -822,7 +860,7 @@
     qs.push(makeQ("Which of the following is a vascular cryptogam?", ["moss", "fern", "liverwort", "alga"], 1, "Plant Classification"));
     qs.push(makeQ("The seed of a monocot is", ["non-endospermic", "endospermic", "without a cotyledon", "with two cotyledons"], 1, "Plant Morphology"));
     qs.push(makeQ("The type of root system found in dicot plants is", ["tap root", "fibrous root", "adventitious root", "aerial root"], 0, "Plant Morphology"));
-    qs.push(makeQ("The process of movement of water from the roots to the leaves is explained by", ["transpiration pull", "root pressure", "osmosis", "both A and B"], 3, "Transport"));
+    qs.push(makeQ("The process of movement of water from the roots to the leaves is explained by", ["transpiration pull", "root pressure", "osmosis", "transpiration pull and root pressure"], 3, "Transport"));
     qs.push(makeQ("The loss of water from plants in the form of liquid droplets is called", ["transpiration", "guttation", "evaporation", "condensation"], 1, "Plant Physiology"));
     qs.push(makeQ("The opening and closing of stomata is controlled by", ["guard cells", "epidermal cells", "cuticle", "lenticels"], 0, "Plant Physiology"));
     qs.push(makeQ("The raw materials for photosynthesis are", ["oxygen and water", "carbon dioxide and water", "glucose and oxygen", "glucose and carbon dioxide"], 1, "Photosynthesis"));
@@ -831,7 +869,7 @@
     qs.push(makeQ("The chemical equation for photosynthesis is", ["6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂", "C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O", "6CO₂ + 6O₂ → C₆H₁₂O₆ + 6H₂O", "6H₂O + 6O₂ → C₆H₁₂O₆ + 6CO₂"], 0, "Photosynthesis"));
     qs.push(makeQ("The energy currency of the cell is", ["ATP", "ADP", "DNA", "RNA"], 0, "Cell Biology"));
     qs.push(makeQ("Anaerobic respiration in yeast produces", ["lactic acid", "ethanol and carbon dioxide", "water and carbon dioxide", "oxygen"], 1, "Respiration"));
-    qs.push(makeQ("The process of breaking down glucose without oxygen is called", ["aerobic respiration", "anaerobic respiration", "fermentation", "both B and C"], 3, "Respiration"));
+    qs.push(makeQ("The process of breaking down glucose without oxygen is called", ["aerobic respiration", "anaerobic respiration", "fermentation", "anaerobic respiration and fermentation"], 1, "Respiration"));
     qs.push(makeQ("The hormone that regulates blood sugar level is", ["adrenaline", "insulin", "thyroxine", "oestrogen"], 1, "Endocrine System"));
     qs.push(makeQ("The part of the human brain that is responsible for intelligence and memory is the", ["cerebrum", "cerebellum", "medulla oblongata", "hypothalamus"], 0, "Nervous System"));
     qs.push(makeQ("The peripheral nervous system consists of", ["brain and spinal cord", "nerves and ganglia", "only spinal nerves", "only cranial nerves"], 1, "Nervous System"));
@@ -843,7 +881,7 @@
     qs.push(makeQ("The site of fertilization in the human female reproductive system is the", ["ovary", "fallopian tube", "uterus", "vagina"], 1, "Reproduction"));
     qs.push(makeQ("The structure that connects the foetus to the placenta is the", ["umbilical cord", "amniotic sac", "yolk sac", "fallopian tube"], 0, "Reproduction"));
     qs.push(makeQ("Which of the following is not a method of birth control?", ["condom", "IUD", "abstinence", "fertilization"], 3, "Reproduction"));
-    qs.push(makeQ("The type of reproduction that does not involve gametes is called", ["sexual reproduction", "asexual reproduction", "vegetative reproduction", "both B and C"], 3, "Reproduction"));
+    qs.push(makeQ("The type of reproduction that does not involve gametes is called", ["sexual reproduction", "asexual reproduction", "vegetative reproduction", "asexual reproduction and vegetative reproduction"], 3, "Reproduction"));
     qs.push(makeQ("The process by which an organism produces offspring is called", ["reproduction", "growth", "development", "evolution"], 0, "Reproduction"));
     qs.push(makeQ("Which of the following reproduces by budding?", ["amoeba", "yeast", "paramecium", "spirogyra"], 1, "Reproduction"));
     qs.push(makeQ("The part of the flower that produces pollen is the", ["stigma", "style", "anther", "filament"], 2, "Plant Reproduction"));
@@ -869,7 +907,7 @@
     qs.push(makeQ("The double circulation in mammals involves", ["pulmonary and systemic circuits", "only pulmonary circuit", "only systemic circuit", "single circuit"], 0, "Circulatory System"));
     qs.push(makeQ("The blood pressure is measured with an instrument called", ["stethoscope", "sphygmomanometer", "thermometer", "barometer"], 1, "Circulatory System"));
     qs.push(makeQ("The normal resting heart rate for an adult is approximately", ["60-80 beats per minute", "100-120 beats per minute", "40-50 beats per minute", "120-140 beats per minute"], 0, "Circulatory System"));
-    qs.push(makeQ("The process of breathing in is called", ["expiration", "inspiration", "inhalation", "both B and C"], 3, "Respiratory System"));
+    qs.push(makeQ("The process of breathing in is called", ["expiration", "inspiration", "inhalation", "inspiration and inhalation"], 3, "Respiratory System"));
     qs.push(makeQ("The exchange of gases in the lungs occurs in the", ["bronchi", "trachea", "alveoli", "bronchioles"], 2, "Respiratory System"));
     qs.push(makeQ("The muscle that separates the thoracic and abdominal cavities is the", ["diaphragm", "intercostal muscles", "pectoral muscle", "abdominal muscle"], 0, "Respiratory System"));
     qs.push(makeQ("The process of removing nitrogenous waste from the body is called", ["excretion", "egestion", "secretion", "defecation"], 0, "Excretion"));
@@ -892,7 +930,7 @@
     qs.push(makeQ("The autonomic nervous system controls", ["voluntary actions", "involuntary actions", "skeletal muscles", "all muscles"], 1, "Nervous System"));
     qs.push(makeQ("The hormone secreted by the adrenal medulla during stress is", ["adrenaline", "cortisol", "aldosterone", "thyroxine"], 0, "Endocrine System"));
     qs.push(makeQ("The thyroid gland is located in the", ["neck", "abdomen", "chest", "pelvis"], 0, "Endocrine System"));
-    qs.push(makeQ("The deficiency of iodine causes", ["goitre", "cretinism", "both A and B", "diabetes"], 2, "Endocrine System"));
+    qs.push(makeQ("The deficiency of iodine causes", ["goitre", "cretinism", "goitre and cretinism", "diabetes"], 2, "Endocrine System"));
     qs.push(makeQ("The pituitary gland is also called the", ["master gland", "adrenal gland", "thyroid gland", "pineal gland"], 0, "Endocrine System"));
     qs.push(makeQ("The hormone that promotes growth of bones and tissues is", ["thyroxine", "growth hormone", "insulin", "adrenaline"], 1, "Endocrine System"));
     qs.push(makeQ("The hormone that increases blood glucose level is", ["insulin", "glucagon", "thyroxine", "adrenaline"], 1, "Endocrine System"));
@@ -902,7 +940,7 @@
     qs.push(makeQ("The part of the eye that contains photoreceptors is the", ["cornea", "lens", "retina", "iris"], 2, "Sense Organs"));
     qs.push(makeQ("Rod cells in the retina are responsible for", ["colour vision", "dim light vision", "sharp vision", "peripheral vision"], 1, "Sense Organs"));
     qs.push(makeQ("Cone cells are responsible for", ["colour vision", "dim light vision", "night vision", "black and white vision"], 0, "Sense Organs"));
-    qs.push(makeQ("The ossicles in the middle ear are", ["malleus, incus, stapes", "hammer, anvil, stirrup", "both A and B", "cochlea, vestibule, semicircular canals"], 2, "Sense Organs"));
+    qs.push(makeQ("The ossicles in the middle ear are", ["malleus, incus, stapes", "hammer, anvil, stirrup", "three small bones in the middle ear", "cochlea, vestibule, semicircular canals"], 2, "Sense Organs"));
     qs.push(makeQ("The organ of balance is located in the", ["cochlea", "semicircular canals", "eustachian tube", "tympanic membrane"], 1, "Sense Organs"));
     qs.push(makeQ("The sense of smell is detected by", ["olfactory receptors", "taste buds", "photoreceptors", "thermoreceptors"], 0, "Sense Organs"));
     qs.push(makeQ("The tongue detects taste through", ["papillae", "villi", "cilia", "taste buds"], 3, "Sense Organs"));
@@ -1009,15 +1047,15 @@
     qs.push(makeQ("The study of the structure of organisms is called", ["anatomy", "physiology", "cytology", "histology"], 0, "Branches of Biology"));
     qs.push(makeQ("The study of the functions of organisms is called", ["physiology", "anatomy", "cytology", "histology"], 0, "Branches of Biology"));
     qs.push(makeQ("The process by which organisms produce offspring is", ["reproduction", "growth", "development", "evolution"], 0, "Reproduction"));
-    qs.push(makeQ("The type of reproduction that does not involve fusion of gametes is", ["asexual", "sexual", "vegetative", "both A and C"], 3, "Reproduction"));
+    qs.push(makeQ("The type of reproduction that does not involve fusion of gametes is", ["asexual", "sexual", "vegetative", "asexual and vegetative reproduction"], 3, "Reproduction"));
     qs.push(makeQ("The structure that forms the interface between the foetus and the mother is the", ["placenta", "umbilical cord", "amniotic sac", "uterus"], 0, "Reproduction"));
     qs.push(makeQ("The fluid that surrounds and protects the foetus is", ["amniotic fluid", "placental fluid", "uterine fluid", "serous fluid"], 0, "Reproduction"));
     qs.push(makeQ("The stage of development from the eighth week to birth is called", ["foetus", "embryo", "zygote", "blastocyst"], 0, "Development"));
     qs.push(makeQ("The process of cell division that produces gametes is", ["meiosis", "mitosis", "binary fission", "budding"], 0, "Cell Division"));
     qs.push(makeQ("The process of cell division that produces somatic cells is", ["mitosis", "meiosis", "binary fission", "budding"], 0, "Cell Division"));
     qs.push(makeQ("The male gamete in animals is the", ["sperm", "egg", "ovum", "pollen"], 0, "Reproduction"));
-    qs.push(makeQ("The female gamete in animals is the", ["ovum", "sperm", "egg", "both A and C"], 3, "Reproduction"));
-    qs.push(makeQ("The process of sperm and egg fusion is called", ["fertilization", "conception", "both A and B", "gestation"], 2, "Reproduction"));
+    qs.push(makeQ("The female gamete in animals is the", ["ovum", "sperm", "egg", "ovum (egg)"], 3, "Reproduction"));
+    qs.push(makeQ("The process of sperm and egg fusion is called", ["fertilization", "conception", "fertilization (conception)", "gestation"], 2, "Reproduction"));
     qs.push(makeQ("The result of fertilization is a", ["zygote", "embryo", "foetus", "blastocyst"], 0, "Reproduction"));
     qs.push(makeQ("The process of implantation occurs in the", ["uterus", "ovary", "fallopian tube", "vagina"], 0, "Reproduction"));
     qs.push(makeQ("The hormone that stimulates ovulation is", ["LH", "FSH", "oestrogen", "progesterone"], 0, "Endocrine System"));
@@ -1035,7 +1073,7 @@
     qs.push(makeQ("The storage form of glucose in plants is", ["starch", "glycogen", "cellulose", "sucrose"], 0, "Metabolism"));
     qs.push(makeQ("The process of converting glucose to glycogen is", ["glycogenesis", "glycogenolysis", "gluconeogenesis", "glycolysis"], 0, "Metabolism"));
     qs.push(makeQ("The process of breaking down glycogen to glucose is", ["glycogenolysis", "glycogenesis", "gluconeogenesis", "glycolysis"], 0, "Metabolism"));
-    qs.push(makeQ("The hormone that promotes glycogenolysis is", ["glucagon", "insulin", "adrenaline", "both A and C"], 3, "Endocrine System"));
+    qs.push(makeQ("The hormone that promotes glycogenolysis is", ["glucagon", "insulin", "adrenaline", "glucagon and adrenaline"], 3, "Endocrine System"));
     qs.push(makeQ("The hormone that promotes glycogenesis is", ["insulin", "glucagon", "adrenaline", "cortisol"], 0, "Endocrine System"));
     qs.push(makeQ("The process of converting excess amino acids to urea occurs in the", ["liver", "kidney", "pancreas", "muscles"], 0, "Metabolism"));
     qs.push(makeQ("The nitrogenous waste product of protein metabolism in mammals is", ["urea", "ammonia", "uric acid", "creatinine"], 0, "Excretion"));
@@ -1133,15 +1171,15 @@
     qs.push(makeQ("The study of the structure of organisms is called", ["anatomy", "physiology", "cytology", "histology"], 0, "Branches of Biology"));
     qs.push(makeQ("The study of the functions of organisms is called", ["physiology", "anatomy", "cytology", "histology"], 0, "Branches of Biology"));
     qs.push(makeQ("The process by which organisms produce offspring is", ["reproduction", "growth", "development", "evolution"], 0, "Reproduction"));
-    qs.push(makeQ("The type of reproduction that does not involve fusion of gametes is", ["asexual", "sexual", "vegetative", "both A and C"], 3, "Reproduction"));
+    qs.push(makeQ("The type of reproduction that does not involve fusion of gametes is", ["asexual", "sexual", "vegetative", "asexual and vegetative reproduction"], 3, "Reproduction"));
     qs.push(makeQ("The structure that forms the interface between the foetus and the mother is the", ["placenta", "umbilical cord", "amniotic sac", "uterus"], 0, "Reproduction"));
     qs.push(makeQ("The fluid that surrounds and protects the foetus is", ["amniotic fluid", "placental fluid", "uterine fluid", "serous fluid"], 0, "Reproduction"));
     qs.push(makeQ("The stage of development from the eighth week to birth is called", ["foetus", "embryo", "zygote", "blastocyst"], 0, "Development"));
     qs.push(makeQ("The process of cell division that produces gametes is", ["meiosis", "mitosis", "binary fission", "budding"], 0, "Cell Division"));
     qs.push(makeQ("The process of cell division that produces somatic cells is", ["mitosis", "meiosis", "binary fission", "budding"], 0, "Cell Division"));
     qs.push(makeQ("The male gamete in animals is the", ["sperm", "egg", "ovum", "pollen"], 0, "Reproduction"));
-    qs.push(makeQ("The female gamete in animals is the", ["ovum", "sperm", "egg", "both A and C"], 3, "Reproduction"));
-    qs.push(makeQ("The process of sperm and egg fusion is called", ["fertilization", "conception", "both A and B", "gestation"], 2, "Reproduction"));
+    qs.push(makeQ("The female gamete in animals is the", ["ovum", "sperm", "egg", "ovum (egg)"], 3, "Reproduction"));
+    qs.push(makeQ("The process of sperm and egg fusion is called", ["fertilization", "conception", "fertilization (conception)", "gestation"], 2, "Reproduction"));
     qs.push(makeQ("The result of fertilization is a", ["zygote", "embryo", "foetus", "blastocyst"], 0, "Reproduction"));
     qs.push(makeQ("The process of implantation occurs in the", ["uterus", "ovary", "fallopian tube", "vagina"], 0, "Reproduction"));
     qs.push(makeQ("The hormone that stimulates ovulation is", ["LH", "FSH", "oestrogen", "progesterone"], 0, "Endocrine System"));
@@ -1218,7 +1256,7 @@
     qs.push(makeQ("The mass of 2 moles of carbon dioxide (CO₂) is (C=12, O=16)", ["44 g", "88 g", "22 g", "176 g"], 1, "Chemistry"));
     qs.push(makeQ("Which of the following is used in the extraction of aluminium?", ["bauxite", "haematite", "galena", "limestone"], 0, "Chemistry"));
     qs.push(makeQ("The colour of chlorine gas is", ["greenish-yellow", "reddish-brown", "colourless", "blue"], 0, "Chemistry"));
-    qs.push(makeQ("A solution with pH 3 is", ["strongly acidic", "weakly acidic", "strongly basic", "neutral"], 1, "Chemistry"));
+    qs.push(makeQ("A solution with pH 3 is", ["strongly acidic", "weakly acidic", "strongly basic", "neutral"], 0, "Chemistry"));
     qs.push(makeQ("The number of protons in an atom of atomic number 12 is", ["12", "24", "6", "10"], 0, "Chemistry"));
     qs.push(makeQ("The mass number of an element is the sum of its", ["protons and neutrons", "protons and electrons", "neutrons and electrons", "nucleons"], 0, "Chemistry"));
     qs.push(makeQ("Isotopes of an element have the same number of", ["neutrons", "protons", "nucleons", "electrons in the outer shell"], 1, "Chemistry"));
@@ -1228,7 +1266,7 @@
     qs.push(makeQ("The molar mass of H₂SO₄ is (H=1, S=32, O=16)", ["98 g/mol", "49 g/mol", "196 g/mol", "32 g/mol"], 0, "Chemistry"));
     qs.push(makeQ("The percentage by mass of oxygen in water (H₂O) is (H=1, O=16)", ["88.9%", "11.1%", "50%", "33.3%"], 0, "Chemistry"));
     qs.push(makeQ("1 mole of any substance contains", ["6.02×10²³ particles", "1 g of particles", "22.4 L of particles", "1 kg of particles"], 0, "Chemistry"));
-    qs.push(makeQ("The number of atoms in 0.5 mole of oxygen gas (O₂) is", ["6.02×10²³", "3.01×10²³", "1.204×10²⁴", "1.806×10²⁴"], 2, "Chemistry"));
+    qs.push(makeQ("The number of atoms in 0.5 mole of oxygen gas (O₂) is", ["6.02×10²³", "3.01×10²³", "1.204×10²⁴", "1.806×10²⁴"], 0, "Chemistry"));
     qs.push(makeQ("The empirical formula of benzene (C₆H₆) is", ["CH", "C₆H₆", "C₂H₂", "CH₂"], 0, "Chemistry"));
     qs.push(makeQ("A compound has empirical formula CH₂O and molar mass 180 g/mol. Its molecular formula is (C=12, H=1, O=16)", ["C₆H₁₂O₆", "C₃H₆O₃", "C₂H₄O₂", "CH₂O"], 0, "Chemistry"));
     qs.push(makeQ("The reaction 2Mg + O₂ → 2MgO is an example of", ["combination", "decomposition", "displacement", "double decomposition"], 0, "Chemistry"));
@@ -1245,7 +1283,7 @@
     qs.push(makeQ("An example of a buffer solution is", ["CH₃COOH and CH₃COONa", "HCl and NaCl", "NaOH and NaCl", "H₂SO₄ and Na₂SO₄"], 0, "Chemistry"));
     qs.push(makeQ("The pH of a 0.01 M HCl solution is", ["2", "1", "0.01", "12"], 0, "Chemistry"));
     qs.push(makeQ("The pH of a 0.01 M NaOH solution is", ["12", "2", "10", "0.01"], 0, "Chemistry"));
-    qs.push(makeQ("The indicator used in the titration of a strong acid with a strong base is", ["methyl orange", "phenolphthalein", "both A and B", "litmus"], 2, "Chemistry"));
+    qs.push(makeQ("The indicator used in the titration of a strong acid with a strong base is", ["methyl orange", "phenolphthalein", "methyl orange or phenolphthalein", "litmus"], 2, "Chemistry"));
     qs.push(makeQ("The colour of phenolphthalein in an alkaline solution is", ["pink", "colourless", "red", "blue"], 0, "Chemistry"));
     qs.push(makeQ("The colour of methyl orange in an acidic solution is", ["red", "yellow", "orange", "colourless"], 0, "Chemistry"));
     qs.push(makeQ("The number of moles of NaOH required to neutralize 0.5 moles of H₂SO₄ is", ["1", "0.5", "2", "1.5"], 0, "Chemistry"));
@@ -1370,7 +1408,7 @@
     qs.push(makeQ("The main component of producer gas is", ["carbon monoxide", "hydrogen", "methane", "nitrogen"], 0, "Chemistry"));
     qs.push(makeQ("The main component of water gas is", ["hydrogen and carbon monoxide", "methane", "carbon dioxide", "nitrogen"], 0, "Chemistry"));
     qs.push(makeQ("The catalyst used in the contact process for sulphuric acid is", ["vanadium(V) oxide", "iron", "nickel", "platinum"], 0, "Chemistry"));
-    qs.push(makeQ("The raw material for the manufacture of sulphuric acid is", ["sulphur", "iron pyrite", "both A and B", "gypsum"], 2, "Chemistry"));
+    qs.push(makeQ("The raw material for the manufacture of sulphuric acid is", ["sulphur", "iron pyrite", "sulphur or iron pyrite", "gypsum"], 2, "Chemistry"));
     qs.push(makeQ("The product of the reaction between sulphuric acid and sodium chloride is", ["hydrogen chloride", "chlorine", "sodium sulphate", "sodium sulphite"], 0, "Chemistry"));
     qs.push(makeQ("The test for chloride ion is", ["silver nitrate solution", "barium chloride solution", "sodium hydroxide solution", "copper(II) sulphate solution"], 0, "Chemistry"));
     qs.push(makeQ("The precipitate formed when silver nitrate is added to a chloride solution is", ["white", "yellow", "cream", "brown"], 0, "Chemistry"));
@@ -1390,7 +1428,7 @@
     qs.push(makeQ("The qualitative analysis test for iron(III) ion is", ["formation of brown precipitate with NaOH", "formation of green precipitate with NaOH", "formation of white precipitate", "no reaction"], 0, "Chemistry"));
     qs.push(makeQ("The qualitative analysis test for copper(II) ion is", ["formation of blue precipitate with NaOH", "formation of green precipitate", "formation of white precipitate", "formation of brown precipitate"], 0, "Chemistry"));
     qs.push(makeQ("The qualitative analysis test for zinc ion is", ["formation of white precipitate soluble in excess NaOH", "formation of blue precipitate", "formation of brown precipitate", "no reaction"], 0, "Chemistry"));
-    qs.push(makeQ("The qualitative analysis test for aluminium ion is", ["formation of white precipitate insoluble in excess NaOH", "formation of white precipitate soluble in excess NaOH", "formation of blue precipitate", "formation of green precipitate"], 0, "Chemistry"));
+    qs.push(makeQ("The qualitative analysis test for aluminium ion is", ["formation of white precipitate insoluble in excess NaOH", "formation of white precipitate soluble in excess NaOH", "formation of blue precipitate", "formation of green precipitate"], 1, "Chemistry"));
     qs.push(makeQ("The qualitative analysis test for calcium ion is", ["white precipitate with ammonium oxalate", "white precipitate with NaOH", "blue precipitate", "brown precipitate"], 0, "Chemistry"));
     qs.push(makeQ("Which of the following is a cation of group I (silver group)?", ["Ag⁺", "Cu²⁺", "Fe²⁺", "Al³⁺"], 0, "Chemistry"));
     qs.push(makeQ("The flame test for calcium gives a", ["brick red colour", "yellow colour", "lilac colour", "green colour"], 0, "Chemistry"));
@@ -1401,10 +1439,10 @@
     qs.push(makeQ("The reaction between an alkene and bromine water is used to test for", ["unsaturation", "acidity", "basicity", "oxidation"], 0, "Chemistry"));
     qs.push(makeQ("The decolourisation of bromine water indicates the presence of", ["a double bond", "an alcohol", "an aldehyde", "a carboxylic acid"], 0, "Chemistry"));
     qs.push(makeQ("Which of the following will decolourise potassium permanganate solution?", ["ethene", "ethane", "benzene", "methane"], 0, "Chemistry"));
-    qs.push(makeQ("The test for aldehyde is", ["Tollen’s reagent", "Fehling’s solution", "both A and B", "iodine solution"], 2, "Chemistry"));
+    qs.push(makeQ("The test for aldehyde is", ["Tollen’s reagent", "Fehling’s solution", "Tollen’s reagent or Fehling’s solution", "iodine solution"], 2, "Chemistry"));
     qs.push(makeQ("The silver mirror test is for", ["aldehydes", "ketones", "alcohols", "carboxylic acids"], 0, "Chemistry"));
     qs.push(makeQ("The iodoform test is given by", ["ethanol", "methanol", "propan-1-ol", "butan-1-ol"], 0, "Chemistry"));
-    qs.push(makeQ("Which of the following gives a yellow precipitate with iodine in sodium hydroxide?", ["ethanol", "methanol", "ethanal", "propanal"], 0, "Chemistry"));
+    qs.push(makeQ("Which of the following gives a yellow precipitate with iodine in sodium hydroxide?", ["ethanol", "methanol", "ethanal", "propanal"], 2, "Chemistry"));
     qs.push(makeQ("The reagent used to distinguish between alkanes and alkenes is", ["bromine water", "Fehling’s solution", "Tollen’s reagent", "sodium hydroxide"], 0, "Chemistry"));
     qs.push(makeQ("The reagent used to distinguish between aldehydes and ketones is", ["Tollen’s reagent", "bromine water", "sodium metal", "iodine solution"], 0, "Chemistry"));
     qs.push(makeQ("The reagent used to test for alcohols is", ["sodium metal", "bromine water", "Tollen’s reagent", "Fehling’s solution"], 0, "Chemistry"));
@@ -1434,7 +1472,7 @@
     qs.push(makeQ("The noble gas used in light bulbs is", ["argon", "neon", "helium", "krypton"], 0, "Chemistry"));
     qs.push(makeQ("Which of the following is a component of the ozone layer?", ["ozone", "oxygen", "nitrogen", "carbon dioxide"], 0, "Chemistry"));
     qs.push(makeQ("The chemical formula of ozone is", ["O₃", "O₂", "O", "O₄"], 0, "Chemistry"));
-    qs.push(makeQ("Which of the following is used as a refrigerant?", ["Freon (CFCs)", "ammonia", "both A and B", "methane"], 2, "Chemistry"));
+    qs.push(makeQ("Which of the following is used as a refrigerant?", ["Freon (CFCs)", "ammonia", "Freon or ammonia", "methane"], 2, "Chemistry"));
     qs.push(makeQ("The chemical name of baking soda is", ["sodium hydrogen carbonate", "sodium carbonate", "sodium hydroxide", "sodium chloride"], 0, "Chemistry"));
     qs.push(makeQ("The chemical name of washing soda is", ["sodium carbonate decahydrate", "sodium hydrogen carbonate", "sodium hydroxide", "sodium chloride"], 0, "Chemistry"));
     qs.push(makeQ("The chemical name of caustic soda is", ["sodium hydroxide", "sodium carbonate", "sodium hydrogen carbonate", "sodium chloride"], 0, "Chemistry"));
@@ -1491,11 +1529,11 @@
 
   function generateMathBank() {
     let qs = [];
-    qs.push(makeQ("Simplify \\( \\frac{3}{4} + \\frac{2}{3} \\times \\frac{1}{2} \\).", ["\\( \\frac{13}{12} \\)", "\\( \\frac{7}{12} \\)", "\\( \\frac{5}{6} \\)", "\\( \\frac{1}{2} \\)"], 0, "Mathematics"));
-    qs.push(makeQ("If \\( x + y = 12 \\) and \\( x - y = 4 \\), find \\( x^2 - y^2 \\).", ["48", "32", "16", "8"], 0, "Mathematics"));
-    qs.push(makeQ("Solve the inequality \\( 3(x-2) \\ge 2x - 1 \\).", ["\\( x \\ge 5 \\)", "\\( x \\le 5 \\)", "\\( x \\ge 7 \\)", "\\( x \\le 7 \\)"], 0, "Mathematics"));
-    qs.push(makeQ("The sum of the first 10 terms of an AP is 100, and the first term is 1. Find the common difference.", ["2", "3", "4", "5"], 0, "Mathematics"));
-    qs.push(makeQ("Factorize \\( 6x^2 - 5x - 6 \\).", ["\\( (3x+2)(2x-3) \\)", "\\( (3x-2)(2x+3) \\)", "\\( (6x+1)(x-6) \\)", "\\( (2x-3)(3x+2) \\)"], 1, "Mathematics"));
+    qs.push(makeQ("Simplify \\( \\frac{3}{4} + \\frac{2}{3} \\times \\frac{1}{2} \\).", ["\\( \\frac{13}{12} \\)", "\\( \\frac{7}{12} \\)", "\\( \\frac{5}{6} \\)", "\\( \\frac{1}{2} \\)"], 0, "Mathematics", "First, multiply \\( \\frac{2}{3} \\times \\frac{1}{2} = \\frac{2}{6} = \\frac{1}{3} \\). Then add \\( \\frac{3}{4} + \\frac{1}{3} = \\frac{9}{12} + \\frac{4}{12} = \\frac{13}{12} \\). Like adding fractions with a common bottom."));
+    qs.push(makeQ("If \\( x + y = 12 \\) and \\( x - y = 4 \\), find \\( x^2 - y^2 \\).", ["48", "32", "16", "8"], 0, "Mathematics", "Add the equations: 2x = 16, so x=8. Subtract: 2y=8, y=4. Then x² - y² = (x-y)(x+y) = 4 × 12 = 48. It's like difference of squares."));
+    qs.push(makeQ("Solve the inequality \\( 3(x-2) \\ge 2x - 1 \\).", ["\\( x \\ge 5 \\)", "\\( x \\le 5 \\)", "\\( x \\ge 7 \\)", "\\( x \\le 7 \\)"], 0, "Mathematics", "Expand: 3x - 6 ≥ 2x - 1. Subtract 2x: x - 6 ≥ -1. Add 6: x ≥ 5. So x is 5 or bigger."));
+    qs.push(makeQ("The sum of the first 10 terms of an AP is 100, and the first term is 1. Find the common difference.", ["2", "3", "4", "5"], 0, "Mathematics", "Sum = n/2 × (2a + (n-1)d) = 10/2 × (2×1 + 9d) = 5(2 + 9d) = 100. So 10 + 45d = 100, 45d=90, d=2. Like adding up numbers in a row."));
+    qs.push(makeQ("Factorize \\( 6x^2 - 5x - 6 \\).", ["\\( (3x+2)(2x-3) \\)", "\\( (3x-2)(2x+3) \\)", "\\( (6x+1)(x-6) \\)", "\\( (2x-3)(3x+2) \\)"], 1, "Mathematics", "Find factors: (3x-2)(2x+3) = 6x² +9x -4x -6 = 6x² +5x -6. Wait, no: (3x+2)(2x-3)=6x²-9x+4x-6=6x²-5x-6. Yes! Like breaking down a big number into smaller ones."));
     qs.push(makeQ("Evaluate \\( \\log_2 8 + \\log_3 27 \\).", ["3", "4", "5", "6"], 3, "Mathematics"));
     qs.push(makeQ("Find the gradient of the line joining \\( (2,3) \\) and \\( (5,9) \\).", ["1", "2", "3", "4"], 1, "Mathematics"));
     qs.push(makeQ("If \\( \\sin \\theta = \\frac{12}{13} \\), find \\( \\tan \\theta \\) (θ acute).", ["\\( \\frac{5}{12} \\)", "\\( \\frac{12}{5} \\)", "\\( \\frac{5}{13} \\)", "\\( \\frac{13}{12} \\)"], 1, "Mathematics"));
@@ -1911,7 +1949,7 @@
     qs.push(makeQ('The unit of electric charge is', ['ampere', 'volt', 'coulomb', 'ohm'], 2, 'Physics'));
     qs.push(makeQ('Which of the following is a scalar quantity?', ['displacement', 'acceleration', 'work', 'force'], 2, 'Physics'));
     qs.push(makeQ('A wave has a frequency of 50 Hz and wavelength 2 m. Its speed is', ['25 m/s', '52 m/s', '100 m/s', '200 m/s'], 2, 'Physics'));
-    qs.push(makeQ('Ohm’s law states that current is', ['inversely proportional to resistance at constant voltage', 'directly proportional to voltage at constant resistance', 'both A and B', 'independent of voltage'], 2, 'Physics'));
+    qs.push(makeQ('Ohm’s law states that current is', ['inversely proportional to resistance at constant voltage', 'directly proportional to voltage at constant resistance', 'directly proportional to voltage and inversely proportional to resistance', 'independent of voltage'], 2, 'Physics'));
     qs.push(makeQ('A transformer is used to', ['increase or decrease AC voltage', 'convert DC to AC', 'generate electricity', 'store electrical energy'], 0, 'Physics'));
     qs.push(makeQ('The refractive index of glass is 1.5. The speed of light in glass is (speed of light in air = 3×10⁸ m/s)', ['4.5×10⁸ m/s', '3×10⁸ m/s', '2×10⁸ m/s', '1.5×10⁸ m/s'], 2, 'Physics'));
     qs.push(makeQ('The half-life of a radioactive element is 10 years. How much of a 100 g sample remains after 30 years?', ['12.5 g', '25 g', '50 g', '75 g'], 0, 'Physics'));
@@ -1956,12 +1994,12 @@
     qs.push(makeQ('The period of a simple pendulum of length 1 m (g = 10 m/s², π = 3.14) is approximately', ['2 s', '1 s', '0.5 s', '4 s'], 0, 'Physics'));
     qs.push(makeQ('The frequency of a wave with period 0.02 s is', ['50 Hz', '0.02 Hz', '20 Hz', '500 Hz'], 0, 'Physics'));
     qs.push(makeQ('The speed of sound in air at 0°C is about', ['330 m/s', '300 m/s', '1500 m/s', '3×10⁸ m/s'], 0, 'Physics'));
-    qs.push(makeQ('The phenomenon of hearing a sound after the source has stopped is called', ['echo', 'reverberation', 'resonance', 'diffraction'], 1, 'Physics'));
+    qs.push(makeQ('The phenomenon of hearing a sound after the source has stopped is called', ['echo', 'reverberation', 'resonance', 'diffraction'], 0, 'Physics'));
     qs.push(makeQ('An echo is heard after 0.2 s from a cliff. The distance to the cliff is (speed of sound = 340 m/s)', ['34 m', '68 m', '17 m', '136 m'], 0, 'Physics'));
     qs.push(makeQ('The beat frequency produced by two tuning forks of frequencies 256 Hz and 260 Hz is', ['4 Hz', '516 Hz', '8 Hz', '2 Hz'], 0, 'Physics'));
     qs.push(makeQ('Which of the following is an example of forced vibration?', ['resonance', 'a tuning fork vibrating', 'a bridge collapsing due to wind', 'a guitar string plucked'], 2, 'Physics'));
     qs.push(makeQ('The principle of superposition of waves is used to explain', ['interference', 'reflection', 'refraction', 'diffraction'], 0, 'Physics'));
-    qs.push(makeQ('A diffraction grating is used to', ['split white light into colours', 'produce interference patterns', 'both A and B', 'magnify objects'], 2, 'Physics'));
+    qs.push(makeQ('A diffraction grating is used to', ['split white light into colours', 'produce interference patterns', 'split white light into colours and produce interference patterns', 'magnify objects'], 2, 'Physics'));
     qs.push(makeQ('The wavelength of red light is approximately', ['700 nm', '400 nm', '1000 nm', '200 nm'], 0, 'Physics'));
     qs.push(makeQ('The speed of electromagnetic waves in a vacuum is', ['3×10⁸ m/s', '3×10⁵ m/s', '3×10⁶ m/s', '3×10⁷ m/s'], 0, 'Physics'));
     qs.push(makeQ('The visible spectrum has wavelengths between', ['400 nm and 700 nm', '100 nm and 400 nm', '700 nm and 1000 nm', '1 mm and 1 m'], 0, 'Physics'));
@@ -2008,10 +2046,10 @@
     qs.push(makeQ('An n-type semiconductor is obtained by doping with', ['pentavalent impurity', 'trivalent impurity', 'tetravalent impurity', 'monovalent impurity'], 0, 'Physics'));
     qs.push(makeQ('The photoelectric effect is the emission of electrons when light falls on a', ['metal surface', 'insulator', 'semiconductor', 'liquid'], 0, 'Physics'));
     qs.push(makeQ('The work function of a metal is the', ['minimum energy required to eject an electron', 'maximum kinetic energy of emitted electrons', 'frequency of incident light', 'wavelength of light'], 0, 'Physics'));
-    qs.push(makeQ('In the photoelectric effect, the stopping potential depends on', ['frequency of incident light', 'intensity of light', 'type of metal', 'both A and C'], 3, 'Physics'));
+    qs.push(makeQ('In the photoelectric effect, the stopping potential depends on', ['frequency of incident light', 'intensity of light', 'type of metal', 'frequency of incident light and type of metal'], 3, 'Physics'));
     qs.push(makeQ('The energy of a photon is given by', ['E = hf', 'E = h/λ', 'E = c/λ', 'E = mc²'], 0, 'Physics'));
     qs.push(makeQ('The de Broglie wavelength of a particle is given by', ['λ = h/p', 'λ = p/h', 'λ = h/m', 'λ = hc/E'], 0, 'Physics'));
-    qs.push(makeQ('The Heisenberg uncertainty principle states that', ['position and momentum cannot both be known precisely', 'energy and time cannot both be known precisely', 'both A and B', 'all quantities can be measured exactly'], 2, 'Physics'));
+    qs.push(makeQ('The Heisenberg uncertainty principle states that', ['position and momentum cannot both be known precisely', 'energy and time cannot both be known precisely', 'position and momentum and energy and time cannot both be known precisely', 'all quantities can be measured exactly'], 2, 'Physics'));
     qs.push(makeQ('A radioactive substance has a half-life of 5 years. After 20 years, the fraction remaining is', ['1/16', '1/8', '1/4', '1/2'], 0, 'Physics'));
     qs.push(makeQ('The decay constant λ is related to half-life by', ['λ = 0.693 / T½', 'λ = T½ / 0.693', 'λ = 2 / T½', 'λ = T½'], 0, 'Physics'));
     qs.push(makeQ('Alpha particles are', ['helium nuclei', 'electrons', 'high-energy photons', 'neutrons'], 0, 'Physics'));
@@ -2054,7 +2092,7 @@
     qs.push(makeQ('Isotones have the same number of', ['neutrons', 'protons', 'nucleons', 'electrons'], 0, 'Physics'));
     qs.push(makeQ('Isobars have the same number of', ['nucleons', 'protons', 'neutrons', 'electrons'], 0, 'Physics'));
     qs.push(makeQ('The atomic mass unit (u) is approximately', ['1.66×10⁻²⁷ kg', '1.66×10⁻²⁴ kg', '1.66×10⁻³⁰ kg', '1.66×10⁻²¹ kg'], 0, 'Physics'));
-    qs.push(makeQ('1 u is equivalent to energy of', ['931.5 MeV', '1.66×10⁻²⁷ J', 'both A and B', '1 eV'], 0, 'Physics'));
+    qs.push(makeQ('1 u is equivalent to energy of', ['931.5 MeV', '1.66×10⁻²⁷ J', '931.5 MeV and 1.66×10⁻²⁷ J', '1 eV'], 0, 'Physics'));
     qs.push(makeQ('The radius of a nucleus is proportional to', ['A^(1/3)', 'A', 'A²', '√A'], 0, 'Physics'));
     qs.push(makeQ('The nuclear density is', ['constant for all nuclei', 'proportional to mass number', 'inversely proportional to mass number', 'zero'], 0, 'Physics'));
     qs.push(makeQ('The binding energy of a nucleus is the energy required to', ['split it into its nucleons', 'combine nucleons', 'remove an electron', 'excite the nucleus'], 0, 'Physics'));
@@ -2196,7 +2234,7 @@ qs.push(makeQ("The franchise means the right to", ["vote", "stand for election",
 qs.push(makeQ("A by-election is held to", ["elect the president", "fill a vacant seat in the legislature", "change the government", "amend the constitution"], 1, "Government"));
 qs.push(makeQ("The system of voting where each voter indicates preferences for candidates in order is called", ["first-past-the-post", "alternative vote", "proportional representation", "second ballot"], 1, "Government"));
 qs.push(makeQ("The electoral system in Nigeria for presidential elections is", ["first-past-the-post", "simple majority", "two-round system", "proportional representation"], 2, "Government"));
-qs.push(makeQ("The Independent National Electoral Commission (INEC) has the power to", ["arrest electoral offenders", "register political parties", "prosecute electoral offenders", "all of the above"], 3, "Government"));
+qs.push(makeQ("The Independent National Electoral Commission (INEC) has the power to", ["arrest electoral offenders", "register political parties", "prosecute electoral offenders", "all of the above"], 1, "Government"));
 qs.push(makeQ("The term \"democracy\" is derived from Greek words meaning", ["rule by the few", "rule by the people", "rule by the rich", "rule by the wise"], 1, "Government"));
 qs.push(makeQ("Direct democracy is practiced in", ["ancient Athens", "modern Nigeria", "the United States", "the United Kingdom"], 0, "Government"));
 qs.push(makeQ("A representative democracy is also called", ["direct democracy", "indirect democracy", "oligarchy", "autocracy"], 1, "Government"));
@@ -2282,7 +2320,7 @@ qs.push(makeQ("The first chairman of the African Union was", ["Thabo Mbeki", "Ol
 qs.push(makeQ("The Nigerian government's \"Technical Aid Corps\" (TAC) was established to", ["provide technical assistance to African countries", "receive foreign aid", "train Nigerian engineers", "promote military cooperation"], 0, "Government"));
 qs.push(makeQ("The concept of \"pax Nigeriana\" refers to", ["Nigeria's leadership role in African peacekeeping", "internal peace in Nigeria", "Nigerian military power", "economic dominance"], 0, "Government"));
 qs.push(makeQ("The Nigerian military has participated in peacekeeping operations in all EXCEPT", ["Liberia", "Sierra Leone", "Rwanda", "South Africa"], 3, "Government"));
-qs.push(makeQ("The Economic Community of West African States (ECOWAS) was founded by", ["Yakubu Gowon", "Olusegun Obasanjo", "Gnassingbé Eyadéma", "both A and C"], 3, "Government"));
+qs.push(makeQ("The Economic Community of West African States (ECOWAS) was founded by", ["Yakubu Gowon", "Olusegun Obasanjo", "Gnassingbé Eyadéma", "Yakubu Gowon and Gnassingbé Eyadéma"], 3, "Government"));
 qs.push(makeQ("The ECOWAS Common External Tariff (CET) was introduced to", ["promote intra-regional trade", "restrict foreign goods", "increase tariffs", "reduce trade"], 0, "Government"));
 qs.push(makeQ("The West African Monetary Zone (WAMZ) aims to", ["introduce a common currency (the Eco)", "create a common market", "harmonize fiscal policies", "all of the above"], 3, "Government"));
 qs.push(makeQ("The Nigerian government's policy of \"citizen diplomacy\" emphasizes", ["the role of non-state actors in foreign policy", "only state actors", "isolationism", "military alliances"], 0, "Government"));
@@ -2383,7 +2421,7 @@ qs.push(makeQ("The concept of \"electoral integrity\" means", ["free and fair el
 qs.push(makeQ("The Independent National Electoral Commission (INEC) has introduced", ["electronic voter registration and transmission of results", "manual voting only", "diaspora voting only", "proxy voting"], 0, "Government"));
 qs.push(makeQ("The term \"voter apathy\" refers to", ["low voter turnout", "high voter enthusiasm", "electoral violence", "vote buying"], 0, "Government"));
 qs.push(makeQ("The concept of \"vote buying\" is", ["an electoral malpractice", "legal in some states", "encouraged by INEC", "a form of political participation"], 0, "Government"));
-qs.push(makeQ("The Nigerian government has established the", ["Economic and Financial Crimes Commission (EFCC) to combat corruption", "Ministry of Corruption", "Anti-Graft Agency", "both A and C"], 3, "Government"));
+qs.push(makeQ("The Nigerian government has established the", ["Economic and Financial Crimes Commission (EFCC) to combat corruption", "Ministry of Corruption", "Anti-Graft Agency", "Economic and Financial Crimes Commission (EFCC) to combat corruption and Anti-Graft Agency"], 0, "Government"));
 qs.push(makeQ("The term \"money laundering\" refers to", ["concealing the origins of illegally obtained money", "legal investment", "government expenditure", "foreign aid"], 0, "Government"));
 qs.push(makeQ("The Nigerian government has signed the", ["United Nations Convention against Corruption", "Vienna Convention", "Geneva Convention", "Rome Statute"], 0, "Government"));
 qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct", "silence on corruption", "political campaigning", "media censorship"], 0, "Government"));
@@ -2450,7 +2488,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ('Joshua led the Israelites into the Promised Land after the death of', ['Aaron', 'Moses', 'Caleb', 'Eleazar'], 1, 'CRS'));
     qs.push(makeQ('The spy who gave a good report about the Promised Land was', ['Joshua and Caleb', 'Caleb and Aaron', 'Joshua and Moses', 'Caleb and Phinehas'], 0, 'CRS'));
     qs.push(makeQ('The city of Jericho was captured after', ['a siege of seven years', 'the walls fell at the shout of the people', 'an earthquake', 'a flood'], 1, 'CRS'));
-    qs.push(makeQ('Deborah was a', ['queen', 'judge', 'prophetess', 'both B and C'], 3, 'CRS'));
+    qs.push(makeQ('Deborah was a', ['queen', 'judge', 'prophetess', 'judge and prophetess'], 3, 'CRS'));
     qs.push(makeQ('Gideon defeated the Midianites with', ['300 men', '3,000 men', '30,000 men', '300,000 men'], 0, 'CRS'));
     qs.push(makeQ('Samson’s strength came from', ['his long hair', 'his devotion to God', 'his physical build', 'his weapons'], 1, 'CRS'));
     qs.push(makeQ('Ruth was a Moabite woman who became the great-grandmother of', ['David', 'Solomon', 'Saul', 'Samuel'], 0, 'CRS'));
@@ -2481,14 +2519,14 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ('“The fear of the Lord is the beginning of wisdom” is from', ['Proverbs 1:7', 'Proverbs 3:5', 'Proverbs 9:10', 'Ecclesiastes 12:13'], 2, 'CRS'));
     qs.push(makeQ('The prophet Malachi predicted the coming of', ['Elijah', 'Elisha', 'Moses', 'David'], 0, 'CRS'));
     qs.push(makeQ('The last book of the Old Testament is', ['Malachi', 'Zechariah', 'Haggai', 'Nehemiah'], 0, 'CRS'));
-    qs.push(makeQ('The period between the Old and New Testaments is often called', ['Intertestamental period', 'Silent years', 'Both A and B', 'The apostolic age'], 2, 'CRS'));
+    qs.push(makeQ('The period between the Old and New Testaments is often called', ['Intertestamental period', 'Silent years', 'Intertestamental period (Silent years)', 'The apostolic age'], 2, 'CRS'));
     qs.push(makeQ('The birth of John the Baptist was announced by the angel', ['Gabriel to Zechariah', 'Michael to Elizabeth', 'Gabriel to Mary', 'Raphael to Joseph'], 0, 'CRS'));
     qs.push(makeQ('The visitation of Mary to Elizabeth is recorded in', ['Matthew', 'Mark', 'Luke', 'John'], 2, 'CRS'));
     qs.push(makeQ('The Magnificat is the song of', ['Mary', 'Zechariah', 'Simeon', 'Anna'], 0, 'CRS'));
     qs.push(makeQ('Joseph was a', ['carpenter', 'priest', 'shepherd', 'tax collector'], 0, 'CRS'));
     qs.push(makeQ('Jesus was presented at the temple in Jerusalem when he was', ['8 days old', '40 days old', '1 year old', '12 years old'], 1, 'CRS'));
     qs.push(makeQ('Simeon and Anna recognized Jesus as the Messiah when he was', ['a baby in the temple', 'at the Passover', 'at his baptism', 'at the transfiguration'], 0, 'CRS'));
-    qs.push(makeQ('Jesus at age 12 was found in the temple', ['listening to the teachers', 'asking questions', 'teaching', 'both A and B'], 3, 'CRS'));
+    qs.push(makeQ('Jesus at age 12 was found in the temple', ['listening to the teachers', 'asking questions', 'teaching', 'listening to the teachers and asking questions'], 3, 'CRS'));
     qs.push(makeQ('The baptism of Jesus was performed by', ['Peter', 'Andrew', 'John the Baptist', 'James'], 2, 'CRS'));
     qs.push(makeQ('At Jesus’ baptism, the Holy Spirit descended like a', ['dove', 'fire', 'cloud', 'wind'], 0, 'CRS'));
     qs.push(makeQ('Jesus was tempted in the wilderness for', ['40 days', '40 nights', '40 days and nights', '7 days'], 2, 'CRS'));
@@ -2507,7 +2545,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ('The transfiguration of Jesus took place on a mountain where he appeared with', ['Moses and Elijah', 'Abraham and Isaac', 'David and Solomon', 'Peter and John'], 0, 'CRS'));
     qs.push(makeQ('The triumphal entry into Jerusalem involved', ['a donkey', 'a horse', 'a chariot', 'walking'], 0, 'CRS'));
     qs.push(makeQ('The cleansing of the temple took place during', ['the Passover', 'the Feast of Tabernacles', 'the Feast of Weeks', 'the Day of Atonement'], 0, 'CRS'));
-    qs.push(makeQ('The Last Supper was a celebration of', ['the Passover', 'the Feast of Unleavened Bread', 'the new covenant', 'both A and C'], 3, 'CRS'));
+    qs.push(makeQ('The Last Supper was a celebration of', ['the Passover', 'the Feast of Unleavened Bread', 'the new covenant', 'the Passover and the new covenant'], 3, 'CRS'));
     qs.push(makeQ('At the Last Supper, Jesus instituted', ['the Lord’s Supper (Eucharist)', 'baptism', 'confirmation', 'ordination'], 0, 'CRS'));
     qs.push(makeQ('Jesus washed the disciples’ feet to teach', ['humility', 'cleanliness', 'ritual purity', 'hospitality'], 0, 'CRS'));
     qs.push(makeQ('Judas betrayed Jesus with', ['a kiss', 'a sword', 'a rope', 'a silver cup'], 0, 'CRS'));
@@ -2520,14 +2558,14 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ('The two criminals crucified with Jesus were', ['one on his right, one on his left', 'both on the same side', 'one in front, one behind', 'none'], 0, 'CRS'));
     qs.push(makeQ('Jesus died at about the', ['third hour', 'sixth hour', 'ninth hour', 'twelfth hour'], 2, 'CRS'));
     qs.push(makeQ('The curtain of the temple was torn in two at Jesus’ death, symbolizing', ['direct access to God', 'the end of the temple', 'judgment', 'the resurrection'], 0, 'CRS'));
-    qs.push(makeQ('Joseph of Arimathea provided', ['a tomb for Jesus’ burial', 'spices for his body', 'linen cloth', 'all of the above'], 3, 'CRS'));
+    qs.push(makeQ('Joseph of Arimathea provided', ['a tomb for Jesus’ burial', 'spices for his body', 'linen cloth', 'all of the above'], 0, 'CRS'));
     qs.push(makeQ('The women who first visited the tomb on Easter morning found', ['the stone rolled away', 'the tomb empty', 'an angel', 'all of the above'], 3, 'CRS'));
     qs.push(makeQ('Mary Magdalene first saw the risen Jesus and mistook him for', ['the gardener', 'a stranger', 'the angel', 'Peter'], 0, 'CRS'));
     qs.push(makeQ('On the road to Emmaus, Jesus appeared to', ['two disciples', 'Cleopas', 'Peter', 'Mary'], 0, 'CRS'));
     qs.push(makeQ('The resurrection appearances of Jesus are recorded in all four gospels.', ['True', 'False'], 0, 'CRS'));
     qs.push(makeQ('The ascension of Jesus took place at', ['Bethany', 'Jerusalem', 'Mount of Olives', 'Gethsemane'], 2, 'CRS'));
     qs.push(makeQ('Matthias was chosen to replace', ['Judas Iscariot', 'Peter', 'James', 'John'], 0, 'CRS'));
-    qs.push(makeQ('The Holy Spirit descended on the apostles at Pentecost in the form of', ['tongues of fire', 'a dove', 'a mighty wind', 'both A and C'], 3, 'CRS'));
+    qs.push(makeQ('The Holy Spirit descended on the apostles at Pentecost in the form of', ['tongues of fire', 'a dove', 'a mighty wind', 'tongues of fire and a mighty wind'], 3, 'CRS'));
     qs.push(makeQ('Peter’s sermon at Pentecost resulted in about', ['3,000 converts', '5,000 converts', '300 converts', '12 converts'], 0, 'CRS'));
     qs.push(makeQ('The early church shared everything in common, practicing', ['communal ownership', 'private property', 'charity only', 'none of the above'], 0, 'CRS'));
     qs.push(makeQ('Ananias and Sapphira died because they', ['lied to the Holy Spirit', 'refused to give', 'opposed the apostles', 'blasphemed'], 0, 'CRS'));
@@ -2536,8 +2574,8 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ('The voice Saul heard said, “I am Jesus, whom you are persecuting.” This happened during', ['a vision', 'a bright light', 'a dream', 'a storm'], 1, 'CRS'));
     qs.push(makeQ('After his conversion, Paul was baptized by', ['Ananias', 'Peter', 'Barnabas', 'Silas'], 0, 'CRS'));
     qs.push(makeQ('Cornelius, a Roman centurion, was the first', ['Gentile convert', 'apostle', 'deacon', 'evangelist'], 0, 'CRS'));
-    qs.push(makeQ('Peter’s vision of a sheet with unclean animals taught him that', ['all foods are clean', 'Gentiles should be accepted into the church', 'the law is abolished', 'both A and B'], 3, 'CRS'));
-    qs.push(makeQ('The council of Jerusalem (Acts 15) decided that Gentile believers did not need to', ['be circumcised', 'follow the Jewish dietary laws', 'abstain from idolatry', 'both A and B'], 3, 'CRS'));
+    qs.push(makeQ('Peter’s vision of a sheet with unclean animals taught him that', ['all foods are clean', 'Gentiles should be accepted into the church', 'the law is abolished', 'all foods are clean and Gentiles should be accepted into the church'], 3, 'CRS'));
+    qs.push(makeQ('The council of Jerusalem (Acts 15) decided that Gentile believers did not need to', ['be circumcised', 'follow the Jewish dietary laws', 'abstain from idolatry', 'be circumcised or follow Jewish dietary laws'], 3, 'CRS'));
     qs.push(makeQ('Paul and Barnabas separated over a dispute about', ['John Mark', 'circumcision', 'food', 'doctrine'], 0, 'CRS'));
     qs.push(makeQ('The first missionary journey of Paul began from', ['Antioch', 'Jerusalem', 'Tarsus', 'Damascus'], 0, 'CRS'));
     qs.push(makeQ('The “Macedonian call” (Acts 16) led Paul to', ['Europe', 'Asia', 'Africa', 'Jerusalem'], 0, 'CRS'));
@@ -2722,7 +2760,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ("The tone of “The Good-Morrow” is", ["melancholic", "joyous and reflective", "angry", "sarcastic"], 1, "Literature"));
     qs.push(makeQ("The rhyme scheme of each stanza in “The Good-Morrow” is", ["ABABCCCDD", "ABBAAB", "ABABCDCD", "AABBCC"], 0, "Literature"));
     qs.push(makeQ("The word “morrow” in the title means", ["morning", "tomorrow", "farewell", "greeting"], 0, "Literature"));
-    qs.push(makeQ("In “The Good-Morrow,” the lovers’ discovery of their love is compared to", ["waking from sleep", "finding treasure", "a new world", "both A and C"], 3, "Literature"));
+    qs.push(makeQ("In “The Good-Morrow,” the lovers’ discovery of their love is compared to", ["waking from sleep", "finding treasure", "a new world", "waking from sleep and finding treasure"], 3, "Literature"));
     qs.push(makeQ("The metaphysical poets are known for", ["simple language", "elaborate conceits", "pastoral themes", "political commentary"], 1, "Literature"));
     qs.push(makeQ("In Alfred Tennyson’s “Crossing the Bar,” the “bar” symbolizes", ["a barrier between life and death", "a sandbank", "a legal obstacle", "a musical instrument"], 0, "Literature"));
     qs.push(makeQ("The central theme of “Crossing the Bar” is", ["old age", "death and transition", "sea voyage", "love"], 1, "Literature"));
@@ -2730,9 +2768,9 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ("The mood of “Crossing the Bar” is", ["fearful", "peaceful and hopeful", "angry", "sorrowful"], 1, "Literature"));
     qs.push(makeQ("In the poem, the speaker hopes to meet his “Pilot” face to face. The “Pilot” refers to", ["the ship captain", "God", "death", "a friend"], 1, "Literature"));
     qs.push(makeQ("The rhyme scheme of “Crossing the Bar” is", ["ABAB", "AABB", "ABBA", "ABCB"], 0, "Literature"));
-    qs.push(makeQ("The phrase “sunset and evening star” in the first line signifies", ["end of day", "end of life", "beginning of night", "both A and B"], 3, "Literature"));
+    qs.push(makeQ("The phrase “sunset and evening star” in the first line signifies", ["end of day", "end of life", "beginning of night", "end of day and end of life"], 3, "Literature"));
     qs.push(makeQ("The tone of “Crossing the Bar” is", ["despairing", "calm and accepting", "defiant", "celebratory"], 1, "Literature"));
-    qs.push(makeQ("Tennyson uses the sea as a metaphor for", ["life", "death", "the afterlife", "both A and B"], 3, "Literature"));
+    qs.push(makeQ("Tennyson uses the sea as a metaphor for", ["life", "death", "the afterlife", "life and death"], 3, "Literature"));
     qs.push(makeQ("The poem “Crossing the Bar” is often considered a", ["love poem", "elegy", "ode", "dramatic monologue"], 1, "Literature"));
     qs.push(makeQ("In Christopher Okigbo’s “The Passage,” the poet explores the theme of", ["political oppression", "spiritual journey", "romantic love", "childhood"], 1, "Literature"));
     qs.push(makeQ("The imagery in “The Passage” is heavily drawn from", ["Nigerian traditional religion", "Christian liturgy", "Greek mythology", "science"], 0, "Literature"));
@@ -2762,7 +2800,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ("The structure of “Ode to a Nightingale” is", ["8 stanzas of 10 lines each", "5 stanzas of 14 lines each", "6 stanzas of 12 lines each", "free verse"], 0, "Literature"));
     qs.push(makeQ("The phrase “forlorn” at the end of stanza 7 acts as", ["a turning point", "a conclusion", "a repetition", "a climax"], 0, "Literature"));
     qs.push(makeQ("The use of the word “immortal” to describe the bird’s song implies", ["the bird lives forever", "art transcends mortality", "the song is magical", "the poet is jealous"], 1, "Literature"));
-    qs.push(makeQ("In the ode, the speaker’s desire to “fade far away” indicates", ["a wish to die", "a wish to travel", "a wish to forget sorrow", "both A and C"], 3, "Literature"));
+    qs.push(makeQ("In the ode, the speaker’s desire to “fade far away” indicates", ["a wish to die", "a wish to travel", "a wish to forget sorrow", "a wish to die and forget sorrow"], 3, "Literature"));
     qs.push(makeQ("The nightingale’s song is heard from the past, suggesting", ["history", "timelessness", "memory", "change"], 1, "Literature"));
     qs.push(makeQ("In Lenrie Peters’ “We Have Come Home,” the theme of homecoming is", ["joyous", "ambivalent and complex", "triumphant", "tragic"], 1, "Literature"));
     qs.push(makeQ("The phrase “we have come home” is repeated to emphasise", ["a physical return", "a psychological and cultural return", "a political victory", "a religious experience"], 1, "Literature"));
@@ -2774,7 +2812,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ("The mood of the poem can be described as", ["optimistic", "nostalgic and questioning", "joyful", "angry"], 1, "Literature"));
     qs.push(makeQ("The speaker’s identity is that of", ["an African returning after colonial education", "a tourist", "a refugee", "a trader"], 0, "Literature"));
     qs.push(makeQ("The poem’s title “We Have Come Home” implies", ["finality", "a cyclical journey", "abandonation", "defeat"], 1, "Literature"));
-    qs.push(makeQ("In Leopold Senghor’s “Black Woman,” the woman symbolises", ["the speaker’s lover", "Africa", "nature", "both B and C"], 3, "Literature"));
+    qs.push(makeQ("In Leopold Senghor’s “Black Woman,” the woman symbolises", ["the speaker’s lover", "Africa", "nature", "Africa and nature"], 3, "Literature"));
     qs.push(makeQ("The poem celebrates", ["African beauty and identity", "European culture", "urban life", "political struggle"], 0, "Literature"));
     qs.push(makeQ("The phrase “naked woman, black woman” is an example of", ["apostrophe", "repetition", "personification", "simile"], 0, "Literature"));
     qs.push(makeQ("The tone of “Black Woman” is", ["angry", "adoring and reverent", "sorrowful", "humorous"], 1, "Literature"));
@@ -2788,7 +2826,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ("The drums in the poem symbolise", ["African tradition", "war", "joy", "music"], 0, "Literature"));
     qs.push(makeQ("The speaker’s dilemma is", ["choosing between two cultures", "learning music", "poverty", "love"], 0, "Literature"));
     qs.push(makeQ("The tone of “Piano and Drums” is", ["joyful", "contemplative and uncertain", "angry", "humorous"], 1, "Literature"));
-    qs.push(makeQ("The phrase “at the river path I wander” suggests", ["a journey", "confusion", "exploration", "both A and B"], 3, "Literature"));
+    qs.push(makeQ("The phrase “at the river path I wander” suggests", ["a journey", "confusion", "exploration", "a journey and confusion"], 3, "Literature"));
     qs.push(makeQ("The poem uses", ["regular rhyme", "free verse", "blank verse", "sonnet form"], 1, "Literature"));
     qs.push(makeQ("The imagery of the drums is described as", ["wild and primal", "gentle and soft", "mechanical", "foreign"], 0, "Literature"));
     qs.push(makeQ("The piano’s music is described as", ["complex and sophisticated", "simple", "noisy", "soothing"], 0, "Literature"));
@@ -2803,12 +2841,12 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ("In “Piano and Drums,” the phrase “mystic rhythm” refers to", ["the piano", "the drums", "nature", "the speaker"], 1, "Literature"));
     qs.push(makeQ("In “The School Boy,” the line “O father and mother, if buds are nip’d” uses the metaphor of", ["plants for children", "birds for parents", "school for garden", "summer for joy"], 0, "Literature"));
     qs.push(makeQ("In “The Passage,” the phrase “Mother Idoto” is a", ["Christian reference", "traditional deity", "historical figure", "literary character"], 1, "Literature"));
-    qs.push(makeQ("In “Ode to a Nightingale,” the phrase “the viewless wings of Poesy” means", ["invisible imagination", "poetry’s wings", "the bird’s wings", "both A and B"], 3, "Literature"));
+    qs.push(makeQ("In “Ode to a Nightingale,” the phrase “the viewless wings of Poesy” means", ["invisible imagination", "poetry’s wings", "the bird’s wings", "invisible imagination and poetry’s wings"], 3, "Literature"));
     qs.push(makeQ("In “Crossing the Bar,” the phrase “moaning of the bar” suggests", ["sadness", "a sound of waves", "a barrier", "all of the above"], 3, "Literature"));
     qs.push(makeQ("In “The Good-Morrow,” the phrase “where can we find two better hemispheres” compares", ["lovers to hemispheres", "the world to lovers", "geography to love", "eyes to globes"], 0, "Literature"));
     qs.push(makeQ("In “Black Woman,” the line “Your colour is life, your form is beauty!” is an example of", ["apostrophe", "hyperbole", "metaphor", "simile"], 0, "Literature"));
     qs.push(makeQ("In “Telephone Conversation,” the speaker’s description of his skin colour as “plain black” is", ["factual", "ironic", "poetic", "humorous"], 1, "Literature"));
-    qs.push(makeQ("In “We Have Come Home,” the phrase “the waves / That brought us” symbolises", ["the Middle Passage", "colonial education", "travel", "both A and B"], 3, "Literature"));
+    qs.push(makeQ("In “We Have Come Home,” the phrase “the waves / That brought us” symbolises", ["the Middle Passage", "colonial education", "travel", "the Middle Passage and colonial education"], 3, "Literature"));
     qs.push(makeQ("In “Piano and Drums,” the speaker’s “wandering” is a metaphor for", ["cultural confusion", "physical travel", "aimlessness", "exploration"], 0, "Literature"));
     qs.push(makeQ("In “The Pulley,” the “glass of blessings” refers to", ["all gifts given to man", "a mirror", "a drinking cup", "wealth"], 0, "Literature"));
     qs.push(makeQ("In “The School Boy,” the line “I love to rise in a summer morn” shows", ["the child’s love of nature", "the child’s hate of school", "the child’s laziness", "the child’s obedience"], 0, "Literature"));
@@ -2869,7 +2907,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ("The character Yoko is based on a historical", ["Mende queen", "British governor", "missionary", "trader"], 0, "Literature"));
     qs.push(makeQ("The dramatic irony in “Oedipus Rex” occurs when", ["Oedipus curses the murderer not knowing it is himself", "Oedipus saves Thebes", "Jocasta kills herself", "the messenger arrives"], 0, "Literature"));
     qs.push(makeQ("The tragic hero in “Oedipus Rex” is", ["Oedipus", "Creon", "Tiresias", "Jocasta"], 0, "Literature"));
-    qs.push(makeQ("In “The Trials of Brother Jero,” the character Amope is", ["Jero’s wife", "Chume’s wife", "a trader", "both B and C"], 3, "Literature"));
+    qs.push(makeQ("In “The Trials of Brother Jero,” the character Amope is", ["Jero’s wife", "Chume’s wife", "a trader", "Chume’s wife and a trader"], 3, "Literature"));
     qs.push(makeQ("In “The Lion and the Jewel,” the stranger who takes Sidi’s photograph is", ["the magazine editor", "the photographer", "Lakunle", "Baroka"], 0, "Literature"));
     qs.push(makeQ("In “A Raisin in the Sun,” Walter Lee’s dream is to", ["own a liquor store", "become a doctor", "buy a house", "travel"], 0, "Literature"));
     qs.push(makeQ("In “The Strong Breed,” the stranger who becomes the carrier is", ["Eman", "Jaguna", "Oroge", "Ifada"], 0, "Literature"));
@@ -2880,7 +2918,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ("The comic character in “The Trials of Brother Jero” is often", ["Chume", "Jero", "Amope", "the drummer"], 0, "Literature"));
     qs.push(makeQ("The use of dance and song in African drama serves to", ["entertain", "advance the plot", "comment on action", "all of the above"], 3, "Literature"));
     qs.push(makeQ("The protagonist of “The Lion and the Jewel” is", ["Sidi", "Lakunle", "Baroka", "Sadiku"], 0, "Literature"));
-    qs.push(makeQ("The theme of generational conflict is evident in", ["The Lion and the Jewel", "A Raisin in the Sun", "The Trials of Brother Jero", "both A and B"], 3, "Literature"));
+    qs.push(makeQ("The theme of generational conflict is evident in", ["The Lion and the Jewel", "A Raisin in the Sun", "The Trials of Brother Jero", "The Lion and the Jewel and A Raisin in the Sun"], 3, "Literature"));
     qs.push(makeQ("The character who serves as a foil to Baroka in “The Lion and the Jewel” is", ["Lakunle", "Sidi", "Sadiku", "the stranger"], 0, "Literature"));
     qs.push(makeQ("In “A Raisin in the Sun,” the character who is a Nigerian student is", ["Joseph Asagai", "George Murchison", "Karl Lindner", "Bobo"], 0, "Literature"));
     qs.push(makeQ("In “Death and the King’s Horseman,” the colonial officer’s name is", ["Pilkings", "Simon", "William", "Johnson"], 0, "Literature"));
@@ -3022,7 +3060,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ('Cost-push inflation can be caused by', ['increase in wages', 'increase in money supply', 'increase in government spending', 'decrease in taxes'], 0, 'Economics'));
     qs.push(makeQ('Demand-pull inflation can be caused by', ['increase in exports', 'increase in interest rates', 'decrease in money supply', 'decrease in government spending'], 0, 'Economics'));
     qs.push(makeQ('A person who is not working but actively seeking work is', ['employed', 'unemployed', 'not in labour force', 'underemployed'], 1, 'Economics'));
-    qs.push(makeQ('Underemployment means', ['working fewer hours than desired', 'not working at all', 'working in a job below skill level', 'both A and C'], 3, 'Economics'));
+    qs.push(makeQ('Underemployment means', ['working fewer hours than desired', 'not working at all', 'working in a job below skill level', 'working fewer hours than desired and working in a job below skill level'], 3, 'Economics'));
     qs.push(makeQ('Frictional unemployment occurs when', ['workers are between jobs', 'there is a mismatch of skills', 'the economy is in recession', 'workers are laid off due to technology'], 0, 'Economics'));
     qs.push(makeQ('Structural unemployment occurs when', ['there is a mismatch between skills and job requirements', 'workers are temporarily between jobs', 'the economy is at full employment', 'there is seasonal work'], 0, 'Economics'));
     qs.push(makeQ('The natural rate of unemployment is the', ['sum of frictional and structural unemployment', 'rate when there is no cyclical unemployment', 'rate at full employment', 'all of the above'], 3, 'Economics'));
@@ -4630,7 +4668,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ('An annuity is a', ['regular income paid to a person for life or a period', 'lump sum payment', 'type of investment', 'insurance claim'], 0, 'Commerce'));
     qs.push(makeQ('Marine insurance covers', ['loss or damage to ships and cargo', 'life', 'health', 'property on land'], 0, 'Commerce'));
     qs.push(makeQ('Fire insurance covers', ['loss or damage by fire', 'theft', 'accident', 'health'], 0, 'Commerce'));
-    qs.push(makeQ('Motor vehicle insurance in Nigeria includes', ['third-party liability', 'comprehensive cover', 'both A and B', 'only comprehensive'], 2, 'Commerce'));
+    qs.push(makeQ('Motor vehicle insurance in Nigeria includes', ['third-party liability', 'comprehensive cover', 'third-party liability and comprehensive cover', 'only comprehensive'], 2, 'Commerce'));
     qs.push(makeQ('The Nigerian Insurance Association (NIA) is a', ['professional body for insurers', 'regulatory body', 'consumer protection group', 'government agency'], 0, 'Commerce'));
     qs.push(makeQ('The National Insurance Commission (NAICOM) is the', ['regulator of insurance in Nigeria', 'association of insurers', 'consumer association', 'reinsurance company'], 0, 'Commerce'));
     qs.push(makeQ('The concept of "takaful" is', ['Islamic insurance based on mutual cooperation', 'conventional insurance', 'life insurance', 'health insurance'], 0, 'Commerce'));
@@ -4909,7 +4947,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ("The word **opportunity** is stressed on the", ["first syllable", "second syllable", "third syllable", "fourth syllable"], 2, "Stress"));
     qs.push(makeQ("The vowel sound in **fur** is", ["/fɜ:/", "/fɔ:/", "/fʌ/", "/fə/"], 0, "Phonetics"));
     qs.push(makeQ("Which word has the same vowel sound as **come**?", ["home", "some", "tone", "bone"], 1, "Phonetics"));
-    qs.push(makeQ("The number of syllables in **comfortable** is", ["3", "4", "5", "6"], 0, "Stress"));
+    qs.push(makeQ("The number of syllables in **comfortable** is", ["3", "4", "5", "6"], 1, "Stress"));
     qs.push(makeQ("The consonant sound /ð/ is heard in", ["thin", "this", "think", "thumb"], 1, "Phonetics"));
     qs.push(makeQ("The word **photography** is stressed on the", ["first syllable", "second syllable", "third syllable", "fourth syllable"], 1, "Stress"));
     qs.push(makeQ("The vowel sound in **cup** is", ["/ʌ/", "/æ/", "/ɑ:/", "/ɔ:/"], 0, "Phonetics"));
@@ -4952,7 +4990,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ("The consonant sound /k/ is heard in", ["knife", "know", "knee", "kill"], 3, "Phonetics"));
     qs.push(makeQ("The vowel sound in **bus** is", ["/bʌs/", "/bʊs/", "/bu:s/", "/bɒs/"], 0, "Phonetics"));
     qs.push(makeQ("Which word contains the sound /aʊ/?", ["how", "who", "shoe", "blue"], 0, "Phonetics"));
-    qs.push(makeQ("The stress pattern for **impossible** is", ["oOooo", "ooOoo", "oooOo", "ooooO"], 1, "Stress"));
+    qs.push(makeQ("The stress pattern for **impossible** is", ["oOooo", "ooOoo", "oooOo", "ooooO"], 0, "Stress"));
     qs.push(makeQ("The vowel sound in **bird** is", ["/bɜ:d/", "/bɔ:d/", "/bʌd/", "/beəd/"], 0, "Phonetics"));
     qs.push(makeQ("Which word has the stress on the **second** syllable?", ["government", "necessary", "condition", "beautiful"], 2, "Stress"));
     qs.push(makeQ("The consonant sound /f/ is found in", ["of", "off", "photo", "all of the above"], 3, "Phonetics"));
@@ -4994,7 +5032,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ("The novel criticises the practice of", ["paying teachers well", "using examination results to extort money", "building new schools", "encouraging sports"], 1, "Literature"));
     qs.push(makeQ("The headmaster's assistant is portrayed as", ["loyal and hardworking", "cunning and disloyal", "incompetent", "uninterested"], 1, "Literature"));
     qs.push(makeQ("The setting reflects issues in", ["pre-colonial Nigeria", "modern-day Nigeria", "colonial era", "future Nigeria"], 1, "Literature"));
-    qs.push(makeQ("The headmaster's personal sacrifices include", ["using his own money to pay staff", "ignoring his family", "working long hours under stress", "both A and C"], 3, "Literature"));
+    qs.push(makeQ("The headmaster's personal sacrifices include", ["using his own money to pay staff", "ignoring his family", "working long hours under stress", "using his own money to pay staff and working long hours under stress"], 3, "Literature"));
     qs.push(makeQ("The novel's ending suggests that", ["evil triumphs", "integrity can prevail despite challenges", "the school closes down", "the headmaster flees"], 1, "Literature"));
     qs.push(makeQ("The author uses the school as a microcosm of", ["Nigerian society", "the entire world", "rural communities", "the military"], 0, "Literature"));
     qs.push(makeQ("The character who represents the voice of reason is", ["the headmaster's wife", "an elder teacher", "the vice principal", "a student leader"], 1, "Literature"));
@@ -5235,14 +5273,23 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
       const baseExplanation = q.explanation ? q.explanation
         : `The correct answer is <strong>${correctLetter}. ${correctOptionText}</strong>. Focus on ${q.topic || "JAMB syllabus"}.`;
 
+      let feedbackText = "";
       if(selectedIdx === null || selectedIdx === undefined) {
-        reviewExplanationHtml = `<div class="review-explanation">⚠️ Unanswered. Correct answer: <strong>${correctLetter}. ${correctOptionText}</strong>. ${baseExplanation}</div>`;
+        feedbackText = `⚠️ Unanswered. Correct answer: <strong>${correctLetter}. ${correctOptionText}</strong>.`;
       } else if(selectedIdx === q.correctIdx) {
-        reviewExplanationHtml = `<div class="review-explanation correct-feedback">✅ Correct. Answer: <strong>${correctLetter}. ${correctOptionText}</strong>. ${baseExplanation}</div>`;
+        feedbackText = `✅ Correct. Answer: <strong>${correctLetter}. ${correctOptionText}</strong>.`;
       } else {
         const wrongOptionText = q.opts[selectedIdx] || "(selected option)";
-        reviewExplanationHtml = `<div class="review-explanation wrong-feedback">❌ Wrong. Your answer: <strong>${selectedLetter}. ${wrongOptionText}</strong>. Correct answer: <strong>${correctLetter}. ${correctOptionText}</strong>. ${baseExplanation}</div>`;
+        feedbackText = `❌ Wrong. Your answer: <strong>${selectedLetter}. ${wrongOptionText}</strong>. Correct answer: <strong>${correctLetter}. ${correctOptionText}</strong>.`;
       }
+
+      reviewExplanationHtml = `
+        <div class="review-explanation">
+          <div class="feedback-text">${feedbackText}</div>
+          <button class="show-explanation-btn" data-q-index="${currentQIndex}">💡 Show Explanation</button>
+          <div class="explanation-text hidden">${baseExplanation}</div>
+        </div>
+      `;
     }
 
     questionContainer.innerHTML = `
@@ -5264,7 +5311,27 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
         });
       });
     }
+    if(reviewMode) {
+      const showExplanationBtn = questionContainer.querySelector('.show-explanation-btn');
+      if(showExplanationBtn) {
+        showExplanationBtn.addEventListener('click', () => {
+          const explanationDiv = questionContainer.querySelector('.explanation-text');
+          if(explanationDiv.classList.contains('hidden')) {
+            explanationDiv.classList.remove('hidden');
+            showExplanationBtn.textContent = '🙈 Hide Explanation';
+          } else {
+            explanationDiv.classList.add('hidden');
+            showExplanationBtn.textContent = '💡 Show Explanation';
+          }
+        });
+      }
+    }
     updateNavButtons();
+    if(reviewMode && !examActive) {
+      submitExamBtn.textContent = '📚 Select Another Subject';
+    } else {
+      submitExamBtn.textContent = '✔ SUBMIT EXAM';
+    }
     if(window.MathJax && MathJax.typesetPromise) {
       MathJax.typesetPromise([questionContainer]).catch(err => console.error('MathJax typeset error:', err));
     }
@@ -5313,11 +5380,18 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     if(timerInterval) clearInterval(timerInterval);
     let total = currentExamQuestions.length;
     let correct = 0;
+    let failedTopicsSet = new Set();
     for(let i=0; i<total; i++) {
       let userAns = userSelections[i];
       let correctAns = currentExamQuestions[i].correctIdx;
-      if(userAns !== null && userAns === correctAns) correct++;
+      if(userAns !== null && userAns === correctAns) {
+        correct++;
+      } else {
+        let topicName = currentExamQuestions[i].topic ? currentExamQuestions[i].topic : "General";
+        failedTopicsSet.add(topicName);
+      }
     }
+    let failedTopics = Array.from(failedTopicsSet).sort();
     
     // Save exam result
     let percent = Math.round((correct/total)*100);
@@ -5326,6 +5400,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
       score: correct,
       total: total,
       percentage: percent,
+      failedTopics: failedTopics,
       timestamp: new Date().toLocaleString()
     };
     examResults.push(resultEntry);
@@ -5343,6 +5418,24 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     examAreaDiv.classList.add("hidden");
     subjectSelectPanel.classList.remove("hidden");
     populateAnotherSubjectDropdown();
+    displayFailedTopicsForLastExam();
+  }
+
+  function displayFailedTopicsForLastExam() {
+    const failedTopicsPanel = document.getElementById('failedTopicsPanel');
+    const failedTopicsText = document.getElementById('failedTopicsText');
+    if(examResults.length === 0) {
+      failedTopicsPanel.classList.add('hidden');
+      return;
+    }
+    const latestResult = examResults[examResults.length - 1];
+    if(latestResult.failedTopics && latestResult.failedTopics.length > 0) {
+      failedTopicsPanel.classList.remove('hidden');
+      failedTopicsText.innerHTML = latestResult.failedTopics.map(topic => `<li>${topic}</li>`).join('');
+    } else {
+      failedTopicsPanel.classList.remove('hidden');
+      failedTopicsText.innerHTML = '<li>No failed topics — great job!</li>';
+    }
   }
 
   function populateAnotherSubjectDropdown() {
@@ -5418,6 +5511,22 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
       resultsTableBody.appendChild(row);
     });
     
+    const failedTopicsSummary = document.getElementById('failedTopicsSummary');
+    const failedTopicsSummaryList = document.getElementById('failedTopicsSummaryList');
+    if(examResults.length > 0) {
+      const latestResult = examResults[examResults.length - 1];
+      if(latestResult.failedTopics && latestResult.failedTopics.length > 0) {
+        failedTopicsSummary.style.display = 'block';
+        failedTopicsSummaryList.innerHTML = latestResult.failedTopics.map(topic => `<li>${topic}</li>`).join('');
+      } else {
+        failedTopicsSummary.style.display = 'block';
+        failedTopicsSummaryList.innerHTML = '<li>No failed topics — excellent!</li>';
+      }
+    } else {
+      failedTopicsSummary.style.display = 'none';
+      failedTopicsSummaryList.innerHTML = '';
+    }
+
     // Show results panel
     subjectSelectPanel.classList.add("hidden");
     resultsSummaryPanel.classList.remove("hidden");
@@ -5498,7 +5607,13 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     if(!examActive && !reviewMode) return;
     if(currentQIndex < currentExamQuestions.length-1) { currentQIndex++; renderCurrentQuestion(); }
   });
-  submitExamBtn.addEventListener('click', () => submitExamFinal("submitted"));
+  submitExamBtn.addEventListener('click', () => {
+    if(reviewMode && !examActive) {
+      showSubjectSelectionPanel();
+    } else {
+      submitExamFinal("submitted");
+    }
+  });
   restartExamBtn.addEventListener('click', () => restartFull());
   startAnotherExamBtn.addEventListener('click', () => startAnotherExam());
   exitExamBtn.addEventListener('click', () => showResultsSummary());
@@ -5511,3 +5626,4 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
 </script>
 </body>
 </html>
+
