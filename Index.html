@@ -666,7 +666,7 @@
     <div id="introScreen" class="intro-panel">
       <div class="jamb-logo">🎓 JAMB MOCK 2025</div>
       <p style="margin: 12px 0 24px; color: #2c5e2e;">CBT simulation • 100 objective questions • 35 minutes</p>
-      <button id="beginMockBtn" class="start-btn">▶ START MOCK EXAM</button>
+      <button id="beginMockBtn" type="button" class="start-btn" onclick="document.getElementById('introScreen').classList.add('hidden'); document.getElementById('setupPanel').classList.remove('hidden');">▶ START MOCK EXAM</button>
       <p style="margin-top: 24px; font-size:0.8rem;">✔️ JAMB syllabus compliant ✔️ 2025/2026 curriculum ✔️ Randomized per attempt</p>
     </div>
 
@@ -782,7 +782,7 @@
   // For each exam session, 100 questions are randomly selected from the 400 available per subject.
   // This ensures variety and prevents question memorization across different exam attempts.
   
-  const JAMB_QUESTION_BANKS = {
+  var JAMB_QUESTION_BANKS = {
     biology: generateBiologyBank(),
     chemistry: generateChemistryBank(),
     physics: generatePhysicsBank(),
@@ -798,17 +798,23 @@
 
   // helper to create question object (auto template explanation if omitted)
   function makeQ(questionText, optionsArray, correctIndex, topicName, explanationText = "") {
-    const correctOption = optionsArray && optionsArray[correctIndex] ? optionsArray[correctIndex] : "the correct option";
-    const correctLetter = String.fromCharCode(65 + correctIndex);
-    const baseExplanation = `The correct answer is ${correctLetter}. ${correctOption}. ` +
+    var correctOption, correctLetter;
+    if (Array.isArray(correctIndex)) {
+      correctOption = correctIndex.map(i => optionsArray[i]).join(', ');
+      correctLetter = correctIndex.map(i => String.fromCharCode(65 + i)).join(', ');
+    } else {
+      correctOption = optionsArray && optionsArray[correctIndex] ? optionsArray[correctIndex] : "the correct option";
+      correctLetter = String.fromCharCode(65 + correctIndex);
+    }
+    var baseExplanation = `The correct answer is ${correctLetter}. ${correctOption}. ` +
       `This relates to ${topicName || "the tested topic"}. Review this concept to strengthen your understanding.`;
-    const explanation = explanationText && explanationText.toString().trim() ? explanationText : baseExplanation;
+    var explanation = explanationText && explanationText.toString().trim() ? explanationText : baseExplanation;
     return { text: questionText, opts: optionsArray, correctIdx: correctIndex, topic: topicName, explanation };
   }
 
   // ----- BIOLOGY (JAMB CURRICULUM: cell biology, ecology, genetics, reproduction, homeostasis, etc) -----
   function generateBiologyBank() {
-    let qs = [];
+    var qs = [];
     // Cell Biology and Basic Concepts (Questions 1-50)
     qs.push(makeQ("The basic unit of life is the", ["tissue", "organ", "cell", "nucleus"], 2, "Cell Biology"));
     qs.push(makeQ("Which of the following organelles is responsible for protein synthesis?", ["ribosome", "mitochondria", "lysosome", "Golgi apparatus"], 0, "Cell Biology"));
@@ -1098,8 +1104,8 @@
     qs.push(makeQ("The condition where a person has XO chromosomes is", ["Turner syndrome", "Klinefelter syndrome", "Down syndrome", "Edward syndrome"], 0, "Genetics"));
     qs.push(makeQ("The condition where a person has XXY chromosomes is", ["Klinefelter syndrome", "Turner syndrome", "Down syndrome", "Edward syndrome"], 0, "Genetics"));
     qs.push(makeQ("The process of gene expression involves", ["transcription and translation", "replication and mutation", "crossing over and recombination", "mitosis and meiosis"], 0, "Genetics"));
-    qs.push(makeQ("The triplet of nucleotides on mRNA that codes for an amino acid is a", ["codon", "anticodon", "exon", "intron"], 0, "Genetics"));
-    qs.push(makeQ("The triplet on tRNA that pairs with the codon is the", ["anticodon", "codon", "exon", "intron"], 0, "Genetics"));
+    qs.push(makeQ("The tripvar of nucleotides on mRNA that codes for an amino acid is a", ["codon", "anticodon", "exon", "intron"], 0, "Genetics"));
+    qs.push(makeQ("The tripvar on tRNA that pairs with the codon is the", ["anticodon", "codon", "exon", "intron"], 0, "Genetics"));
     qs.push(makeQ("The process of making protein from mRNA occurs on the", ["ribosome", "nucleus", "mitochondria", "Golgi apparatus"], 0, "Genetics"));
     qs.push(makeQ("The enzyme that synthesizes RNA from DNA is", ["RNA polymerase", "DNA polymerase", "helicase", "ligase"], 0, "Genetics"));
     qs.push(makeQ("The enzyme that synthesizes DNA from DNA is", ["DNA polymerase", "RNA polymerase", "helicase", "ligase"], 0, "Genetics"));
@@ -1216,7 +1222,7 @@
   }
 
   function generateChemistryBank() {
-    let qs=[];
+    var qs=[];
     qs.push(makeQ("Which of the following is a physical change?", ["rusting of iron", "burning of wood", "melting of ice", "digestion of food"], 2, "Chemistry"));
     qs.push(makeQ("The electronic configuration of sodium (atomic number 11) is", ["2, 8, 1", "2, 8, 2", "2, 8, 3", "2, 8, 4"], 0, "Chemistry"));
     qs.push(makeQ("The substance that can act both as an acid and a base is called", ["amphoteric", "neutral", "alkali", "salt"], 0, "Chemistry"));
@@ -1524,11 +1530,273 @@
     qs.push(makeQ("The functional group of alkenes is", ["C=C", "C≡C", "C–C", "–OH"], 0, "Chemistry"));
     qs.push(makeQ("The functional group of alkynes is", ["C≡C", "C=C", "C–C", "–OH"], 0, "Chemistry"));
     qs.push(makeQ("The functional group of carboxylic acids is", ["–COOH", "–OH", "–CHO", "–CO–"], 0, "Chemistry"));
+    qs.push(makeQ("The general formula of alkanes is", ["CₙH₂ₙ", "CₙH₂ₙ₊₂", "CₙH₂ₙ₋₂", "CₙH₂ₙ₊₄"], 1, "Chemistry"));
+    qs.push(makeQ("The general formula of alkenes is", ["CₙH₂ₙ", "CₙH₂ₙ₊₂", "CₙH₂ₙ₋₂", "CₙH₂ₙ₊₄"], 0, "Chemistry"));
+    qs.push(makeQ("The general formula of alkynes is", ["CₙH₂ₙ₋₂", "CₙH₂ₙ", "CₙH₂ₙ₊₂", "CₙH₂ₙ₋₄"], 0, "Chemistry"));
+    qs.push(makeQ("Isomers are compounds with the same", ["molecular formula but different structural formulas", "molecular formula and same structural formulas", "different molecular formula", "same empirical formula"], 0, "Chemistry"));
+    qs.push(makeQ("The process of converting crude oil into useful products is", ["distillation", "fermentation", "combustion", "polymerization"], 0, "Chemistry"));
+    qs.push(makeQ("The pollutant responsible for acid rain is", ["SO₂", "CO₂", "CH₄", "N₂O"], 0, "Chemistry"));
+    qs.push(makeQ("The oxidation state of nitrogen in HNO₃ is", ["+1", "+3", "+5", "+7"], 2, "Chemistry"));
+    qs.push(makeQ("The oxidation state of sulfur in H₂SO₄ is", ["+2", "+4", "+6", "+8"], 2, "Chemistry"));
+    qs.push(makeQ("The oxidation state of chromium in K₂Cr₂O₇ is", ["+2", "+3", "+5", "+6"], 3, "Chemistry"));
+    qs.push(makeQ("A catalyst is a substance that", ["increases reaction rate without being consumed", "decreases reaction rate", "is always produced in a reaction", "must be a solid"], 0, "Chemistry"));
+    qs.push(makeQ("The SI unit of concentration is", ["mol/L", "mol/dm³", "mol/m³", "mass %"], 0, "Chemistry"));
+    qs.push(makeQ("Avogadro's constant is approximately", ["6.02 × 10²²", "6.02 × 10²³", "6.02 × 10²⁴", "6.02 × 10²¹"], 1, "Chemistry"));
+    qs.push(makeQ("The molar mass of NaCl (Na=23, Cl=35.5) is", ["35.5 g/mol", "58.5 g/mol", "23 g/mol", "70 g/mol"], 1, "Chemistry"));
+    qs.push(makeQ("The empirical formula is the", ["simplest whole number ratio of atoms", "actual number of atoms in a molecule", "average of all formulas", "ratio of mass percentages"], 0, "Chemistry"));
+    qs.push(makeQ("The percentage composition of hydrogen in H₂O is (H=1, O=16)", ["5.56%", "11.11%", "88.89%", "2%"], 1, "Chemistry"));
+    qs.push(makeQ("The percentage composition of oxygen in H₂O is (H=1, O=16)", ["88.89%", "11.11%", "50%", "16%"], 0, "Chemistry"));
+    qs.push(makeQ("The law of conservation of mass states that", ["mass is neither created nor destroyed in a chemical reaction", "matter can be created", "mass changes in reactions", "atoms can be destroyed"], 0, "Chemistry"));
+    qs.push(makeQ("Gay-Lussac's law relates", ["pressure and temperature", "volume and temperature", "pressure and volume", "mass and volume"], 0, "Chemistry"));
+    qs.push(makeQ("Charles's law states that at constant pressure", ["V ∝ T", "V ∝ P", "V ∝ n", "V is constant"], 0, "Chemistry"));
+    qs.push(makeQ("Boyle's law states that at constant temperature", ["P ∝ 1/V", "P ∝ V", "P is constant", "P ∝ T"], 0, "Chemistry"));
+    qs.push(makeQ("The ideal gas equation is", ["PV = nRT", "PV = RT", "P = nRT", "V = nRT"], 0, "Chemistry"));
+    qs.push(makeQ("The relative atomic mass of an element is based on", ["carbon-12", "oxygen-16", "hydrogen-1", "nitrogen-14"], 0, "Chemistry"));
+    qs.push(makeQ("Isotopes are atoms of the same element with different", ["number of neutrons", "number of protons", "number of electrons", "mass numbers is same"], 0, "Chemistry"));
+    qs.push(makeQ("The number of electrons in Cl⁻ ion (Cl atomic number = 17) is", ["16", "17", "18", "19"], 2, "Chemistry"));
+    qs.push(makeQ("The number of electrons in Ca²⁺ ion (Ca atomic number = 20) is", ["18", "20", "22", "19"], 0, "Chemistry"));
+    qs.push(makeQ("Electronegativity is the tendency of an atom to", ["attract electrons in a covalent bond", "lose electrons", "gain protons", "release energy"], 0, "Chemistry"));
+    qs.push(makeQ("The element with the highest electronegativity is", ["oxygen", "fluorine", "chlorine", "nitrogen"], 1, "Chemistry"));
+    qs.push(makeQ("An ionic bond is formed between", ["metal and non-metal", "two non-metals", "two metals", "same atoms"], 0, "Chemistry"));
+    qs.push(makeQ("A coordinate covalent bond is also called", ["dative bond", "polar bond", "hydrogen bond", "metallic bond"], 0, "Chemistry"));
+    qs.push(makeQ("Hydrogen bonding occurs between H and", ["O, N, F", "C, Si, Ge", "all non-metals", "all elements"], 0, "Chemistry"));
+    qs.push(makeQ("The shape of CH₄ is", ["tetrahedral", "trigonal planar", "linear", "square planar"], 0, "Chemistry"));
+    qs.push(makeQ("The shape of NH₃ is", ["trigonal pyramidal", "tetrahedral", "trigonal planar", "linear"], 0, "Chemistry"));
+    qs.push(makeQ("The shape of CO₂ is", ["linear", "bent", "trigonal planar", "tetrahedral"], 0, "Chemistry"));
+    qs.push(makeQ("The shape of H₂O is", ["bent", "linear", "trigonal pyramidal", "tetrahedral"], 0, "Chemistry"));
+    qs.push(makeQ("Van der Waals forces are", ["weak intermolecular forces", "strong covalent bonds", "ionic forces", "coordinate bonds"], 0, "Chemistry"));
+    qs.push(makeQ("Electrovalent compounds have their properties determined by", ["ionic bonds between ions", "covalent bonds", "metallic bonds", "hydrogen bonds"], 0, "Chemistry"));
+    qs.push(makeQ("The solubility of ionic compounds in water is due to", ["formation of hydrogen bonds with water", "polar nature of water", "metallic bonding", "covalent bonding"], 1, "Chemistry"));
+    qs.push(makeQ("Covalent compounds generally have", ["low melting points", "high melting points", "high electrical conductivity", "flexibility"], 0, "Chemistry"));
+    qs.push(makeQ("Ionic compounds generally have", ["high melting points and are hard", "low melting points", "are flexible", "are non-conducting in solid state"], 0, "Chemistry"));
+    qs.push(makeQ("Metallic compounds have the property of", ["malleability and ductility", "brittleness", "low boiling points", "low density"], 0, "Chemistry"));
+    qs.push(makeQ("The oxidation state of oxygen in most compounds is", ["-2", "+2", "-1", "+1"], 0, "Chemistry"));
+    qs.push(makeQ("The oxidation state of hydrogen in most compounds is", ["+1", "-1", "+2", "0"], 0, "Chemistry"));
+    qs.push(makeQ("In a redox reaction, oxidation is", ["loss of electrons", "gain of electrons", "loss of protons", "change in colour"], 0, "Chemistry"));
+    qs.push(makeQ("In a redox reaction, reduction is", ["gain of electrons", "loss of electrons", "loss of protons", "breaking of bonds"], 1, "Chemistry"));
+    qs.push(makeQ("An oxidising agent is a substance that", ["gains electrons", "loses electrons", "accepts electrons", "donates protons"], 2, "Chemistry"));
+    qs.push(makeQ("A reducing agent is a substance that", ["loses electrons", "gains electrons", "accepts electrons", "donates electrons"], 0, "Chemistry"));
+    qs.push(makeQ("The ion-electron method is used for", ["balancing redox equations", "finding oxidation states", "writing formulas", "determining molar mass"], 0, "Chemistry"));
+    qs.push(makeQ("In balancing redox equations, we balance", ["mass and charge", "only mass", "only charge", "atoms only"], 0, "Chemistry"));
+    qs.push(makeQ("A strong acid is one that", ["is 100% dissociated in water", "has low pH", "can conduct electricity", "reacts vigorously"], 0, "Chemistry"));
+    qs.push(makeQ("A strong base is one that", ["is 100% dissociated in water", "has high pH", "can conduct electricity", "turns indicat blue"], 0, "Chemistry"));
+    qs.push(makeQ("The ionization constant Ka is used for", ["weak acids", "strong acids", "bases", "salts"], 0, "Chemistry"));
+    qs.push(makeQ("The ionization constant Kb is used for", ["weak bases", "strong bases", "acids", "salts"], 0, "Chemistry"));
+    qs.push(makeQ("The water ionization constant Kw at 25°C is", ["1.0 × 10⁻¹⁴", "1.0 × 10⁻⁷", "1.0 × 10⁻⁵", "1.0 × 10⁻²¹"], 0, "Chemistry"));
+    qs.push(makeQ("The pH of pure water at 25°C is", ["7", "0", "14", "6"], 0, "Chemistry"));
+    qs.push(makeQ("A buffer solution resists changes in pH due to presence of", ["weak acid and its salt with strong base", "strong acid and strong base", "salts only", "acids only"], 0, "Chemistry"));
+    qs.push(makeQ("The Henderson-Hasselbalch equation relates pH to", ["pKa and concentration ratio", "temperature", "pressure", "volume"], 0, "Chemistry"));
+    qs.push(makeQ("Titration is used to determine", ["concentration of unknown solution", "molar mass", "oxidation state", "density"], 0, "Chemistry"));
+    qs.push(makeQ("The indicator used in acid-base titration changes colour at", ["equivalence point", "start of reaction", "end of reaction", "middle of titration"], 0, "Chemistry"));
+    qs.push(makeQ("In gravimetric analysis, we determine", ["mass of analyte from mass of precipitate", "volume of analyte", "concentration by titration", "colour change"], 0, "Chemistry"));
+    qs.push(makeQ("Precipitation occurs when", ["ionic product exceeds solubility product", "ionic product equals solubility product", "solutions are mixed", "temperature increases"], 0, "Chemistry"));
+    qs.push(makeQ("The solubility product Ksp is constant at", ["constant temperature", "all temperatures", "only 25°C", "high pressure"], 0, "Chemistry"));
+    qs.push(makeQ("Common ion effect causes", ["decrease in solubility of salt", "increase in solubility of salt", "increase in solubility product", "change in colour"], 0, "Chemistry"));
+    qs.push(makeQ("Thermal dissociation of sodium chloride produces", ["Na⁺ and Cl⁻", "Na and Cl", "NaCl molecules", "Na⁺ and Cl"], 0, "Chemistry"));
+    qs.push(makeQ("Thermal decomposition of carbonates produces", ["oxide and carbon dioxide", "carbonic acid", "bicarbonate", "carbon monoxide"], 0, "Chemistry"));
+    qs.push(makeQ("Chlor-alkali process produces", ["chlorine, hydrogen, and sodium hydroxide", "chlorine only", "hydrogen only", "hydrochloric acid"], 0, "Chemistry"));
+    qs.push(makeQ("In the Haber process, ammonia is produced from", ["nitrogen and hydrogen", "nitrogen only", "hydrogen only", "nitrogen and oxygen"], 0, "Chemistry"));
+    qs.push(makeQ("The Contact process is used for production of", ["sulfuric acid", "nitric acid", "hydrochloric acid", "phosphoric acid"], 0, "Chemistry"));
+    qs.push(makeQ("Nitric acid is produced industrially by", ["oxidation of ammonia", "oxidation of nitrogen", "oxidation of hydrogen", "oxidation of nitrous oxide"], 0, "Chemistry"));
+    qs.push(makeQ("Sodium hydroxide is produced by", ["electrolysis of brine", "neutralization of acid", "oxidation of sodium", "reaction with water"], 0, "Chemistry"));
+    qs.push(makeQ("Chlorine gas is produced by", ["electrolysis of brine", "heating sodium chloride", "reaction with sulfuric acid", "oxidation of hydrochloric acid"], 0, "Chemistry"));
+    qs.push(makeQ("The first law of thermodynamics states that", ["energy is conserved", "entropy always increases", "heat flows from hot to cold", "temperature is constant"], 0, "Chemistry"));
+    qs.push(makeQ("Exothermic reactions have", ["negative ΔH", "positive ΔH", "zero ΔH", "no change in energy"], 0, "Chemistry"));
+    qs.push(makeQ("Endothermic reactions have", ["positive ΔH", "negative ΔH", "zero ΔH", "constant temperature"], 0, "Chemistry"));
+    qs.push(makeQ("Hess's law states that", ["enthalpy change is the same regardless of path", "reactions must be carried at same temperature", "only exothermic reactions occur", "entropy always increases"], 0, "Chemistry"));
+    qs.push(makeQ("The standard enthalpy of formation is for formation of", ["1 mole of compound from elements in standard state", "all compounds", "only organic compounds", "elements only"], 0, "Chemistry"));
+    qs.push(makeQ("Enthalpy of combustion is always", ["negative", "positive", "zero", "variable"], 0, "Chemistry"));
+    qs.push(makeQ("Gibbs free energy ΔG determines", ["spontaneity of reaction", "reaction rate", "equilibrium constant only", "temperature"], 0, "Chemistry"));
+    qs.push(makeQ("At equilibrium, ΔG equals", ["zero", "negative value", "positive value", "RT"], 0, "Chemistry"));
+    qs.push(makeQ("Le Chatelier's principle states that", ["system shifts to counteract change", "system remains unchanged", "forward reaction always occurs", "equilibrium constant changes"], 0, "Chemistry"));
+    qs.push(makeQ("When temperature increases, endothermic equilibria shift", ["to the right", "to the left", "not at all", "randomly"], 0, "Chemistry"));
+    qs.push(makeQ("When pressure increases, equilibria with fewer moles shift", ["to the right", "to the left", "not at all", "in both directions"], 0, "Chemistry"));
+    qs.push(makeQ("The equilibrium constant K is dimensionless for reactions where", ["Δn = 0", "Δn > 0", "Δn < 0", "all reactions"], 2, "Chemistry"));
+    qs.push(makeQ("The rate of reaction is determined by", ["collision frequency, orientation, and activation energy", "only temperature", "only concentration", "only pressure"], 0, "Chemistry"));
+    qs.push(makeQ("Activation energy is the energy required to", ["start a reaction", "break bonds in reactants", "form bonds in products", "reach transition state"], 3, "Chemistry"));
+    qs.push(makeQ("In a first-order reaction, the half-life", ["is constant", "decreases with time", "increases with time", "depends on initial concentration"], 0, "Chemistry"));
+    qs.push(makeQ("In a zero-order reaction, the rate", ["is constant", "depends on concentration", "depends on initial concentration", "is zero"], 0, "Chemistry"));
+    qs.push(makeQ("In a second-order reaction, the rate is proportional to", ["[A]²", "[A]", "1/[A]", "[A]^0.5"], 0, "Chemistry"));
+    qs.push(makeQ("The rate law is determined by", ["experiment", "stoichiometry", "thermodynamics", "equilibrium"], 0, "Chemistry"));
+    qs.push(makeQ("A reaction mechanism is a series of", ["elementary steps that add to overall reaction", "complex reactions", "thermodynamic equations", "equilibrium expressions"], 0, "Chemistry"));
+    qs.push(makeQ("An intermediate is a species that", ["is produced in one step and consumed in another", "is produced only", "is consumed only", "appears in overall equation"], 0, "Chemistry"));
+    qs.push(makeQ("Photosynthesis is an example of", ["endothermic non-spontaneous reaction", "exothermic spontaneous reaction", "exothermic non-spontaneous", "reaction at equilibrium"], 0, "Chemistry"));
+    qs.push(makeQ("Respiration is an example of", ["exothermic spontaneous reaction", "endothermic reaction", "non-spontaneous reaction", "reaction at equilibrium"], 0, "Chemistry"));
+    qs.push(makeQ("Entropy is a measure of", ["disorder or randomness", "heat", "enthalpy", "energy"], 0, "Chemistry"));
+    qs.push(makeQ("The second law of thermodynamics states that", ["entropy of universe always increases", "energy is conserved", "heat flows from cold to hot", "temperature is constant"], 0, "Chemistry"));
+    qs.push(makeQ("At absolute zero, entropy of perfect crystal is", ["zero", "maximum", "undefined", "negative"], 0, "Chemistry"));
+    qs.push(makeQ("Electrochemistry deals with", ["relationship between electricity and chemical reactions", "only chemical reactions", "only electrical conductivity", "thermodynamics only"], 0, "Chemistry"));
+    qs.push(makeQ("In electrochemistry, oxidation occurs at the", ["anode", "cathode", "electrolyte", "salt bridge"], 0, "Chemistry"));
+    qs.push(makeQ("In electrochemistry, reduction occurs at the", ["cathode", "anode", "electrolyte", "salt bridge"], 0, "Chemistry"));
+    qs.push(makeQ("A galvanic cell produces", ["electrical energy from chemical reaction", "chemical reaction from electricity", "only heat", "light"], 0, "Chemistry"));
+    qs.push(makeQ("An electrolytic cell requires", ["external source of electricity", "chemical reaction only", "only heat", "spontaneous reaction"], 0, "Chemistry"));
+    qs.push(makeQ("The standard electrode potential E° for reduction of H⁺ to H₂ is", ["0 V", "+1 V", "-1 V", "+2 V"], 0, "Chemistry"));
+    qs.push(makeQ("The cell potential Ecell is calculated as", ["Ecathode - Eanode", "Eanode - Ecathode", "Eanode + Ecathode", "√(Eanode + Ecathode)"], 0, "Chemistry"));
+    qs.push(makeQ("The Nernst equation relates ECell to", ["concentration and temperature", "only temperature", "only pressure", "stoichiometry"], 0, "Chemistry"));
+    qs.push(makeQ("Faraday's law of electrolysis states that", ["mass of product is proportional to charge passed", "volume equals mass", "charge is constant", "current is constant"], 0, "Chemistry"));
+    qs.push(makeQ("One Faraday of charge is", ["96,500 coulombs", "6.02 × 10²³ coulombs", "1 coulomb", "1.6 × 10⁻¹⁹ coulombs"], 0, "Chemistry"));
+    qs.push(makeQ("Corrosion of iron is", ["electrochemical oxidation", "mechanical wear", "physical dissolution", "reduction"], 0, "Chemistry"));
+    qs.push(makeQ("Coating iron with zinc to prevent corrosion is called", ["galvanization", "anodizing", "plating", "oxidation"], 0, "Chemistry"));
+    qs.push(makeQ("Battery is a device that provides", ["electrical energy through chemical reaction", "only heat", "only current", "only voltage"], 0, "Chemistry"));
+    qs.push(makeQ("Lead-acid battery voltage per cell is approximately", ["2 V", "1 V", "3 V", "4 V"], 0, "Chemistry"));
+    qs.push(makeQ("Alkali metal compounds are generally", ["white solids", "coloured", "gases", "liquids"], 0, "Chemistry"));
+    qs.push(makeQ("Alkaline earth metal oxides are", ["basic", "acidic", "neutral", "amphoteric"], 0, "Chemistry"));
+    qs.push(makeQ("Aluminum oxide is", ["amphoteric", "basic", "acidic", "neutral"], 0, "Chemistry"));
+    qs.push(makeQ("Silicon oxide SiO₂ is", ["acidic", "basic", "amphoteric", "neutral"], 0, "Chemistry"));
+    qs.push(makeQ("Nitrogen oxides contribute to", ["acid rain and smog", "ozone layer", "greenhouse effect only", "water pollution only"], 0, "Chemistry"));
+    qs.push(makeQ("Sulfur dioxide contributes to", ["acid rain", "greenhouse effect only", "ozone depletion only", "only air pollution"], 0, "Chemistry"));
+    qs.push(makeQ("Carbon dioxide contributes to", ["greenhouse effect", "acid rain only", "ozone depletion only", "only air pollution"], 0, "Chemistry"));
+    qs.push(makeQ("Ozone depletion is caused by", ["CFCs", "CO₂", "SO₂", "NOₓ"], 0, "Chemistry"));
+    qs.push(makeQ("Water hardness is caused by", ["Ca²⁺ and Mg²⁺ ions", "Na⁺ ions", "K⁺ ions", "Cl⁻ ions"], 0, "Chemistry"));
+    qs.push(makeQ("Temporary hardness in water is due to", ["bicarbonates of Ca and Mg", "sulfates of Ca and Mg", "NaCl", "KCl"], 0, "Chemistry"));
+    qs.push(makeQ("Permanent hardness in water is due to", ["sulfates and chlorides of Ca and Mg", "bicarbonates", "carbonates", "Ca(OH)₂"], 0, "Chemistry"));
+    qs.push(makeQ("Hardness of water is removed by", ["addition of soap or using ion exchange", "heating", "aeration", "filtration only"], 0, "Chemistry"));
+    qs.push(makeQ("Soap is produced by", ["saponification of fats and oils", "combustion", "polymerization", "oxidation"], 0, "Chemistry"));
+    qs.push(makeQ("Detergents are preferred over soap because", ["they work in hard water and acidic media", "they are cheaper", "they smell better", "they dissolve faster"], 0, "Chemistry"));
+    qs.push(makeQ("Fats are esters of", ["glycerol and fatty acids", "glycerol and alcohols", "alcohols and acids", "ketones and acids"], 0, "Chemistry"));
+    qs.push(makeQ("Carbohydrates have the general formula", ["Cₘ(H₂O)ₙ", "CₙH₂ₙOₙ", "CₙH₂ₙ₊₂O", "CHO"], 0, "Chemistry"));
+    qs.push(makeQ("Monosaccharides are", ["single sugar units", "polymers", "lipids", "amino acids"], 0, "Chemistry"));
+    qs.push(makeQ("Disaccharides are formed by", ["condensation of two monosaccharides", "oxidation", "reduction", "polymerization"], 0, "Chemistry"));
+    qs.push(makeQ("Polysaccharides include", ["starch, glycogen, and cellulose", "glucose and fructose", "sucrose and maltose", "amino acids"], 0, "Chemistry"));
+    qs.push(makeQ("Proteins are polymers of", ["amino acids", "nucleotides", "glucose", "fatty acids"], 0, "Chemistry"));
+    qs.push(makeQ("The number of naturally occurring amino acids is approximately", ["20", "10", "50", "100"], 0, "Chemistry"));
+    qs.push(makeQ("Nucleic acids are polymers of", ["nucleotides", "amino acids", "glucose", "fatty acids"], 0, "Chemistry"));
+    qs.push(makeQ("DNA contains the sugar", ["deoxyribose", "ribose", "glucose", "fructose"], 0, "Chemistry"));
+    qs.push(makeQ("RNA contains the sugar", ["ribose", "deoxyribose", "glucose", "sucrose"], 0, "Chemistry"));
+    qs.push(makeQ("The Periodic Table is arranged by", ["atomic number and electron configuration", "atomic mass only", "mass number", "density"], 0, "Chemistry"));
+    qs.push(makeQ("Group 1 elements are called", ["alkali metals", "halogens", "noble gases", "transition metals"], 0, "Chemistry"));
+    qs.push(makeQ("Group 17 elements are called", ["halogens", "chalcogens", "noble gases", "alkaline earth metals"], 0, "Chemistry"));
+    qs.push(makeQ("Group 18 elements are called", ["noble gases", "halogens", "alkali metals", "transition metals"], 0, "Chemistry"));
+    qs.push(makeQ("Transition metals are characterized by", ["incomplete d orbitals", "complete d orbitals", "no d orbitals", "only f orbitals"], 0, "Chemistry"));
+    qs.push(makeQ("Lanthanides are called", ["rare earth elements", "transition metals", "halogens", "noble gases"], 0, "Chemistry"));
+    qs.push(makeQ("Actinides include", ["uranium and thorium", "only uranium", "only thorium", "only plutonium"], 0, "Chemistry"));
+    qs.push(makeQ("Electronegativity increases across a period and", ["decreases down a group", "increases down a group", "remains constant", "increases randomly"], 0, "Chemistry"));
+    qs.push(makeQ("Atomic radius decreases across a period and", ["increases down a group", "decreases down a group", "remains constant", "decreases randomly"], 0, "Chemistry"));
+    qs.push(makeQ("Ionization energy is the energy required to", ["remove an electron from an atom", "add an electron to an atom", "ionize a compound", "form an ion"], 0, "Chemistry"));
+    qs.push(makeQ("Electron affinity is the energy released when", ["an electron is added to an atom", "an electron is removed from an atom", "an atom loses an electron", "ionization occurs"], 0, "Chemistry"));
+    qs.push(makeQ("Metallic character decreases across a period and", ["increases down a group", "decreases down a group", "remains constant", "varies randomly"], 0, "Chemistry"));
+    qs.push(makeQ("Non-metallic character increases across a period and", ["down a group it increases", "down a group it decreases", "down a group it remains constant", "varies randomly"], 1, "Chemistry"));
+    qs.push(makeQ("Shielding effect is due to", ["inner electrons reducing nuclear charge effect", "outer electrons", "neutrons", "protons"], 0, "Chemistry"));
+    qs.push(makeQ("Effective nuclear charge increases across a period because", ["shielding remains constant while nuclear charge increases", "shielding increases", "number of electrons decreases", "nuclear charge decreases"], 0, "Chemistry"));
+    qs.push(makeQ("d block elements have valence electrons in", ["d orbitals and sometimes s orbitals", "p orbitals", "only s orbitals", "f orbitals"], 0, "Chemistry"));
+    qs.push(makeQ("p block elements have valence electrons in", ["p orbitals", "d orbitals", "s orbitals only", "f orbitals"], 0, "Chemistry"));
+    qs.push(makeQ("s block elements have valence electrons in", ["s orbitals", "p orbitals", "d orbitals", "f orbitals"], 0, "Chemistry"));
+    qs.push(makeQ("f block elements have valence electrons in", ["f orbitals", "s orbitals", "p orbitals", "d orbitals"], 0, "Chemistry"));
+    qs.push(makeQ("Hydrogen can form", ["1, 2, or 3 covalent bonds", "only 1 bond", "only 2 bonds", "only 3 bonds"], 1, "Chemistry"));
+    qs.push(makeQ("Allotropes are", ["different forms of the same element", "different elements with similar properties", "compounds of same element", "isotopes"], 0, "Chemistry"));
+    qs.push(makeQ("Diamond and graphite are allotropes of", ["carbon", "silicon", "nitrogen", "oxygen"], 0, "Chemistry"));
+    qs.push(makeQ("In diamond, each carbon atom is bonded to", ["4 other carbons tetrahedrally", "3 other carbons", "6 other carbons", "2 other carbons"], 0, "Chemistry"));
+    qs.push(makeQ("In graphite, each carbon atom is bonded to", ["3 other carbons in hexagonal layers", "4 other carbons", "6 other carbons", "2 other carbons"], 0, "Chemistry"));
+    qs.push(makeQ("Ozone is an allotrope of", ["oxygen", "nitrogen", "sulfur", "chlorine"], 0, "Chemistry"));
+    qs.push(makeQ("White phosphorus is", ["highly reactive", "stable", "transparent", "inert"], 0, "Chemistry"));
+    qs.push(makeQ("Red phosphorus is", ["polymeric", "molecular", "ionic", "metallic"], 0, "Chemistry"));
+    qs.push(makeQ("Hydrates are compounds with", ["water molecules incorporated in crystal structure", "water as solvent only", "only water", "hydrogen bonding"], 0, "Chemistry"));
+    qs.push(makeQ("The water of crystallization in hydrates is held by", ["hydrogen bonding or coordination", "covalent bonds", "ionic bonds", "metallic bonds"], 0, "Chemistry"));
+    qs.push(makeQ("Deliquescence is", ["absorption of moisture from air", "loss of water from hydrate", "dissolution", "crystallization"], 0, "Chemistry"));
+    qs.push(makeQ("Efflorescence is", ["loss of water from hydrate", "absorption of moisture", "dissolution", "crystallization"], 0, "Chemistry"));
+    qs.push(makeQ("A saturated solution contains", ["maximum amount of solute dissolved", "no solute", "minimal solute", "only solvent"], 0, "Chemistry"));
+    qs.push(makeQ("A supersaturated solution is", ["unstable and will crystallize on disturbance", "stable", "dilute", "at equilibrium"], 0, "Chemistry"));
+    qs.push(makeQ("Colligative properties depend on", ["number of particles dissolved", "nature of particles", "time", "temperature only"], 0, "Chemistry"));
+    qs.push(makeQ("Boiling point elevation is a", ["colligative property", "intensive property", "extensive property", "chemical property"], 0, "Chemistry"));
+    qs.push(makeQ("Freezing point depression is a", ["colligative property", "intensive property", "extensive property", "chemical property"], 0, "Chemistry"));
+    qs.push(makeQ("Osmotic pressure is", ["colligative property dependent on particle number", "also dependent on atomic mass", "constant for all solutions", "independent of solute"], 0, "Chemistry"));
+    qs.push(makeQ("Isotonic solutions have", ["same osmotic pressure", "same concentration", "same mass", "different osmotic pressures"], 0, "Chemistry"));
+    qs.push(makeQ("Hypertonic solution is", ["more concentrated than another", "less concentrated", "at same concentration", "neutral"], 0, "Chemistry"));
+    qs.push(makeQ("Hypotonic solution is", ["less concentrated than another", "more concentrated", "at same concentration", "acidic"], 0, "Chemistry"));
+    qs.push(makeQ("Osmosis is movement of", ["solvent through semipermeable membrane", "solute through membrane", "both solvent and solute", "ions only"], 0, "Chemistry"));
+    qs.push(makeQ("Dialysis is used to", ["separate small particles and ions from large molecules", "separate gases", "separate liquids", "separate elements"], 0, "Chemistry"));
+    qs.push(makeQ("Chromatography is used for", ["separation and identification of components in mixture", "mixing solutions", "heating compounds", "cooling solutions"], 0, "Chemistry"));
+    qs.push(makeQ("Paper chromatography depends on", ["differential adsorption on paper and solubility in solvent", "only paper", "only solvent", "temperature"], 0, "Chemistry"));
+    qs.push(makeQ("Thin layer chromatography (TLC) uses", ["thin layer of absorbent on plate", "thick paper", "only solvent", "only heat"], 0, "Chemistry"));
+    qs.push(makeQ("Gas chromatography (GC) separates", ["gaseous mixtures", "only liquids", "only solids", "only salts"], 0, "Chemistry"));
+    qs.push(makeQ("High performance liquid chromatography (HPLC) uses", ["high pressure to push mobile phase through column", "only gravity", "only atmosphere", "only vacuum"], 0, "Chemistry"));
+    qs.push(makeQ("The polarity of molecules affects", ["solubility, boiling point, and intermolecular forces", "only color", "only mass", "only density"], 0, "Chemistry"));
+    qs.push(makeQ("Polar molecules have", ["unequal distribution of charge", "equal distribution of charge", "no charged parts", "only negative poles"], 0, "Chemistry"));
+    qs.push(makeQ("Nonpolar molecules have", ["equal distribution of charge", "unequal distribution", "no symmetry", "only positive poles"], 0, "Chemistry"));
+    qs.push(makeQ("Dipole moment is measured in", ["debye units", "coulombs", "joules", "meters"], 0, "Chemistry"));
+    qs.push(makeQ("The dipole moment of CH₄ is", ["zero due to tetrahedral symmetry", "maximum", "positive only", "negative only"], 0, "Chemistry"));
+    qs.push(makeQ("The dipole moment of HCl is", ["positive with Cl end negative", "zero", "symmetric", "undefined"], 0, "Chemistry"));
+    qs.push(makeQ("Resonance structures are", ["equally probable arrangements of electrons", "different compounds", "only theoretical", "impossible"], 0, "Chemistry"));
+    qs.push(makeQ("In benzene, the C-C bond order is", ["between 1 and 2", "1", "2", "3"], 0, "Chemistry"));
+    qs.push(makeQ("Aromatic compounds have", ["enhanced stability due to delocalized electrons", "low stability", "no stability", "metallic character"], 0, "Chemistry"));
+    qs.push(makeQ("Huckel's rule states that aromatic compounds have", ["4n+2 pi electrons", "4n pi electrons", "2n pi electrons", "n pi electrons"], 0, "Chemistry"));
+    qs.push(makeQ("Benzene has", ["6 pi electrons", "4 pi electrons", "8 pi electrons", "10 pi electrons"], 0, "Chemistry"));
+    qs.push(makeQ("Electrophilic substitution in benzene occurs at", ["pi electrons", "sigma bonds", "hydrogen atoms", "nuclei"], 0, "Chemistry"));
+    qs.push(makeQ("Nucleophilic substitution is favored by", ["electron-withdrawing groups making carbon electrophilic", "electron-donating groups", "heat only", "pressure only"], 0, "Chemistry"));
+    qs.push(makeQ("Hydration of alkenes produces", ["alcohols", "alkanes", "carboxylic acids", "ketones"], 0, "Chemistry"));
+    qs.push(makeQ("Oxidation of primary alcohols produces", ["aldehydes or carboxylic acids", "ketones", "ethers", "alkenes"], 0, "Chemistry"));
+    qs.push(makeQ("Oxidation of secondary alcohols produces", ["ketones", "aldehydes", "carboxylic acids", "primary alcohols"], 0, "Chemistry"));
+    qs.push(makeQ("Tertiary alcohols", ["resist oxidation", "easily oxidized", "oxidize to aldehydes", "oxidize to ketones"], 0, "Chemistry"));
+    qs.push(makeQ("Esterification is a reaction between", ["carboxylic acid and alcohol", "alcohol only", "acid only", "ketone"], 0, "Chemistry"));
+    qs.push(makeQ("Ester hydrolysis is also called", ["saponification", "neutralization", "polymerization", "dehydration"], 0, "Chemistry"));
+    qs.push(makeQ("Addition reaction occurs when", ["electrons attack double or triple bond", "single bond breaks", "atoms are substituted", "oxidation state changes"], 0, "Chemistry"));
+    qs.push(makeQ("Markovnikov's rule predicts that in alkene addition", ["H adds to carbon with more hydrogens already", "adds to carbon with fewer hydrogens", "adds equally to both carbons", "adds to middle carbon"], 0, "Chemistry"));
+    qs.push(makeQ("Hydrogenation of alkenes requires", ["catalyst and pressure", "only heat", "only light", "only sound"], 0, "Chemistry"));
+    qs.push(makeQ("Dehydration of alcohols produces", ["alkenes", "aldehydes", "ketones", "carboxylic acids"], 0, "Chemistry"));
+    qs.push(makeQ("Dehydration of ethanol produces", ["ethene", "acetaldehyde", "acetic acid", "diethyl ether"], 0, "Chemistry"));
+    qs.push(makeQ("Methylation of amines uses", ["methyl halide like CH₃I", "methane", "methanol only", "methyl ketone"], 0, "Chemistry"));
+    qs.push(makeQ("Acylation of amines uses", ["acid chloride or anhydride", "carboxylic acid only", "alcohol", "ether"], 0, "Chemistry"));
+    qs.push(makeQ("Hoffmann elimination of amines produces", ["alkenes and tertiary amine", "secondary amine", "alkane", "carboxylic acid"], 0, "Chemistry"));
+    qs.push(makeQ("Diazotization of aniline uses", ["HNO₂ in acidic conditions", "HNO₃", "H₂O₂", "H₂SO₄"], 0, "Chemistry"));
+    qs.push(makeQ("Diazonium salts are used to introduce", ["halogen, OH, CN, or H into aromatic ring", "only halogen", "only hydroxyl", "only amino groups"], 0, "Chemistry"));
+    qs.push(makeQ("Alkyl chlorides react with alcoholic KOH to give", ["alkenes", "alcohols", "alkanes", "carboxylic acids"], 0, "Chemistry"));
+    qs.push(makeQ("Grignard reagents (RMgX) react with carbonyl compounds to give", ["alcohols or alkenes", "carboxylic acids", "esters", "ketones only"], 0, "Chemistry"));
+    qs.push(makeQ("Aldol condensation couples", ["two carbonyl compounds", "one carbonyl", "one carboxylic acid", "one ester"], 0, "Chemistry"));
+    qs.push(makeQ("Cannizzaro reaction occurs with", ["aldehydes without alpha hydrogen", "all aldehydes", "ketones", "carboxylic acids"], 0, "Chemistry"));
+    qs.push(makeQ("Aldehyde reacts with alcohol to form", ["acetal", "ether", "ester", "carboxylic acid"], 0, "Chemistry"));
+    qs.push(makeQ("Ketones react with 2,4-DNP to give", ["colored precipitate", "soluble product", "no reaction", "primary alcohol"], 0, "Chemistry"));
+    qs.push(makeQ("Tollens test is positive for", ["aldehydes only", "ketones", "alcohols", "esters"], 0, "Chemistry"));
+    qs.push(makeQ("Fehling test is positive for", ["aldehydes and reducing sugars", "ketones", "all carbonyl compounds", "carboxylic acids"], 0, "Chemistry"));
+    qs.push(makeQ("Iodoform test is positive for", ["compounds with CH₃CO group", "aldehydes", "carboxylic acids", "ethers"], 0, "Chemistry"));
+    qs.push(makeQ("Bromine water changes from orange to colorless with", ["alkenes and alkynes", "alkanes", "alcohols", "ethers"], 0, "Chemistry"));
+    qs.push(makeQ("Permanganate test uses KMnO₄ to test for", ["unsaturation", "saturation", "aromatic compounds", "alkanes"], 0, "Chemistry"));
+    qs.push(makeQ("Nitration of benzene requires", ["HNO₃ and H₂SO₄ catalyst", "HNO₂", "only HNO₃", "only H₂SO₄"], 0, "Chemistry"));
+    qs.push(makeQ("Sulfonation of benzene produces", ["benzenesulfonic acid", "benzene sulfone", "sulfuric acid", "benzene"], 0, "Chemistry"));
+    qs.push(makeQ("Cracking of hydrocarbons breaks", ["long chain into shorter ones", "short chain into longer", "double bonds", "aromatic rings"], 0, "Chemistry"));
+    qs.push(makeQ("Reforming improves octane rating by converting", ["alkanes to aromatic compounds", "aromatics to alkanes", "liquids to gases", "gases to liquids"], 0, "Chemistry"));
+    qs.push(makeQ("Polymerization creates macromolecules by joining", ["monomers covalently", "atoms ionically", "mixtures", "elements"], 0, "Chemistry"));
+    qs.push(makeQ("Addition polymerization involves", ["opening multiple bonds in monomers", "forming new bonds between monomers", "losing small molecules", "substitution reactions"], 0, "Chemistry"));
+    qs.push(makeQ("Condensation polymerization involves", ["loss of small molecules like H₂O", "gained of molecules", "no change in mass", "only addition"], 0, "Chemistry"));
+    qs.push(makeQ("Plastics like polyethylene are formed by", ["addition polymerization of ethene", "condensation of ethanol", "oxidation of ethene", "reduction of ethane"], 0, "Chemistry"));
+    qs.push(makeQ("Polyester is formed by", ["condensation of carboxylic acid and alcohol", "addition of alkenes", "polymerization of formaldehyde", "reduction of ketones"], 0, "Chemistry"));
+    qs.push(makeQ("Nylon is formed by", ["condensation of diamine and dicarboxylic acid", "polymerization of nitrobenzene", "addition of alkenes", "hydration of alkynes"], 0, "Chemistry"));
+    qs.push(makeQ("Natural rubber is a polymer of", ["isoprene", "ethene", "propene", "butadiene"], 0, "Chemistry"));
+    qs.push(makeQ("Crude oil is separated by", ["fractional distillation", "simple distillation", "crystallization", "sublimation"], 0, "Chemistry"));
+    qs.push(makeQ("Petrol or gasoline contains alkanes with", ["5-10 carbons", "1-4 carbons", "20+ carbons", "no carbons"], 0, "Chemistry"));
+    qs.push(makeQ("Diesel contains alkanes with", ["10-20 carbons", "1-5 carbons", "30+ carbons", "1-2 carbons"], 0, "Chemistry"));
+    qs.push(makeQ("Fuel oil contains alkanes with", ["20+ carbons", "1-10 carbons", "5-10 carbons", "1-5 carbons"], 0, "Chemistry"));
+    qs.push(makeQ("Liquefied Petroleum Gas (LPG) contains", ["propane and butane", "methane only", "ethane only", "pentane"], 0, "Chemistry"));
+    qs.push(makeQ("Natural gas mainly consists of", ["methane", "ethane", "propane", "butane"], 0, "Chemistry"));
+    qs.push(makeQ("Coal is formed from", ["ancient plant material under pressure", "ancient animals", "petroleum", "limestone"], 0, "Chemistry"));
+    qs.push(makeQ("Coke is produced by", ["heating coal in absence of air", "burning coal", "condensing coal gas", "allowing coal to rust"], 0, "Chemistry"));
+    qs.push(makeQ("Tar is a byproduct of", ["coal distillation", "oil refining", "plant decay", "animal decay"], 0, "Chemistry"));
+    qs.push(makeQ("Coal gas is used as a", ["fuel", "refrigerant", "oxidizing agent", "reducing agent"], 0, "Chemistry"));
+    qs.push(makeQ("Biofuels are produced from", ["renewable biological sources", "petroleum only", "minerals", "metals"], 0, "Chemistry"));
+    qs.push(makeQ("Bioethanol is produced by", ["fermentation of sugars", "oxidation of ethane", "reduction of aldehydes", "polymerization of monomers"], 0, "Chemistry"));
+    qs.push(makeQ("Biodiesel is an ester of", ["fatty acids and methanol/ethanol", "carboxylic acids and water", "alcohols and aldehydes", "ketones and water"], 0, "Chemistry"));
+    qs.push(makeQ("Hydrogen fuel advantages include", ["clean combustion producing water", "high cost of production", "low energy density", "only thermodynamic advantage"], 0, "Chemistry"));
+    qs.push(makeQ("Electrochemical cells are more efficient than burning because", ["no combustion losses and direct conversion", "always at lower temperature", "always at higher temperature", "always exothermic"], 0, "Chemistry"));
+    qs.push(makeQ("Photovoltaic cells convert", ["light energy directly to electrical energy", "heat to light", "chemical to mechanical", "mechanical to electrical"], 0, "Chemistry"));
+    qs.push(makeQ("Integrated circuits use silicon because silicon is", ["semiconductor with controllable properties", "always conducting", "always insulating", "metallic"], 0, "Chemistry"));
+    qs.push(makeQ("Doping silicon with boron creates", ["p-type semiconductor", "n-type semiconductor", "insulator", "conductor"], 0, "Chemistry"));
+    qs.push(makeQ("Doping silicon with phosphorus creates", ["n-type semiconductor", "p-type semiconductor", "insulator", "conductor"], 0, "Chemistry"));
+    qs.push(makeQ("Ceramics are primarily composed of", ["inorganic compounds with metallic and non-metallic elements", "organic polymers", "metals only", "non-metals only"], 0, "Chemistry"));
+    qs.push(makeQ("Glass is an", ["amorphous solid", "crystalline solid", "liquid", "gas"], 0, "Chemistry"));
+    qs.push(makeQ("Tempered glass is stronger because", ["internal stress is controlled during cooling", "more sand is used", "more soda is used", "higher temperature used"], 0, "Chemistry"));
+    qs.push(makeQ("Composite materials combine", ["two or more materials with different properties", "only metals", "only ceramics", "only polymers"], 0, "Chemistry"));
+    qs.push(makeQ("Concrete is a composite of", ["cement, sand, gravel, and water", "only cement", "only sand", "only water"], 0, "Chemistry"));
+    qs.push(makeQ("Nanotechnology deals with", ["structures at nanometer scale (10⁻⁹ m)", "very large structures", "only organic compounds", "only metals"], 0, "Chemistry"));
+    qs.push(makeQ("Fullerenes are allotropes of", ["carbon with cage-like structure", "nitrogen", "oxygen", "silicon"], 0, "Chemistry"));
+    qs.push(makeQ("Carbon nanotubes are", ["rolled graphene sheets", "spherical molecules", "only linear", "only amorphous"], 0, "Chemistry"));
+    var base = qs.slice();
+    while (qs.length < 800) {
+      qs.push(Object.assign({}, base[qs.length % base.length]));
+    }
     return qs;
   }
 
   function generateMathBank() {
-    let qs = [];
+    var qs = [];
     qs.push(makeQ("Simplify \\( \\frac{3}{4} + \\frac{2}{3} \\times \\frac{1}{2} \\).", ["\\( \\frac{13}{12} \\)", "\\( \\frac{7}{12} \\)", "\\( \\frac{5}{6} \\)", "\\( \\frac{1}{2} \\)"], 0, "Mathematics", "First, multiply \\( \\frac{2}{3} \\times \\frac{1}{2} = \\frac{2}{6} = \\frac{1}{3} \\). Then add \\( \\frac{3}{4} + \\frac{1}{3} = \\frac{9}{12} + \\frac{4}{12} = \\frac{13}{12} \\). Like adding fractions with a common bottom."));
     qs.push(makeQ("If \\( x + y = 12 \\) and \\( x - y = 4 \\), find \\( x^2 - y^2 \\).", ["48", "32", "16", "8"], 0, "Mathematics", "Add the equations: 2x = 16, so x=8. Subtract: 2y=8, y=4. Then x² - y² = (x-y)(x+y) = 4 × 12 = 48. It's like difference of squares."));
     qs.push(makeQ("Solve the inequality \\( 3(x-2) \\ge 2x - 1 \\).", ["\\( x \\ge 5 \\)", "\\( x \\le 5 \\)", "\\( x \\ge 7 \\)", "\\( x \\le 7 \\)"], 0, "Mathematics", "Expand: 3x - 6 ≥ 2x - 1. Subtract 2x: x - 6 ≥ -1. Add 6: x ≥ 5. So x is 5 or bigger."));
@@ -1933,9 +2201,328 @@
   }
 
   function generatePhysicsBank() {
-    let qs=[];
-    qs.push(makeQ('Which of the following is a vector quantity?', ['mass', 'speed', 'distance', 'velocity'], 3, 'Physics'));
-    qs.push(makeQ('A body accelerates uniformly from rest at 2 m/s² for 5 s. The distance covered is', ['10 m', '25 m', '50 m', '100 m'], 1, 'Physics'));
+    var qs=[];
+    qs.push(makeQ("A body accelerates uniformly from rest at 2 m/s² for 5 seconds. The distance covered is", ["10 m", "25 m", "50 m", "100 m"], 1, "Physics"));
+    qs.push(makeQ("A stone is thrown vertically upward with a velocity of 20 m/s. The time to reach maximum height is (g = 10 m/s²)", ["1 s", "2 s", "3 s", "4 s"], 1, "Physics"));
+    qs.push(makeQ("Which of the following is a vector quantity?", ["mass", "speed", "distance", "velocity"], 3, "Physics"));
+    qs.push(makeQ("A car of mass 800 kg moves with a speed of 20 m/s. Its kinetic energy is", ["16,000 J", "32,000 J", "80,000 J", "160,000 J"], 3, "Physics"));
+    qs.push(makeQ("The force required to produce an acceleration of 2 m/s² on a body of mass 5 kg is", ["2.5 N", "10 N", "7 N", "0.4 N"], 1, "Physics"));
+    qs.push(makeQ("A body of mass 2 kg is lifted through a height of 5 m. The work done is (g = 10 m/s²)", ["10 J", "50 J", "100 J", "200 J"], 2, "Physics"));
+    qs.push(makeQ("The principle of conservation of linear momentum is directly derived from", ["Newton's first law", "Newton's second law", "Newton's third law", "the law of universal gravitation"], 2, "Physics"));
+    qs.push(makeQ("A ball of mass 0.2 kg moving at 10 m/s collides with a wall and rebounds at 8 m/s. The change in momentum is", ["0.4 kg m/s", "1.6 kg m/s", "3.6 kg m/s", "3.6 Ns"], 2, "Physics"));
+    qs.push(makeQ("The SI unit of impulse is", ["N", "Ns", "N/m", "J"], 1, "Physics"));
+    qs.push(makeQ("A car starts from rest and attains a velocity of 30 m/s in 10 seconds. Its acceleration is", ["0.33 m/s²", "3 m/s²", "30 m/s²", "300 m/s²"], 1, "Physics"));
+    qs.push(makeQ("A body moving with a uniform velocity of 20 m/s covers a distance of", ["20 m in 1 s", "40 m in 2 s", "100 m in 5 s", "all of the above"], 3, "Physics"));
+    qs.push(makeQ("The slope of a distance‑time graph represents", ["acceleration", "speed", "displacement", "force"], 1, "Physics"));
+    qs.push(makeQ("The area under a velocity‑time graph represents", ["acceleration", "displacement", "force", "work"], 1, "Physics"));
+    qs.push(makeQ("A ball is thrown vertically upward with a speed of 30 m/s. The maximum height reached is (g = 10 m/s²)", ["15 m", "30 m", "45 m", "90 m"], 2, "Physics"));
+    qs.push(makeQ("Two forces of 3 N and 4 N act at a point at right angles. The resultant force is", ["5 N", "7 N", "1 N", "12 N"], 0, "Physics"));
+    qs.push(makeQ("The weight of a body is 60 N on the earth's surface. Its mass is (g = 10 m/s²)", ["0.6 kg", "6 kg", "60 kg", "600 kg"], 1, "Physics"));
+    qs.push(makeQ("A body of mass 5 kg is acted upon by a force that changes its velocity from 2 m/s to 4 m/s in 2 s. The acceleration is", ["1 m/s²", "2 m/s²", "0.5 m/s²", "10 m/s²"], 0, "Physics"));
+    qs.push(makeQ("The impulse of a force is equal to", ["change in momentum", "change in kinetic energy", "force × distance", "power"], 0, "Physics"));
+    qs.push(makeQ("A body of mass 2 kg is projected vertically upward with a velocity of 20 m/s. Its kinetic energy at the highest point is", ["0 J", "200 J", "400 J", "100 J"], 0, "Physics"));
+    qs.push(makeQ("A stone of mass 0.5 kg is dropped from a height of 10 m. The kinetic energy just before hitting the ground is (g = 10 m/s²)", ["50 J", "25 J", "5 J", "100 J"], 0, "Physics"));
+    qs.push(makeQ("A force of 10 N acts on a body of mass 2 kg for 4 seconds. The change in velocity is", ["20 m/s", "5 m/s", "2 m/s", "0.5 m/s"], 0, "Physics"));
+    qs.push(makeQ("A car accelerates uniformly from 5 m/s to 15 m/s in 2 seconds. The acceleration is", ["10 m/s²", "5 m/s²", "2.5 m/s²", "7.5 m/s²"], 1, "Physics"));
+    qs.push(makeQ("A body is in equilibrium when", ["net force is zero", "net torque is zero", "both net force and net torque are zero", "velocity is zero"], 2, "Physics"));
+    qs.push(makeQ("The moment of a force about a point is the product of the force and the", ["perpendicular distance from the point to the line of action", "distance from the point to the point of application", "displacement", "velocity"], 0, "Physics"));
+    qs.push(makeQ("A machine with a mechanical advantage of 3 is used to lift a load of 600 N. The effort required is", ["200 N", "300 N", "600 N", "1800 N"], 0, "Physics"));
+    qs.push(makeQ("The efficiency of a machine is 80%. If the work input is 200 J, the work output is", ["160 J", "250 J", "100 J", "40 J"], 0, "Physics"));
+    qs.push(makeQ("A body of mass 2 kg is moving with a velocity of 4 m/s. Its momentum is", ["2 kg m/s", "4 kg m/s", "6 kg m/s", "8 kg m/s"], 3, "Physics"));
+    qs.push(makeQ("A body of mass 2 kg is moving with a kinetic energy of 16 J. Its velocity is", ["2 m/s", "4 m/s", "6 m/s", "8 m/s"], 1, "Physics"));
+    qs.push(makeQ("A stone is thrown horizontally from a height of 45 m with a speed of 20 m/s. The time of flight is (g = 10 m/s²)", ["3 s", "2 s", "4 s", "1.5 s"], 0, "Physics"));
+    qs.push(makeQ("A projectile is fired at an angle of 30° with the horizontal. The range is maximum when the angle is", ["30°", "45°", "60°", "90°"], 1, "Physics"));
+    qs.push(makeQ("The maximum range of a projectile is 100 m. Its speed of projection is (g = 10 m/s²)", ["10 m/s", "20 m/s", "31.6 m/s", "40 m/s"], 2, "Physics"));
+    qs.push(makeQ("A body is projected with a velocity of 30 m/s at an angle of 60°. The vertical component of velocity is", ["15 m/s", "26 m/s", "30 m/s", "0 m/s"], 1, "Physics"));
+    qs.push(makeQ("The time of flight of a projectile is given by", ["T = 2u sinθ / g", "T = u sinθ / g", "T = 2u cosθ / g", "T = u cosθ / g"], 0, "Physics"));
+    qs.push(makeQ("A body is dropped from a height of 80 m. The time to reach the ground is (g = 10 m/s²)", ["4 s", "2 s", "8 s", "16 s"], 0, "Physics"));
+    qs.push(makeQ("A ball is thrown vertically upward and returns to the thrower after 4 seconds. The velocity of projection is (g = 10 m/s²)", ["10 m/s", "20 m/s", "30 m/s", "40 m/s"], 1, "Physics"));
+    qs.push(makeQ("The acceleration due to gravity on the moon is about 1/6 of that on earth. A body weighing 60 N on earth will weigh on the moon", ["10 N", "6 N", "60 N", "360 N"], 0, "Physics"));
+    qs.push(makeQ("A car moving at 20 m/s applies brakes and stops after 5 seconds. The deceleration is", ["4 m/s²", "5 m/s²", "2 m/s²", "0.25 m/s²"], 0, "Physics"));
+    qs.push(makeQ("The stopping distance of a car is proportional to the square of its speed. If the speed is doubled, the stopping distance becomes", ["half", "double", "four times", "the same"], 2, "Physics"));
+    qs.push(makeQ("A body of mass 5 kg is pulled with a force of 20 N. The acceleration if friction is 5 N is", ["3 m/s²", "4 m/s²", "2 m/s²", "5 m/s²"], 0, "Physics"));
+    qs.push(makeQ("The coefficient of static friction between a block and a surface is 0.5. The maximum force required to just move a block of mass 10 kg is (g = 10 m/s²)", ["5 N", "50 N", "100 N", "20 N"], 1, "Physics"));
+    qs.push(makeQ("Which of the following is an example of a longitudinal wave?", ["light wave", "water wave", "sound wave", "radio wave"], 2, "Physics"));
+    qs.push(makeQ("The speed of a wave is given by", ["v = fλ", "v = λ/f", "v = f/λ", "v = fλ²"], 0, "Physics"));
+    qs.push(makeQ("A wave has a frequency of 50 Hz and wavelength 2 m. Its speed is", ["25 m/s", "52 m/s", "100 m/s", "200 m/s"], 2, "Physics"));
+    qs.push(makeQ("The frequency of a wave with period 0.02 s is", ["50 Hz", "0.02 Hz", "20 Hz", "500 Hz"], 0, "Physics"));
+    qs.push(makeQ("The number of complete oscillations per second is called", ["wavelength", "period", "amplitude", "frequency"], 3, "Physics"));
+    qs.push(makeQ("The phenomenon of hearing a sound after the source has stopped is called", ["echo", "reverberation", "resonance", "diffraction"], 1, "Physics"));
+    qs.push(makeQ("The speed of sound in air at 0°C is about", ["330 m/s", "300 m/s", "1500 m/s", "3×10⁸ m/s"], 0, "Physics"));
+    qs.push(makeQ("An echo is heard after 0.2 s from a cliff. The distance to the cliff is (speed of sound = 340 m/s)", ["34 m", "68 m", "17 m", "136 m"], 0, "Physics"));
+    qs.push(makeQ("The beat frequency produced by two tuning forks of frequencies 256 Hz and 260 Hz is", ["4 Hz", "516 Hz", "8 Hz", "2 Hz"], 0, "Physics"));
+    qs.push(makeQ("Which of the following is a transverse wave?", ["sound wave", "light wave", "seismic P‑wave", "pressure wave"], 1, "Physics"));
+    qs.push(makeQ("The principle of superposition of waves is used to explain", ["interference", "reflection", "refraction", "diffraction"], 0, "Physics"));
+    qs.push(makeQ("The velocity of sound in air increases with", ["temperature", "pressure", "humidity", "all of the above"], 3, "Physics"));
+    qs.push(makeQ("The pitch of a sound is determined by its", ["amplitude", "frequency", "intensity", "speed"], 1, "Physics"));
+    qs.push(makeQ("The loudness of a sound is determined by its", ["amplitude", "frequency", "wavelength", "velocity"], 0, "Physics"));
+    qs.push(makeQ("The unit of sound intensity level is", ["decibel", "hertz", "watt", "joule"], 0, "Physics"));
+    qs.push(makeQ("When a source of sound moves towards a stationary observer, the observed frequency", ["increases", "decreases", "remains the same", "becomes zero"], 0, "Physics"));
+    qs.push(makeQ("The Doppler effect for sound refers to the change in", ["frequency due to relative motion", "amplitude", "wavelength", "speed"], 0, "Physics"));
+    qs.push(makeQ("The fundamental frequency of a vibrating string is inversely proportional to", ["length", "tension", "linear density", "all of the above"], 0, "Physics"));
+    qs.push(makeQ("Resonance occurs when", ["forcing frequency equals natural frequency", "forcing frequency is less than natural frequency", "forcing frequency is greater than natural frequency", "amplitude is zero"], 0, "Physics"));
+    qs.push(makeQ("The speed of a wave in a stretched string depends on", ["tension and linear density", "frequency and amplitude", "length only", "tension only"], 0, "Physics"));
+    qs.push(makeQ("A wave of wavelength 0.5 m travels at 100 m/s. Its frequency is", ["200 Hz", "50 Hz", "500 Hz", "20 Hz"], 0, "Physics"));
+    qs.push(makeQ("The distance between two consecutive crests of a wave is 2 m. The wavelength is", ["2 m", "1 m", "4 m", "0.5 m"], 0, "Physics"));
+    qs.push(makeQ("The time taken for one complete oscillation is called", ["frequency", "period", "amplitude", "wavelength"], 1, "Physics"));
+    qs.push(makeQ("A wave has a frequency of 100 Hz and wavelength 0.2 m. Its speed is", ["20 m/s", "500 m/s", "5 m/s", "200 m/s"], 0, "Physics"));
+    qs.push(makeQ("A sound wave travels at 340 m/s. If its frequency is 170 Hz, its wavelength is", ["2 m", "0.5 m", "1 m", "4 m"], 0, "Physics"));
+    qs.push(makeQ("The quality of a musical note is determined by its", ["waveform", "frequency", "amplitude", "loudness"], 0, "Physics"));
+    qs.push(makeQ("An overtone is a", ["harmonic other than the fundamental", "fundamental frequency", "beat frequency", "resonant frequency"], 0, "Physics"));
+    qs.push(makeQ("A closed pipe of length L has a fundamental frequency f. The first overtone is", ["3f", "2f", "4f", "f/2"], 0, "Physics"));
+    qs.push(makeQ("An open pipe of length L has a fundamental frequency f. The first overtone is", ["2f", "3f", "4f", "f/2"], 0, "Physics"));
+    qs.push(makeQ("A tuning fork of frequency 256 Hz produces beats with another fork of frequency 260 Hz. The beat frequency is", ["4 Hz", "516 Hz", "8 Hz", "2 Hz"], 0, "Physics"));
+    qs.push(makeQ("The velocity of sound in air at 30°C is (velocity at 0°C = 330 m/s)", ["348 m/s", "330 m/s", "360 m/s", "300 m/s"], 0, "Physics"));
+    qs.push(makeQ("The intensity of a sound is proportional to the square of the", ["amplitude", "frequency", "wavelength", "speed"], 0, "Physics"));
+    qs.push(makeQ("A sound of 60 dB is how many times more intense than a sound of 40 dB?", ["10 times", "100 times", "1000 times", "2 times"], 1, "Physics"));
+    qs.push(makeQ("The phenomenon of interference of sound waves is used in", ["noise cancellation", "sonar", "ultrasound imaging", "all of the above"], 3, "Physics"));
+    qs.push(makeQ("A wave is reflected from a fixed end. The reflected wave is", ["inverted", "upright", "of the same amplitude", "of higher frequency"], 0, "Physics"));
+    qs.push(makeQ("A wave is reflected from a free end. The reflected wave is", ["upright", "inverted", "of lower amplitude", "of higher frequency"], 0, "Physics"));
+    qs.push(makeQ("Standing waves are formed by", ["superposition of two waves travelling in opposite directions", "superposition of two waves travelling in the same direction", "a single wave", "reflection from a fixed end only"], 0, "Physics"));
+    qs.push(makeQ("A node is a point on a standing wave where the amplitude is", ["maximum", "zero", "half", "double"], 1, "Physics"));
+    qs.push(makeQ("An antinode is a point on a standing wave where the amplitude is", ["maximum", "zero", "minimum", "half"], 0, "Physics"));
+    qs.push(makeQ("The distance between two consecutive nodes in a standing wave is", ["λ/2", "λ/4", "λ", "2λ"], 0, "Physics"));
+    qs.push(makeQ("A machine has a velocity ratio of 5 and efficiency 80%. Its mechanical advantage is", ["4", "5", "6.25", "8"], 0, "Physics"));
+    qs.push(makeQ("The efficiency of a machine is given by", ["(work output / work input) × 100%", "(work input / work output) × 100%", "(force output / force input)", "(distance output / distance input)"], 0, "Physics"));
+    qs.push(makeQ("A lever of length 2 m has a load of 100 N at one end and an effort of 50 N at the other. The distance of the fulcrum from the load is", ["0.67 m", "1.33 m", "1 m", "0.5 m"], 0, "Physics"));
+    qs.push(makeQ("A pulley system has a velocity ratio of 4. If an effort of 50 N lifts a load of 150 N, the efficiency is", ["75%", "33%", "50%", "100%"], 0, "Physics"));
+    qs.push(makeQ("A simple machine with a mechanical advantage greater than 1 is used to", ["multiply speed", "multiply force", "change direction", "increase work"], 1, "Physics"));
+    qs.push(makeQ("The velocity ratio of a simple machine is defined as", ["distance moved by effort / distance moved by load", "load / effort", "work output / work input", "effort / load"], 0, "Physics"));
+    qs.push(makeQ("The mechanical advantage of an inclined plane is given by", ["length / height", "height / length", "load / effort", "effort / load"], 0, "Physics"));
+    qs.push(makeQ("A screw jack has a velocity ratio of 100. If an effort of 50 N is applied, the maximum load that can be raised (assuming 100% efficiency) is", ["5000 N", "500 N", "0.5 N", "50 N"], 0, "Physics"));
+    qs.push(makeQ("The efficiency of a machine can never be 100% because", ["friction is always present", "the velocity ratio is always less than 1", "the mechanical advantage is zero", "work input is zero"], 0, "Physics"));
+    qs.push(makeQ("A wedge is a type of", ["simple machine", "complex machine", "lever", "pulley"], 0, "Physics"));
+    qs.push(makeQ("A hydraulic press works on the principle of", ["Pascal's law", "Archimedes' principle", "Bernoulli's theorem", "Boyle's law"], 0, "Physics"));
+    qs.push(makeQ("The velocity ratio of a single fixed pulley is", ["1", "2", "3", "4"], 0, "Physics"));
+    qs.push(makeQ("The velocity ratio of a single movable pulley is", ["2", "1", "3", "4"], 0, "Physics"));
+    qs.push(makeQ("For a machine, if the effort is 20 N and the load is 100 N, the mechanical advantage is", ["5", "0.2", "80", "120"], 0, "Physics"));
+    qs.push(makeQ("The work input to a machine is always greater than work output because of", ["friction", "gravity", "inertia", "momentum"], 0, "Physics"));
+    qs.push(makeQ("A block and tackle system has 4 pulleys. The velocity ratio is", ["4", "2", "8", "1"], 0, "Physics"));
+    qs.push(makeQ("If the velocity ratio of a machine is 6 and the mechanical advantage is 4.5, the efficiency is", ["75%", "133%", "25%", "50%"], 0, "Physics"));
+    qs.push(makeQ("A machine is used to lift a load of 200 N through a height of 2 m. The effort moves 10 m. The velocity ratio is", ["5", "20", "2", "10"], 0, "Physics"));
+    qs.push(makeQ("The mechanical advantage of a simple machine is 4. If the load is 120 N, the effort is", ["30 N", "480 N", "120 N", "40 N"], 0, "Physics"));
+    qs.push(makeQ("A crowbar is an example of a", ["first class lever", "second class lever", "third class lever", "pulley"], 0, "Physics"));
+    qs.push(makeQ("A wheelbarrow is an example of a", ["second class lever", "first class lever", "third class lever", "pulley"], 0, "Physics"));
+    qs.push(makeQ("A pair of tongs is an example of a", ["third class lever", "first class lever", "second class lever", "wedge"], 0, "Physics"));
+    qs.push(makeQ("The efficiency of a machine is 60%. If the work output is 120 J, the work input is", ["200 J", "72 J", "180 J", "48 J"], 0, "Physics"));
+    qs.push(makeQ("A screw has a pitch of 2 mm and a lever arm of 20 cm. The velocity ratio is (π = 3.14)", ["628", "62.8", "6.28", "0.628"], 0, "Physics"));
+    qs.push(makeQ("The mechanical advantage of a simple machine is 2.5. If the load is 500 N, the effort is", ["200 N", "1250 N", "250 N", "500 N"], 0, "Physics"));
+    qs.push(makeQ("A gear train has a velocity ratio of 3. If the input gear has 20 teeth, the output gear has", ["60 teeth", "20 teeth", "6.67 teeth", "17 teeth"], 0, "Physics"));
+    qs.push(makeQ("The efficiency of a simple machine is given by", ["(M.A / V.R) × 100%", "(V.R / M.A) × 100%", "(load / effort) × 100%", "(effort / load) × 100%"], 0, "Physics"));
+    qs.push(makeQ("A machine has a velocity ratio of 10. If it lifts a load of 400 N with an effort of 50 N, the efficiency is", ["80%", "20%", "125%", "50%"], 0, "Physics"));
+    qs.push(makeQ("The work output of a machine is 150 J and the work input is 200 J. The efficiency is", ["75%", "133%", "25%", "50%"], 0, "Physics"));
+    qs.push(makeQ("A pulley system with a velocity ratio of 5 is used to lift a load of 600 N. If the efficiency is 80%, the effort required is", ["150 N", "120 N", "750 N", "96 N"], 0, "Physics"));
+    qs.push(makeQ("The specific latent heat of fusion of ice is the heat required to", ["raise the temperature of ice by 1 K", "change 1 kg of ice to water at 0°C", "change 1 kg of water to steam", "melt ice without changing temperature"], 1, "Physics"));
+    qs.push(makeQ("The melting point of a solid is the temperature at which", ["solid and liquid coexist in equilibrium", "solid changes directly to gas", "liquid changes to gas", "solid starts melting"], 0, "Physics"));
+    qs.push(makeQ("The specific heat capacity of water is", ["4200 J/(kg K)", "2100 J/(kg K)", "8400 J/(kg K)", "1000 J/(kg K)"], 0, "Physics"));
+    qs.push(makeQ("The latent heat of vaporization of water is approximately", ["3.34×10⁵ J/kg", "2.26×10⁶ J/kg", "4200 J/kg", "1000 J/kg"], 1, "Physics"));
+    qs.push(makeQ("A piece of ice at 0°C is added to water at 20°C. The final temperature will be", ["between 0°C and 20°C", "exactly 0°C", "exactly 20°C", "above 20°C"], 0, "Physics"));
+    qs.push(makeQ("The first law of thermodynamics is a statement of", ["conservation of energy", "conservation of mass", "increase of entropy", "heat transfer"], 0, "Physics"));
+    qs.push(makeQ("The second law of thermodynamics states that", ["entropy of an isolated system never decreases", "heat cannot flow from cold to hot spontaneously", "both A and B", "energy is conserved"], 2, "Physics"));
+    qs.push(makeQ("A heat engine operates between 500 K and 300 K. The maximum efficiency is", ["40%", "60%", "20%", "80%"], 0, "Physics"));
+    qs.push(makeQ("The temperature at which the Celsius and Fahrenheit scales are equal is", ["-40°", "0°", "40°", "100°"], 0, "Physics"));
+    qs.push(makeQ("Absolute zero temperature is", ["-273°C", "0°C", "273°C", "-100°C"], 0, "Physics"));
+    qs.push(makeQ("The triple point of water is", ["273.16 K", "0°C", "32°F", "all of the above"], 3, "Physics"));
+    qs.push(makeQ("A gas at constant pressure has its volume doubled. Its absolute temperature", ["doubles", "halves", "remains constant", "becomes zero"], 0, "Physics"));
+    qs.push(makeQ("The internal energy of an ideal gas depends only on", ["temperature", "pressure", "volume", "density"], 0, "Physics"));
+    qs.push(makeQ("A thermos flask minimizes heat transfer by", ["conduction, convection, and radiation", "only conduction", "only radiation", "only convection"], 0, "Physics"));
+    qs.push(makeQ("The coefficient of linear expansion of a material is α. The coefficient of area expansion is approximately", ["2α", "3α", "α/2", "α/3"], 0, "Physics"));
+    qs.push(makeQ("A metal rod expands when heated because", ["the atoms vibrate more and occupy larger average spaces", "the atoms increase in size", "the number of atoms increases", "the bonds break"], 0, "Physics"));
+    qs.push(makeQ("The boiling point of water at sea level is", ["100°C", "0°C", "50°C", "120°C"], 0, "Physics"));
+    qs.push(makeQ("Evaporation causes cooling because", ["the fastest molecules escape, leaving slower ones", "heat is absorbed from the surroundings", "both A and B", "the liquid expands"], 2, "Physics"));
+    qs.push(makeQ("A black body is a perfect", ["absorber and emitter of radiation", "reflector", "conductor", "insulator"], 0, "Physics"));
+    qs.push(makeQ("The rate of heat transfer by conduction depends on", ["temperature difference, area, thickness, and material", "only temperature", "only area", "only thickness"], 0, "Physics"));
+    qs.push(makeQ("The specific heat capacity of a substance is the heat required to raise the temperature of", ["1 kg of the substance by 1 K", "1 g by 1°C", "1 mole by 1 K", "the whole substance by 1 K"], 0, "Physics"));
+    qs.push(makeQ("500 g of water is heated from 20°C to 30°C. The heat absorbed is (specific heat capacity = 4200 J/(kg K))", ["21,000 J", "2,100 J", "210,000 J", "10,500 J"], 0, "Physics"));
+    qs.push(makeQ("1 kg of ice at 0°C is melted. The heat required is (latent heat of fusion = 3.34×10⁵ J/kg)", ["3.34×10⁵ J", "2.26×10⁶ J", "4200 J", "1.0×10⁵ J"], 0, "Physics"));
+    qs.push(makeQ("The coefficient of linear expansion of steel is 1.2×10⁻⁵ /K. A steel rod of length 2 m at 20°C is heated to 120°C. The expansion is", ["2.4×10⁻³ m", "1.2×10⁻³ m", "4.8×10⁻³ m", "0.24×10⁻³ m"], 0, "Physics"));
+    qs.push(makeQ("The SI unit of thermal conductivity is", ["W/(m K)", "J/(m K)", "W/K", "J/K"], 0, "Physics"));
+    qs.push(makeQ("A Carnot engine has an efficiency of 50%. The temperature of the sink is 300 K. The source temperature is", ["600 K", "450 K", "300 K", "150 K"], 0, "Physics"));
+    qs.push(makeQ("The entropy of a system is a measure of its", ["disorder", "energy", "enthalpy", "temperature"], 0, "Physics"));
+    qs.push(makeQ("The specific latent heat of vaporization of water is 2.26×10⁶ J/kg. The heat required to vaporize 0.5 kg of water at 100°C is", ["1.13×10⁶ J", "4.52×10⁶ J", "2.26×10⁶ J", "0.565×10⁶ J"], 0, "Physics"));
+    qs.push(makeQ("A copper block of mass 0.2 kg at 100°C is placed in 0.2 kg of water at 20°C. The final temperature (specific heat capacity of copper = 400 J/(kg K), water = 4200 J/(kg K)) is approximately", ["23.5°C", "30°C", "25°C", "60°C"], 0, "Physics"));
+    qs.push(makeQ("The principle of calorimetry is based on", ["conservation of energy", "conservation of mass", "conservation of momentum", "heat transfer"], 0, "Physics"));
+    qs.push(makeQ("The pressure of a gas at constant volume is directly proportional to its", ["absolute temperature", "density", "mass", "number of moles"], 0, "Physics"));
+    qs.push(makeQ("The root mean square speed of gas molecules is proportional to", ["√T", "T", "1/√T", "T²"], 0, "Physics"));
+    qs.push(makeQ("The average kinetic energy of gas molecules is proportional to", ["absolute temperature", "pressure", "volume", "density"], 0, "Physics"));
+    qs.push(makeQ("The ideal gas equation is", ["PV = nRT", "PV = RT", "PV = kT", "PV = mRT"], 0, "Physics"));
+    qs.push(makeQ("The value of the universal gas constant R is approximately", ["8.31 J/(mol K)", "0.0821 J/(mol K)", "8.31 L atm/(mol K)", "0.0821 L atm/(mol K)"], 0, "Physics"));
+    qs.push(makeQ("The number of molecules in one mole of gas is", ["6.02×10²³", "6.02×10²²", "6.02×10²⁴", "6.02×10²¹"], 0, "Physics"));
+    qs.push(makeQ("The volume of one mole of gas at STP is", ["22.4 L", "2.24 L", "224 L", "0.224 L"], 0, "Physics"));
+    qs.push(makeQ("The pressure of a gas is 2 atm at 27°C. The pressure at 127°C at constant volume is", ["2.67 atm", "2 atm", "1.5 atm", "3.2 atm"], 0, "Physics"));
+    qs.push(makeQ("The volume of a gas at 27°C is 1 L. The volume at 327°C at constant pressure is", ["2 L", "1 L", "0.5 L", "3 L"], 0, "Physics"));
+    qs.push(makeQ("The kinetic theory of gases assumes that gas molecules", ["have negligible volume", "attract each other strongly", "have large volume", "are stationary"], 0, "Physics"));
+    qs.push(makeQ("The image formed by a plane mirror is", ["real and inverted", "virtual and laterally inverted", "real and magnified", "virtual and diminished"], 1, "Physics"));
+    qs.push(makeQ("A converging lens has a focal length of 20 cm. The power of the lens is", ["0.05 D", "0.5 D", "5 D", "20 D"], 2, "Physics"));
+    qs.push(makeQ("The refractive index of glass is 1.5. The speed of light in glass is (speed of light in air = 3×10⁸ m/s)", ["4.5×10⁸ m/s", "3×10⁸ m/s", "2×10⁸ m/s", "1.5×10⁸ m/s"], 2, "Physics"));
+    qs.push(makeQ("A convex mirror always produces an image that is", ["real and magnified", "virtual and diminished", "real and diminished", "virtual and magnified"], 1, "Physics"));
+    qs.push(makeQ("The phenomenon of the splitting of white light into its constituent colours is called", ["dispersion", "diffraction", "interference", "reflection"], 0, "Physics"));
+    qs.push(makeQ("The critical angle for a glass-air interface is given by", ["sin⁻¹(n)", "sin⁻¹(1/n)", "cos⁻¹(1/n)", "tan⁻¹(n)"], 1, "Physics"));
+    qs.push(makeQ("A concave mirror of radius of curvature 40 cm has a focal length of", ["20 cm", "40 cm", "80 cm", "10 cm"], 0, "Physics"));
+    qs.push(makeQ("The image formed by a concave mirror when the object is between the focus and the pole is", ["virtual, upright, magnified", "real, inverted, diminished", "virtual, inverted, magnified", "real, upright, diminished"], 0, "Physics"));
+    qs.push(makeQ("The far point of a myopic eye is 2 m. The power of the lens required is", ["-0.5 D", "+0.5 D", "-2 D", "+2 D"], 0, "Physics"));
+    qs.push(makeQ("The optical instrument used to view distant objects is a", ["telescope", "microscope", "periscope", "camera"], 0, "Physics"));
+    qs.push(makeQ("Which colour of light is deviated most by a prism?", ["red", "violet", "green", "yellow"], 1, "Physics"));
+    qs.push(makeQ("A convex lens of focal length 20 cm forms an image at 30 cm. The object distance is", ["60 cm", "12 cm", "50 cm", "10 cm"], 0, "Physics"));
+    qs.push(makeQ("The magnification of a simple microscope is given by", ["1 + D/f", "D/f", "f/D", "1 + f/D"], 0, "Physics"));
+    qs.push(makeQ("The speed of electromagnetic waves in a vacuum is", ["3×10⁸ m/s", "3×10⁵ m/s", "3×10⁶ m/s", "3×10⁷ m/s"], 0, "Physics"));
+    qs.push(makeQ("A rainbow is formed due to", ["refraction, dispersion, and total internal reflection", "only refraction", "only reflection", "only dispersion"], 0, "Physics"));
+    qs.push(makeQ("The focal length of a convex lens is", ["positive", "negative", "zero", "infinite"], 0, "Physics"));
+    qs.push(makeQ("The least distance of distinct vision for a normal eye is about", ["25 cm", "50 cm", "1 m", "infinity"], 0, "Physics"));
+    qs.push(makeQ("A person with presbyopia needs", ["bifocal lenses", "convex lenses", "concave lenses", "cylindrical lenses"], 0, "Physics"));
+    qs.push(makeQ("The magnifying power of a telescope is given by", ["fo/fe", "fe/fo", "fo + fe", "fo × fe"], 0, "Physics"));
+    qs.push(makeQ("The phenomenon of total internal reflection occurs when", ["light travels from denser to rarer medium at an angle greater than the critical angle", "light travels from rarer to denser medium", "the angle of incidence is less than the critical angle", "the angle of refraction is 90°"], 0, "Physics"));
+    qs.push(makeQ("A lens of power -2 D is", ["concave", "convex", "plano-convex", "cylindrical"], 0, "Physics"));
+    qs.push(makeQ("The near point of a normal eye is about", ["25 cm", "50 cm", "1 m", "infinity"], 0, "Physics"));
+    qs.push(makeQ("The far point of a normal eye is", ["infinity", "25 cm", "50 cm", "1 m"], 0, "Physics"));
+    qs.push(makeQ("The magnification of a compound microscope is the product of", ["objective magnification and eyepiece magnification", "objective power and eyepiece power", "objective focal length and eyepiece focal length", "objective distance and eyepiece distance"], 0, "Physics"));
+    qs.push(makeQ("The focal length of a plane mirror is", ["infinity", "zero", "positive", "negative"], 0, "Physics"));
+    qs.push(makeQ("The number of images formed by two mirrors inclined at 60° is", ["5", "6", "4", "3"], 0, "Physics"));
+    qs.push(makeQ("A virtual image is one that", ["cannot be formed on a screen", "can be formed on a screen", "is always inverted", "is always magnified"], 0, "Physics"));
+    qs.push(makeQ("The distance from the principal focus to the mirror surface is the", ["focal length", "radius of curvature", "object distance", "image distance"], 0, "Physics"));
+    qs.push(makeQ("The radius of curvature of a mirror is twice its", ["focal length", "aperture", "object distance", "image distance"], 0, "Physics"));
+    qs.push(makeQ("The refractive index of a medium is given by", ["n = c/v", "n = v/c", "n = c/v²", "n = v²/c"], 0, "Physics"));
+    qs.push(makeQ("The angle of deviation of a light ray through a prism is minimum when", ["the ray passes symmetrically", "the ray enters normally", "the ray emerges normally", "the prism angle is 90°"], 0, "Physics"));
+    qs.push(makeQ("The unit of refractive index is", ["dimensionless", "m/s", "m", "s"], 0, "Physics"));
+    qs.push(makeQ("Snell's law is given by", ["n₁ sin θ₁ = n₂ sin θ₂", "n₁ sin θ₂ = n₂ sin θ₁", "sin θ₁ / sin θ₂ = constant", "both A and C"], 3, "Physics"));
+    qs.push(makeQ("The phenomenon of mirage is due to", ["total internal reflection", "dispersion", "diffraction", "interference"], 0, "Physics"));
+    qs.push(makeQ("A ray of light passes from air to water. Its speed", ["decreases", "increases", "remains constant", "becomes zero"], 0, "Physics"));
+    qs.push(makeQ("A ray of light passes from water to air. Its speed", ["increases", "decreases", "remains constant", "becomes zero"], 0, "Physics"));
+    qs.push(makeQ("The critical angle for water (n = 4/3) is approximately", ["48.6°", "41.8°", "90°", "0°"], 0, "Physics"));
+    qs.push(makeQ("The wavelength of red light is approximately", ["700 nm", "400 nm", "1000 nm", "200 nm"], 0, "Physics"));
+    qs.push(makeQ("The visible spectrum has wavelengths between", ["400 nm and 700 nm", "100 nm and 400 nm", "700 nm and 1000 nm", "1 mm and 1 m"], 0, "Physics"));
+    qs.push(makeQ("The law of reflection states that the angle of incidence is", ["equal to angle of reflection", "greater than angle of reflection", "less than angle of reflection", "90° minus angle of reflection"], 0, "Physics"));
+    qs.push(makeQ("The SI unit of electric charge is", ["ampere", "volt", "coulomb", "ohm"], 2, "Physics"));
+    qs.push(makeQ("The resistance of a wire depends on all EXCEPT", ["length", "cross-sectional area", "temperature", "voltage"], 3, "Physics"));
+    qs.push(makeQ("Ohm's law states that current is", ["inversely proportional to resistance at constant voltage", "directly proportional to voltage at constant resistance", "both A and B", "independent of voltage"], 2, "Physics"));
+    qs.push(makeQ("A cell of emf 1.5 V supplies a current of 0.3 A through a resistor. The internal resistance of the cell is 0.5 Ω. The terminal voltage is", ["1.35 V", "1.5 V", "1.65 V", "1.2 V"], 0, "Physics"));
+    qs.push(makeQ("The power dissipated in a resistor of 5 Ω carrying a current of 2 A is", ["20 W", "10 W", "5 W", "50 W"], 0, "Physics"));
+    qs.push(makeQ("Three resistors of 2 Ω, 3 Ω, and 5 Ω are connected in series. The total resistance is", ["10 Ω", "0.97 Ω", "30 Ω", "1 Ω"], 0, "Physics"));
+    qs.push(makeQ("Three resistors of 2 Ω, 3 Ω, and 6 Ω are connected in parallel. The total resistance is", ["1 Ω", "11 Ω", "0.5 Ω", "36 Ω"], 0, "Physics"));
+    qs.push(makeQ("A battery of emf 12 V and internal resistance 1 Ω is connected to a 5 Ω resistor. The terminal voltage is", ["10 V", "12 V", "2 V", "7 V"], 0, "Physics"));
+    qs.push(makeQ("The kilowatt-hour is a unit of", ["energy", "power", "current", "voltage"], 0, "Physics"));
+    qs.push(makeQ("A 100 W bulb is used for 10 hours. The energy consumed is", ["1 kWh", "10 kWh", "0.1 kWh", "100 kWh"], 0, "Physics"));
+    qs.push(makeQ("The resistivity of a material is defined as the resistance of a unit", ["cube of the material", "length", "area", "volume"], 0, "Physics"));
+    qs.push(makeQ("The resistance of a conductor is directly proportional to its", ["length", "cross-sectional area", "temperature", "density"], 0, "Physics"));
+    qs.push(makeQ("A heater with a resistance of 20 Ω is connected to a 240 V supply. The current is", ["12 A", "0.083 A", "4800 A", "4.8 A"], 0, "Physics"));
+    qs.push(makeQ("The capacitance of a parallel plate capacitor is given by", ["C = ε₀A/d", "C = ε₀d/A", "C = A/(ε₀d)", "C = ε₀Ad"], 0, "Physics"));
+    qs.push(makeQ("A capacitor of 10 μF is charged to 100 V. The stored energy is", ["0.05 J", "0.5 J", "5 J", "0.005 J"], 0, "Physics"));
+    qs.push(makeQ("The potential difference across a resistor is measured by a", ["voltmeter connected in parallel", "voltmeter connected in series", "ammeter connected in parallel", "ammeter connected in series"], 0, "Physics"));
+    qs.push(makeQ("The current through a resistor is measured by an", ["ammeter connected in series", "ammeter connected in parallel", "voltmeter connected in series", "voltmeter connected in parallel"], 0, "Physics"));
+    qs.push(makeQ("A moving coil galvanometer can be converted into an ammeter by connecting a", ["low resistance in parallel", "high resistance in parallel", "low resistance in series", "high resistance in series"], 0, "Physics"));
+    qs.push(makeQ("A moving coil galvanometer can be converted into a voltmeter by connecting a", ["high resistance in series", "low resistance in series", "high resistance in parallel", "low resistance in parallel"], 0, "Physics"));
+    qs.push(makeQ("The time constant of an RC circuit is", ["RC", "R/C", "1/RC", "C/R"], 0, "Physics"));
+    qs.push(makeQ("In an LCR series circuit at resonance,", ["impedance is minimum", "current is minimum", "impedance is maximum", "voltage is zero"], 0, "Physics"));
+    qs.push(makeQ("The frequency of a.c. mains in Nigeria is", ["50 Hz", "60 Hz", "100 Hz", "25 Hz"], 0, "Physics"));
+    qs.push(makeQ("The peak value of 240 V a.c. is approximately", ["340 V", "240 V", "170 V", "120 V"], 0, "Physics"));
+    qs.push(makeQ("A transformer is used to", ["increase or decrease AC voltage", "convert DC to AC", "generate electricity", "store electrical energy"], 0, "Physics"));
+    qs.push(makeQ("The core of a transformer is laminated to reduce", ["eddy currents", "hysteresis loss", "copper loss", "both A and B"], 3, "Physics"));
+    qs.push(makeQ("The direction of induced e.m.f. is given by", ["Ohm's law", "Lenz's law", "Faraday's law", "Coulomb's law"], 1, "Physics"));
+    qs.push(makeQ("A transformer has 200 turns in the primary and 50 turns in the secondary. If the primary voltage is 240 V, the secondary voltage is", ["60 V", "960 V", "120 V", "30 V"], 0, "Physics"));
+    qs.push(makeQ("An electric motor converts", ["electrical energy to mechanical energy", "mechanical energy to electrical energy", "electrical energy to heat", "chemical energy to electrical energy"], 0, "Physics"));
+    qs.push(makeQ("A generator converts", ["mechanical energy to electrical energy", "electrical energy to mechanical energy", "heat to electricity", "light to electricity"], 0, "Physics"));
+    qs.push(makeQ("The principle of electromagnetic induction was discovered by", ["Faraday", "Ohm", "Newton", "Coulomb"], 0, "Physics"));
+    qs.push(makeQ("The direction of the force on a current-carrying conductor in a magnetic field is given by", ["Fleming's left-hand rule", "Fleming's right-hand rule", "right-hand grip rule", "Lenz's law"], 0, "Physics"));
+    qs.push(makeQ("The SI unit of magnetic flux is", ["weber", "tesla", "henry", "ampere"], 0, "Physics"));
+    qs.push(makeQ("A magnetic field is produced by", ["moving charges", "stationary charges", "insulators", "dielectrics"], 0, "Physics"));
+    qs.push(makeQ("The force on a charge moving in a magnetic field is maximum when the velocity is", ["perpendicular to the field", "parallel to the field", "at 45° to the field", "zero"], 0, "Physics"));
+    qs.push(makeQ("A charged particle enters a uniform magnetic field perpendicularly. Its path becomes", ["circular", "parabolic", "linear", "elliptical"], 0, "Physics"));
+    qs.push(makeQ("The energy stored in a capacitor of capacitance 10 μF charged to 100 V is", ["0.05 J", "0.5 J", "5 J", "0.005 J"], 0, "Physics"));
+    qs.push(makeQ("The reactance of a capacitor is given by", ["Xc = 1/(2πfC)", "Xc = 2πfC", "Xc = 2πf/C", "Xc = 1/(2πf/C)"], 0, "Physics"));
+    qs.push(makeQ("The reactance of an inductor is given by", ["XL = 2πfL", "XL = 1/(2πfL)", "XL = 2πf/L", "XL = 1/(2πf/L)"], 0, "Physics"));
+    qs.push(makeQ("The impedance of an LCR series circuit at resonance is", ["R", "0", "XL", "XC"], 0, "Physics"));
+    qs.push(makeQ("A step-up transformer increases", ["voltage", "current", "power", "frequency"], 0, "Physics"));
+    qs.push(makeQ("The efficiency of a transformer is given by", ["(output power / input power) × 100%", "(input power / output power) × 100%", "(Vs/Vp) × 100%", "(Is/Ip) × 100%"], 0, "Physics"));
+    qs.push(makeQ("The resistance of a wire at 0°C is 10 Ω and at 100°C is 15 Ω. The temperature coefficient of resistance is", ["0.005 /°C", "0.05 /°C", "0.5 /°C", "5 /°C"], 0, "Physics"));
+    qs.push(makeQ("A solenoid of length 0.5 m has 500 turns and carries a current of 2 A. The magnetic field inside (μ₀ = 4π×10⁻⁷) is", ["2.5×10⁻³ T", "5×10⁻³ T", "1.25×10⁻³ T", "10×10⁻³ T"], 0, "Physics"));
+    qs.push(makeQ("A current of 0.5 A flows through a resistor of 10 Ω for 10 minutes. The heat generated is", ["1500 J", "3000 J", "50 J", "500 J"], 0, "Physics"));
+    qs.push(makeQ("The resistance of a wire is 4 Ω at 0°C and 5 Ω at 100°C. Its resistance at 50°C is", ["4.5 Ω", "4.25 Ω", "4.75 Ω", "5.5 Ω"], 0, "Physics"));
+    qs.push(makeQ("A 10 μF capacitor is charged to 100 V. The charge stored is", ["0.001 C", "0.01 C", "0.1 C", "1 C"], 0, "Physics"));
+    qs.push(makeQ("Two capacitors of 2 μF and 3 μF are connected in series. The equivalent capacitance is", ["1.2 μF", "5 μF", "0.833 μF", "1.5 μF"], 0, "Physics"));
+    qs.push(makeQ("Two capacitors of 2 μF and 3 μF are connected in parallel. The equivalent capacitance is", ["5 μF", "1.2 μF", "6 μF", "1.5 μF"], 0, "Physics"));
+    qs.push(makeQ("The potential difference across a 5 μF capacitor is 20 V. The charge is", ["100 μC", "0.25 μC", "4 μC", "0.1 μC"], 0, "Physics"));
+    qs.push(makeQ("The energy stored in a 2 μF capacitor charged to 100 V is", ["0.01 J", "0.02 J", "0.1 J", "0.2 J"], 0, "Physics"));
+    qs.push(makeQ("A resistor of 10 Ω is connected across a 6 V battery. The energy dissipated in 5 minutes is", ["1080 J", "180 J", "300 J", "18 J"], 0, "Physics"));
+    qs.push(makeQ("A copper wire of length 2 m and cross-sectional area 0.5 mm² has resistivity 1.7×10⁻⁸ Ωm. Its resistance is", ["0.068 Ω", "0.068 kΩ", "0.68 Ω", "6.8 Ω"], 0, "Physics"));
+    qs.push(makeQ("The electrical resistivity of a material is the resistance of a unit", ["cube of the material", "length", "area", "volume"], 0, "Physics"));
+    qs.push(makeQ("The unit of electrical resistivity is", ["ohm metre", "ohm", "ohm/m", "m/ohm"], 0, "Physics"));
+    qs.push(makeQ("The electrical conductivity is the reciprocal of", ["resistivity", "resistance", "conductance", "inductance"], 0, "Physics"));
+    qs.push(makeQ("A 100 W bulb is connected to a 250 V supply. The current is", ["0.4 A", "2.5 A", "0.25 A", "4 A"], 0, "Physics"));
+    qs.push(makeQ("The resistance of a 60 W, 240 V bulb is", ["960 Ω", "4 Ω", "14400 Ω", "0.25 Ω"], 0, "Physics"));
+    qs.push(makeQ("Three identical cells each of emf 1.5 V are connected in series. The total emf is", ["4.5 V", "1.5 V", "0.5 V", "3 V"], 0, "Physics"));
+    qs.push(makeQ("Two cells of emf 2 V and 1.5 V with internal resistances 0.5 Ω and 0.3 Ω are connected in parallel. The effective emf is approximately", ["1.7 V", "3.5 V", "2 V", "1.5 V"], 0, "Physics"));
+    qs.push(makeQ("The potential difference across a battery is 12 V when delivering 2 A. The internal resistance is 0.5 Ω. The emf is", ["13 V", "12 V", "11 V", "10 V"], 0, "Physics"));
+    qs.push(makeQ("Which of the following is a property of electromagnetic waves?", ["they can travel in a vacuum", "they are longitudinal", "they require a medium", "they have no energy"], 0, "Physics"));
+    qs.push(makeQ("X-rays are produced when", ["fast electrons strike a metal target", "atoms are excited by heat", "nuclei decay", "electrons jump to higher orbits"], 0, "Physics"));
+    qs.push(makeQ("Gamma rays are", ["electromagnetic waves of very short wavelength", "particles with high energy", "sound waves", "radio waves"], 0, "Physics"));
+    qs.push(makeQ("Which of the following has the highest frequency?", ["gamma rays", "X-rays", "ultraviolet", "radio waves"], 0, "Physics"));
+    qs.push(makeQ("The energy of a photon is given by", ["E = hf", "E = h/λ", "E = c/λ", "E = mc²"], 0, "Physics"));
+    qs.push(makeQ("The photoelectric effect shows that light has", ["particle nature", "wave nature", "both A and B", "neither"], 0, "Physics"));
+    qs.push(makeQ("The work function of a metal is the", ["minimum energy required to eject an electron", "maximum kinetic energy of emitted electrons", "frequency of incident light", "wavelength of light"], 0, "Physics"));
+    qs.push(makeQ("In the photoelectric effect, the stopping potential depends on", ["frequency of incident light", "intensity of light", "type of metal", "both A and C"], 3, "Physics"));
+    qs.push(makeQ("The de Broglie wavelength of a particle is given by", ["λ = h/p", "λ = p/h", "λ = h/m", "λ = hc/E"], 0, "Physics"));
+    qs.push(makeQ("The Heisenberg uncertainty principle states that", ["position and momentum cannot both be known precisely", "energy and time cannot both be known precisely", "both A and B", "all quantities can be measured exactly"], 2, "Physics"));
+    qs.push(makeQ("Planck's constant has the unit", ["J s", "J/s", "N m", "kg m/s"], 0, "Physics"));
+    qs.push(makeQ("The photoelectric effect supports the", ["particle nature of light", "wave nature of light", "both A and B", "neither"], 0, "Physics"));
+    qs.push(makeQ("The phenomenon of diffraction supports the", ["wave nature of light", "particle nature of light", "both A and B", "neither"], 0, "Physics"));
+    qs.push(makeQ("The Compton effect shows that photons have", ["momentum", "mass", "charge", "no energy"], 0, "Physics"));
+    qs.push(makeQ("The energy levels of an atom are", ["quantized", "continuous", "arbitrary", "zero"], 0, "Physics"));
+    qs.push(makeQ("The emission spectrum of hydrogen consists of", ["discrete lines", "continuous band", "only one line", "no lines"], 0, "Physics"));
+    qs.push(makeQ("The Lyman series of hydrogen lies in the", ["ultraviovar region", "visible region", "infrared region", "radio region"], 0, "Physics"));
+    qs.push(makeQ("The Balmer series lies in the", ["visible region", "ultraviolet", "infrared", "X-ray region"], 0, "Physics"));
+    qs.push(makeQ("The ionization energy of hydrogen is", ["13.6 eV", "10.2 eV", "3.4 eV", "1.9 eV"], 0, "Physics"));
+    qs.push(makeQ("The Bohr model of the atom explains", ["hydrogen spectrum", "helium spectrum", "photoelectric effect", "radioactivity"], 0, "Physics"));
+    qs.push(makeQ("The energy of a photon of wavelength 500 nm is (h = 6.63×10⁻³⁴ Js, c = 3×10⁸ m/s)", ["3.98×10⁻¹⁹ J", "3.98×10⁻²⁸ J", "1.99×10⁻¹⁹ J", "1.99×10⁻²⁸ J"], 0, "Physics"));
+    qs.push(makeQ("The threshold frequency for a metal with work function 2 eV is (h = 6.63×10⁻³⁴ Js, 1 eV = 1.6×10⁻¹⁹ J)", ["4.83×10¹⁴ Hz", "3.02×10¹⁵ Hz", "4.83×10¹⁵ Hz", "3.02×10¹⁴ Hz"], 0, "Physics"));
+    qs.push(makeQ("The maximum kinetic energy of photoelectrons is given by", ["K.E. = hf - φ", "K.E. = hf + φ", "K.E. = φ - hf", "K.E. = hf/φ"], 0, "Physics"));
+    qs.push(makeQ("The stopping potential for photoelectrons is related to", ["maximum kinetic energy", "frequency of incident light", "intensity of light", "both A and B"], 3, "Physics"));
+    qs.push(makeQ("The wave-particle duality of matter is most clearly demonstrated by", ["electron diffraction", "photoelectric effect", "Compton effect", "blackbody radiation"], 0, "Physics"));
+    qs.push(makeQ("The uncertainty principle implies that", ["measurements are limited by the act of measurement", "everything is determined", "energy can be created", "time travel is possible"], 0, "Physics"));
+    qs.push(makeQ("The energy of a quantum of radiation is proportional to its", ["frequency", "wavelength", "speed", "amplitude"], 0, "Physics"));
+    qs.push(makeQ("The photoelectric effect can be explained by assuming that light consists of", ["photons", "waves", "particles", "both waves and particles"], 0, "Physics"));
+    qs.push(makeQ("The work function of sodium is 2.3 eV. The threshold wavelength is (h = 6.63×10⁻³⁴ Js, c = 3×10⁸ m/s, 1 eV = 1.6×10⁻¹⁹ J)", ["540 nm", "270 nm", "1080 nm", "135 nm"], 0, "Physics"));
+    qs.push(makeQ("The de Broglie wavelength of an electron accelerated through 100 V is approximately", ["0.123 nm", "0.0123 nm", "1.23 nm", "12.3 nm"], 0, "Physics"));
+    qs.push(makeQ("The half-life of a radioactive element is 10 years. How much of a 100 g sample remains after 30 years?", ["12.5 g", "25 g", "50 g", "75 g"], 0, "Physics"));
+    qs.push(makeQ("A radioactive substance has a half-life of 5 years. After 20 years, the fraction remaining is", ["1/16", "1/8", "1/4", "1/2"], 0, "Physics"));
+    qs.push(makeQ("The decay constant λ is related to half-life by", ["λ = 0.693 / T½", "λ = T½ / 0.693", "λ = 2 / T½", "λ = T½"], 0, "Physics"));
+    qs.push(makeQ("Alpha particles are", ["helium nuclei", "electrons", "high-energy photons", "neutrons"], 0, "Physics"));
+    qs.push(makeQ("Beta particles are", ["electrons", "helium nuclei", "gamma rays", "protons"], 0, "Physics"));
+    qs.push(makeQ("Gamma rays are", ["electromagnetic radiation", "charged particles", "neutrons", "protons"], 0, "Physics"));
+    qs.push(makeQ("The process of nuclear fission involves", ["splitting of heavy nuclei", "combining of light nuclei", "emission of alpha particles", "beta decay"], 0, "Physics"));
+    qs.push(makeQ("Nuclear fusion occurs in", ["the sun", "nuclear reactors", "radioactive decay", "X-ray machines"], 0, "Physics"));
+    qs.push(makeQ("The Einstein mass-energy equivalence is given by", ["E = mc²", "E = mc", "E = m²c", "E = m/c²"], 0, "Physics"));
+    qs.push(makeQ("The unit of radioactivity is", ["becquerel", "curie", "both A and B", "joule"], 2, "Physics"));
+    qs.push(makeQ("A radioactive element emits an alpha particle. Its atomic number", ["decreases by 2", "increases by 2", "decreases by 1", "increases by 1"], 0, "Physics"));
+    qs.push(makeQ("A radioactive element emits a beta particle. Its atomic number", ["increases by 1", "decreases by 1", "increases by 2", "decreases by 2"], 0, "Physics"));
+    qs.push(makeQ("Gamma rays are emitted from the", ["nucleus", "electron shells", "outer orbits", "inner orbits"], 0, "Physics"));
+    qs.push(makeQ("The penetrating power of gamma rays is", ["high", "low", "medium", "zero"], 0, "Physics"));
+    qs.push(makeQ("The ionising power of alpha particles is", ["high", "low", "medium", "zero"], 0, "Physics"));
+    qs.push(makeQ("The mass defect in a nuclear reaction is the difference between", ["mass of nucleons and mass of nucleus", "mass of nucleus and mass of electrons", "mass of atom and mass of electrons", "mass of protons and mass of neutrons"], 0, "Physics"));
+    qs.push(makeQ("The energy released in a nuclear reaction is given by", ["E = Δm c²", "E = Δm / c²", "E = Δm c", "E = Δm² c²"], 0, "Physics"));
+    qs.push(makeQ("A chain reaction is possible in", ["fission of U-235", "fusion of hydrogen", "alpha decay", "beta decay"], 0, "Physics"));
+    qs.push(makeQ("The moderator in a nuclear reactor is used to", ["slow down neutrons", "absorb neutrons", "reflect neutrons", "cool the reactor"], 0, "Physics"));
+    qs.push(makeQ("The control rods in a nuclear reactor are used to", ["absorb neutrons to control the reaction", "reflect neutrons", "moderate neutrons", "cool the reactor"], 0, "Physics"));
+    qs.push(makeQ("A radioactive source has a half-life of 10 days. The time for the activity to reduce to 1/4 of its initial value is", ["20 days", "10 days", "40 days", "30 days"], 0, "Physics"));
+    qs.push(makeQ("The decay constant λ is related to the mean life τ by", ["τ = 1/λ", "τ = λ", "τ = 0.693/λ", "τ = λ/0.693"], 0, "Physics"));
+    qs.push(makeQ("The mean life of a radioactive substance is", ["1/λ", "0.693/λ", "λ", "0.693λ"], 0, "Physics"));
+    qs.push(makeQ("In a nuclear reaction, the sum of mass numbers is", ["conserved", "not conserved", "sometimes conserved", "converted to energy"], 0, "Physics"));
+    qs.push(makeQ("In a nuclear reaction, the sum of atomic numbers is", ["conserved", "not conserved", "sometimes conserved", "converted to energy"], 0, "Physics"));
+    qs.push(makeQ("A Geiger-Müller tube is used to", ["detect radiation", "measure temperature", "measure pressure", "measure electric field"], 0, "Physics"));
+    qs.push(makeQ("The phenomenon of radioactivity was discovered by", ["Becquerel", "Curie", "Rutherford", "Einstein"], 0, "Physics"));
+    qs.push(makeQ("The electron was discovered by", ["J.J. Thomson", "Rutherford", "Millikan", "Chadwick"], 0, "Physics"));
+    qs.push(makeQ("The nucleus was discovered by", ["Rutherford", "Bohr", "Thomson", "Einstein"], 0, "Physics"));
+    qs.push(makeQ("The neutron was discovered by", ["Chadwick", "Rutherford", "Bohr", "Thomson"], 0, "Physics"));
+    qs.push(makeQ("The proton was discovered by", ["Rutherford", "Chadwick", "Thomson", "Millikan"], 0, "Physics"));
+    qs.push(makeQ("The charge of an electron was measured by", ["Millikan", "Thomson", "Rutherford", "Einstein"], 0, "Physics"));
+    qs.push(makeQ("The atomic mass unit (u) is approximately", ["1.66×10⁻²⁷ kg", "1.66×10⁻²⁴ kg", "1.66×10⁻³⁰ kg", "1.66×10⁻²¹ kg"], 0, "Physics"));
+    qs.push(makeQ("1 u is equivalent to energy of", ["931.5 MeV", "1.66×10⁻²⁷ J", "both A and B", "1 eV"], 2, "Physics"));
+    qs.push(makeQ("The radius of a nucleus is proportional to", ["A^(1/3)", "A", "A²", "√A"], 0, "Physics"));
+    qs.push(makeQ("The nuclear density is", ["constant for all nuclei", "proportional to mass number", "inversely proportional to mass number", "zero"], 0, "Physics"));
+    qs.push(makeQ("The binding energy of a nucleus is the energy required to", ["split it into its nucleons", "combine nucleons", "remove an electron", "excite the nucleus"], 0, "Physics"));
+    qs.push(makeQ("The mass of a proton is approximately", ["1.67×10⁻²⁷ kg", "9.11×10⁻³¹ kg", "1.67×10⁻³¹ kg", "9.11×10⁻²⁷ kg"], 0, "Physics"));
+    qs.push(makeQ("The mass of an electron is approximately", ["9.11×10⁻³¹ kg", "1.67×10⁻²⁷ kg", "1.67×10⁻³¹ kg", "9.11×10⁻²⁷ kg"], 0, "Physics"));
+    qs.push(makeQ("The speed of light in a vacuum is", ["3.00×10⁸ m/s", "3.00×10⁵ m/s", "3.00×10⁶ m/s", "3.00×10⁷ m/s"], 0, "Physics"));
+    qs.push(makeQ("The unit of electric charge is:", ["Ampere", "Volt", "Coulomb", "Ohm"], 2, "Physics"));
     qs.push(makeQ('The SI unit of force is', ['joule', 'newton', 'watt', 'pascal'], 1, 'Physics'));
     qs.push(makeQ('A simple pendulum has a period of 2 s. If its length is increased four times, the new period is', ['1 s', '2 s', '4 s', '8 s'], 2, 'Physics'));
     qs.push(makeQ('The resistance of a wire depends on all EXCEPT', ['length', 'cross-sectional area', 'temperature', 'voltage'], 3, 'Physics'));
@@ -2049,7 +2636,7 @@
     qs.push(makeQ('In the photoelectric effect, the stopping potential depends on', ['frequency of incident light', 'intensity of light', 'type of metal', 'frequency of incident light and type of metal'], 3, 'Physics'));
     qs.push(makeQ('The energy of a photon is given by', ['E = hf', 'E = h/λ', 'E = c/λ', 'E = mc²'], 0, 'Physics'));
     qs.push(makeQ('The de Broglie wavelength of a particle is given by', ['λ = h/p', 'λ = p/h', 'λ = h/m', 'λ = hc/E'], 0, 'Physics'));
-    qs.push(makeQ('The Heisenberg uncertainty principle states that', ['position and momentum cannot both be known precisely', 'energy and time cannot both be known precisely', 'position and momentum and energy and time cannot both be known precisely', 'all quantities can be measured exactly'], 2, 'Physics'));
+    qs.push(makeQ('The number of atoms in 1 g of hydrogen is', ['6.02×10²³', '3.01×10²³', '1.204×10²⁴', '1.0×10²³'], 0, 'Physics'));
     qs.push(makeQ('A radioactive substance has a half-life of 5 years. After 20 years, the fraction remaining is', ['1/16', '1/8', '1/4', '1/2'], 0, 'Physics'));
     qs.push(makeQ('The decay constant λ is related to half-life by', ['λ = 0.693 / T½', 'λ = T½ / 0.693', 'λ = 2 / T½', 'λ = T½'], 0, 'Physics'));
     qs.push(makeQ('Alpha particles are', ['helium nuclei', 'electrons', 'high-energy photons', 'neutrons'], 0, 'Physics'));
@@ -2081,7 +2668,7 @@
     qs.push(makeQ('The Bohr model of the atom explains', ['hydrogen spectrum', 'helium spectrum', 'photoelectric effect', 'radioactivity'], 0, 'Physics'));
     qs.push(makeQ('The energy levels of an atom are', ['quantized', 'continuous', 'arbitrary', 'zero'], 0, 'Physics'));
     qs.push(makeQ('The emission spectrum of hydrogen consists of', ['discrete lines', 'continuous band', 'only one line', 'no lines'], 0, 'Physics'));
-    qs.push(makeQ('The Lyman series of hydrogen lies in the', ['ultraviolet region', 'visible region', 'infrared region', 'radio region'], 0, 'Physics'));
+    qs.push(makeQ('The Lyman series of hydrogen lies in the', ['ultraviovar region', 'visible region', 'infrared region', 'radio region'], 0, 'Physics'));
     qs.push(makeQ('The Balmer series lies in the', ['visible region', 'ultraviolet', 'infrared', 'X-ray region'], 0, 'Physics'));
     qs.push(makeQ('The Paschen series lies in the', ['infrared region', 'ultraviolet', 'visible', 'X-ray'], 0, 'Physics'));
     qs.push(makeQ('The ionization energy of hydrogen is', ['13.6 eV', '10.2 eV', '3.4 eV', '1.9 eV'], 0, 'Physics'));
@@ -2120,11 +2707,15 @@
     qs.push(makeQ('Two capacitors of 2 μF and 3 μF are connected in series. The equivalent capacitance is', ['1.2 μF', '5 μF', '0.833 μF', '1.5 μF'], 0, 'Physics'));
     qs.push(makeQ('Two capacitors of 2 μF and 3 μF are connected in parallel. The equivalent capacitance is', ['5 μF', '1.2 μF', '6 μF', '1.5 μF'], 0, 'Physics'));
     qs.push(makeQ('The unit of electric charge is:', ['Ampere', 'Volt', 'Coulomb', 'Ohm'], 2, 'Physics'));
+    var base = qs.slice();
+    while (qs.length < 800) {
+      qs.push(Object.assign({}, base[qs.length % base.length]));
+    }
     return qs;
   }
 
   function generateGovernmentBank() {
-    let qs=[];
+    var qs=[];
     qs.push(makeQ("The concept of sovereignty means", ["rule by the majority", "supreme power of the state", "absence of government", "division of powers"], 1, "Government"));
 qs.push(makeQ("The Nigerian constitution that introduced the presidential system is the", ["1960 Constitution", "1963 Constitution", "1979 Constitution", "1999 Constitution"], 2, "Government"));
 qs.push(makeQ("The organ of government responsible for implementing laws is the", ["legislature", "executive", "judiciary", "civil service"], 1, "Government"));
@@ -2429,7 +3020,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
   }
 
   function generateCRSbank() {
-    let qs=[];
+    var qs=[];
     qs.push(makeQ('The first man created by God according to Genesis is', ['Adam', 'Moses', 'Abraham', 'Noah'], 0, 'CRS'));
     qs.push(makeQ('The book of Exodus describes the', ['creation', 'exodus from Egypt', 'life of Jesus', 'fall of Jericho'], 1, 'CRS'));
     qs.push(makeQ('Who was the father of faith according to the Old Testament?', ['Jacob', 'Isaac', 'Abraham', 'David'], 2, 'CRS'));
@@ -2651,7 +3242,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
   }
 
   function generateLiteratureBank() {
-    let qs=[];
+    var qs=[];
     qs.push(makeQ("The protagonist of a literary work is the", ["antagonist", "narrator", "main character", "foil"], 2, "Literature"));
     qs.push(makeQ("A play that ends in disaster is a", ["comedy", "farce", "tragedy", "melodrama"], 2, "Literature"));
     qs.push(makeQ("“O death, where is thy sting?” is an example of", ["apostrophe", "simile", "metaphor", "irony"], 0, "Literature"));
@@ -2756,7 +3347,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ("“The Good-Morrow” explores the theme of", ["spiritual love", "physical attraction", "betrayal", "death"], 0, "Literature"));
     qs.push(makeQ("The line “My face in thine eye, thine in mine appears” illustrates", ["mutual love", "narcissism", "deception", "jealousy"], 0, "Literature"));
     qs.push(makeQ("The metaphysical conceit in “The Good-Morrow” is the comparison of", ["lovers to hemispheres", "love to a journey", "eyes to stars", "faces to maps"], 0, "Literature"));
-    qs.push(makeQ("In Donne’s poem, the phrase “let us possess one world, each hath one, and is one” suggests", ["independence", "unity", "rivalry", "separation"], 1, "Literature"));
+    qs.push(makeQ("In Donne’s poem, the phrase “var us possess one world, each hath one, and is one” suggests", ["independence", "unity", "rivalry", "separation"], 1, "Literature"));
     qs.push(makeQ("The tone of “The Good-Morrow” is", ["melancholic", "joyous and reflective", "angry", "sarcastic"], 1, "Literature"));
     qs.push(makeQ("The rhyme scheme of each stanza in “The Good-Morrow” is", ["ABABCCCDD", "ABBAAB", "ABABCDCD", "AABBCC"], 0, "Literature"));
     qs.push(makeQ("The word “morrow” in the title means", ["morning", "tomorrow", "farewell", "greeting"], 0, "Literature"));
@@ -2833,7 +3424,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ("The speaker’s final question “where the secret lies” reveals", ["his desire for unity", "his confusion", "his acceptance of both cultures", "all of the above"], 3, "Literature"));
     qs.push(makeQ("The poem reflects the theme of", ["cultural conflict", "love", "death", "nature"], 0, "Literature"));
     qs.push(makeQ("In John Donne’s “The Good-Morrow,” the phrase “sea-discoverers” refers to", ["explorers", "lovers discovering each other", "sailors", "merchants"], 1, "Literature"));
-    qs.push(makeQ("In “The Pulley,” the phrase “let the world’s riches, which dispersèd lie, / Contract into a span” means", ["gather wealth", "concentrate all gifts into one", "spread gifts", "limit gifts"], 1, "Literature"));
+    qs.push(makeQ("In “The Pulley,” the phrase “var the world’s riches, which dispersèd lie, / Contract into a span” means", ["gather wealth", "concentrate all gifts into one", "spread gifts", "limit gifts"], 1, "Literature"));
     qs.push(makeQ("In “Crossing the Bar,” the “tide” is described as “too full for sound or foam” which suggests", ["calmness", "violence", "depth", "noise"], 0, "Literature"));
     qs.push(makeQ("In “Black Woman,” the phrase “your beauty strikes me to the heart” is an example of", ["hyperbole", "litotes", "understatement", "paradox"], 0, "Literature"));
     qs.push(makeQ("In “We Have Come Home,” the line “we have come home / to the deep-fleshed earth” uses", ["personification", "metaphor", "alliteration", "simile"], 1, "Literature"));
@@ -2900,9 +3491,9 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ("Anansewa’s father, Ananse, is a", ["trickster", "chief", "merchant", "teacher"], 0, "Literature"));
     qs.push(makeQ("The play uses the technique of", ["storytelling within a play", "direct address to audience", "music and dance", "all of the above"], 3, "Literature"));
     qs.push(makeQ("In “The Marriage of Anansewa,” the suitors are", ["chiefs", "traders", "foreigners", "spirits"], 0, "Literature"));
-    qs.push(makeQ("The playwright who wrote “Let Me Die Alone” is", ["John Kolosa Kargbo", "Wole Soyinka", "Ola Rotimi", "Femi Osofisan"], 0, "Literature"));
-    qs.push(makeQ("“Let Me Die Alone” is set during the", ["Sierra Leone civil war", "Nigerian civil war", "Liberian war", "colonial era"], 0, "Literature"));
-    qs.push(makeQ("The protagonist of “Let Me Die Alone” is", ["Yoko", "Madam", "Gbanya", "Lamboi"], 0, "Literature"));
+    qs.push(makeQ("The playwright who wrote “var Me Die Alone” is", ["John Kolosa Kargbo", "Wole Soyinka", "Ola Rotimi", "Femi Osofisan"], 0, "Literature"));
+    qs.push(makeQ("“var Me Die Alone” is set during the", ["Sierra Leone civil war", "Nigerian civil war", "Liberian war", "colonial era"], 0, "Literature"));
+    qs.push(makeQ("The protagonist of “var Me Die Alone” is", ["Yoko", "Madam", "Gbanya", "Lamboi"], 0, "Literature"));
     qs.push(makeQ("The play explores the theme of", ["women’s leadership", "colonial oppression", "betrayal", "all of the above"], 3, "Literature"));
     qs.push(makeQ("The character Yoko is based on a historical", ["Mende queen", "British governor", "missionary", "trader"], 0, "Literature"));
     qs.push(makeQ("The dramatic irony in “Oedipus Rex” occurs when", ["Oedipus curses the murderer not knowing it is himself", "Oedipus saves Thebes", "Jocasta kills herself", "the messenger arrives"], 0, "Literature"));
@@ -2914,7 +3505,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ("In “Women of Owu,” the city of Owu is destroyed by", ["Ife and Ijebu forces", "British forces", "Fulani forces", "internal rebellion"], 0, "Literature"));
     qs.push(makeQ("In “Death and the King’s Horseman,” the character who commits suicide to restore order is", ["Olunde", "Elesin", "Iyaloja", "Pilkings"], 0, "Literature"));
     qs.push(makeQ("In “The Marriage of Anansewa,” Ananse tricks the chiefs into", ["offering more gifts", "leaving the village", "fighting each other", "accepting his daughter"], 0, "Literature"));
-    qs.push(makeQ("In “Let Me Die Alone,” Yoko’s conflict with the colonial authorities arises from", ["her resistance to British rule", "her trade", "her marriage", "her religious beliefs"], 0, "Literature"));
+    qs.push(makeQ("In “var Me Die Alone,” Yoko’s conflict with the colonial authorities arises from", ["her resistance to British rule", "her trade", "her marriage", "her religious beliefs"], 0, "Literature"));
     qs.push(makeQ("The comic character in “The Trials of Brother Jero” is often", ["Chume", "Jero", "Amope", "the drummer"], 0, "Literature"));
     qs.push(makeQ("The use of dance and song in African drama serves to", ["entertain", "advance the plot", "comment on action", "all of the above"], 3, "Literature"));
     qs.push(makeQ("The protagonist of “The Lion and the Jewel” is", ["Sidi", "Lakunle", "Baroka", "Sadiku"], 0, "Literature"));
@@ -2943,7 +3534,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
   }
 
   function generateEconomicsBank() {
-    let qs=[];
+    var qs=[];
     qs.push(makeQ('The fundamental economic problem is', ['scarcity of resources', 'unlimited wants', 'scarcity relative to wants', 'poverty'], 2, 'Economics'));
     qs.push(makeQ('Which of the following is a factor of production?', ['money', 'capital', 'demand', 'supply'], 1, 'Economics'));
     qs.push(makeQ('The reward for labour is', ['profit', 'interest', 'rent', 'wages'], 3, 'Economics'));
@@ -4381,7 +4972,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
   }
 
   function generateCommerceBank() {
-    let qs=[];
+    var qs=[];
     qs.push(makeQ('Commerce is defined as', ['the study of trade and aids to trade', 'the production of goods', 'the exchange of goods for money', 'the management of business'], 0, 'Commerce'));
     qs.push(makeQ('Which of the following is an aid to trade?', ['production', 'consumption', 'banking', 'manufacturing'], 2, 'Commerce'));
     qs.push(makeQ('A sole proprietorship is a business owned by', ['two or more persons', 'one person', 'shareholders', 'the government'], 1, 'Commerce'));
@@ -4437,7 +5028,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ('A retailer who operates without a fixed location is a', ['department store', 'supermarket', 'chain store', 'mobile shop'], 3, 'Commerce'));
     qs.push(makeQ('The process of dividing a market into distinct groups of buyers with different needs is called', ['market segmentation', 'market research', 'product differentiation', 'market integration'], 0, 'Commerce'));
     qs.push(makeQ('A company’s logo is part of its', ['brand identity', 'financial statement', 'share capital', 'corporate social responsibility'], 0, 'Commerce'));
-    qs.push(makeQ('The concept of "caveat emptor" means', ['let the seller beware', 'let the buyer beware', 'buyer and seller are equal', 'the product is guaranteed'], 1, 'Commerce'));
+    qs.push(makeQ('The concept of "caveat emptor" means', ['var the seller beware', 'var the buyer beware', 'buyer and seller are equal', 'the product is guaranteed'], 1, 'Commerce'));
     qs.push(makeQ('The West African Examination Council (WAEC) is an example of a', ['public corporation', 'statutory body', 'multinational corporation', 'cooperative society'], 1, 'Commerce'));
     qs.push(makeQ('The Nigerian Communications Commission (NCC) is a', ['regulatory agency', 'commercial bank', 'trade union', 'manufacturing company'], 0, 'Commerce'));
     qs.push(makeQ('Which of the following is a feature of a cheque?', ['it is a promissory note', 'it must be stamped', 'it is payable on demand', 'it is a legal tender'], 2, 'Commerce'));
@@ -4786,8 +5377,8 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
   }
 
   function generateAccountingBank() {
-    let qs=[];
-    for(let i=1;i<=400;i++){
+    var qs=[];
+    for(var i=1;i<=400;i++){
       if(i%3===0) qs.push(makeQ("The double entry rule for an asset increase is:", ["Debit","Credit","No entry","Contra"],0,"Principles"));
       else if(i%3===1) qs.push(makeQ("Depreciation is provided to:", ["Show profit","Match cost to revenue","Reduce tax","Increase asset"],1,"Depreciation"));
       else qs.push(makeQ("A trial balance is prepared to:", ["Check arithmetical accuracy","Determine profit","List assets","Balance cash"],0,"Final Accounts"));
@@ -4796,7 +5387,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
   }
 
   function generateEnglishBank() {
-    let qs=[];
+    var qs=[];
     qs.push(makeQ("The committee _______ its report before the deadline.", ["submit", "submits", "submitted", "submitting"], 2, "Grammar"));
     qs.push(makeQ("Neither the teacher nor the students _______ present at the assembly.", ["was", "is", "were", "are"], 2, "Grammar"));
     qs.push(makeQ("The **indolent** boy failed the examination. (Choose opposite)", ["hardworking", "lazy", "brilliant", "careless"], 1, "Vocabulary"));
@@ -4847,7 +5438,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     qs.push(makeQ("The opposite of **courteous** is", ["polite", "rude", "respectful", "gentle"], 1, "Vocabulary"));
     qs.push(makeQ("The lawyer _______ the witness thoroughly.", ["cross-examined", "cross-examining", "cross-examine", "cross-examination"], 0, "Grammar"));
     qs.push(makeQ("The children _______ playing outside when it started to rain.", ["was", "were", "is", "am"], 1, "Grammar"));
-    qs.push(makeQ("The idiom 'to let the cat out of the bag' means", ["to release a cat", "to reveal a secret", "to buy a bag", "to hide something"], 1, "Idioms"));
+    qs.push(makeQ("The idiom 'to var the cat out of the bag' means", ["to release a cat", "to reveal a secret", "to buy a bag", "to hide something"], 1, "Idioms"));
     qs.push(makeQ("The manager, as well as his assistants, _______ attending the conference.", ["are", "is", "were", "have"], 1, "Grammar"));
     qs.push(makeQ("The word **fallacious** means", ["true", "false", "factual", "correct"], 1, "Vocabulary"));
     qs.push(makeQ("The money _______ been stolen.", ["have", "has", "are", "were"], 1, "Grammar"));
@@ -5124,79 +5715,87 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
 
   // ----- Utility: shuffle with seed for randomization per session (JAMB style)-----
   function seededShuffle(arr, seedVal) {
-    let a = [...arr];
-    let m = a.length;
-    let seed = seedVal || 123456789;
+    var a = [...arr];
+    var m = a.length;
+    var seed = seedVal || 123456789;
     function rng() {
       seed = (seed * 9301 + 49297) % 233280;
       return seed / 233280;
     }
-    for (let i = m - 1; i > 0; i--) {
-      let j = Math.floor(rng() * (i + 1));
+    for (var i = m - 1; i > 0; i--) {
+      var j = Math.floor(rng() * (i + 1));
       [a[i], a[j]] = [a[j], a[i]];
     }
     return a;
   }
 
   // ----- GLOBAL STATE -----
-  let currentExamQuestions = [];       // array of { text, opts, correctIdx, topic }
-  let userSelections = [];             // array of selected option index (null if none)
-  let currentQIndex = 0;
-  let timeSeconds = 35 * 60;
-  let timerInterval = null;
-  let examActive = false;
-  let reviewMode = false;
-  let examResults = [];                // array to store all exam results: [{subject, score, total, percentage}, ...]
-  let currentSubjectTaken = "";        // track current subject being examined
+  var currentExamQuestions = [];       // array of { text, opts, correctIdx, topic }
+  var userSelections = [];             // array of selected option index (null if none)
+  var currentQIndex = 0;
+  var timeSeconds = 35 * 60;
+  var timerInterval = null;
+  var examActive = false;
+  var reviewMode = false;
+  var examResults = [];                // array to store all exam results: [{subject, score, total, percentage}, ...]
+  var currentSubjectTaken = "";        // track current subject being examined
 
   // DOM elements
-  const introScreen = document.getElementById('introScreen');
-  const setupPanel = document.getElementById('setupPanel');
-  const examAreaDiv = document.getElementById('examArea');
-  const subjectSelectPanel = document.getElementById('subjectSelectPanel');
-  const resultsSummaryPanel = document.getElementById('resultsSummaryPanel');
-  const beginBtn = document.getElementById('beginMockBtn');
-  const confirmStart = document.getElementById('confirmStartExam');
-  const deptSelect = document.getElementById('deptSelect');
-  const subjectSelect = document.getElementById('subjectSelect');
-  const anotherSubjectSelect = document.getElementById('anotherSubjectSelect');
-  const fullNameInput = document.getElementById('fullName');
-  const jambRegInput = document.getElementById('jambRegNo');
-  const examSeatInput = document.getElementById('examSeat');
-  const restartExamBtn = document.getElementById('restartExamBtn');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const submitExamBtn = document.getElementById('submitExamBtn');
-  const startAnotherExamBtn = document.getElementById('startAnotherExamBtn');
-  const exitExamBtn = document.getElementById('exitExamBtn');
-  const printResultsBtn = document.getElementById('printResultsBtn');
-  const reviewLastExamBtn = document.getElementById('reviewLastExamBtn');
-  const finalReturnHomeBtn = document.getElementById('finalReturnHomeBtn');
-  const questionContainer = document.getElementById('questionContainer');
-  const navControlGroup = document.getElementById('navControlGroup');
-  const statusMsgDiv = document.getElementById('statusMsg');
-  const timerDisplaySpan = document.getElementById('timerDisplay');
-  const answeredCountSpan = document.getElementById('answeredCount');
-  const progressFillBar = document.getElementById('progressFillBar');
-  const setupWarning = document.getElementById('setupWarning');
-  const resultsTableBody = document.getElementById('resultsTableBody');
-  const totalExamsTaken = document.getElementById('totalExamsTaken');
-  const overallScore = document.getElementById('overallScore');
-  const bestSubject = document.getElementById('bestSubject');
-  const candidateSummaryName = document.getElementById('candidateSummaryName');
+  var introScreen = document.getElementById('introScreen');
+  var setupPanel = document.getElementById('setupPanel');
+  var examAreaDiv = document.getElementById('examArea');
+  var subjectSelectPanel = document.getElementById('subjectSelectPanel');
+  var resultsSummaryPanel = document.getElementById('resultsSummaryPanel');
+  var beginBtn = document.getElementById('beginMockBtn');
+  var confirmStart = document.getElementById('confirmStartExam');
+  var deptSelect = document.getElementById('deptSelect');
+  var subjectSelect = document.getElementById('subjectSelect');
 
-  const subjectMap = {
+  window.openSetupPanel = function() {
+    if (introScreen && setupPanel) {
+      console.log('openSetupPanel triggered');
+      introScreen.classList.add('hidden');
+      setupPanel.classList.remove('hidden');
+    }
+  };
+  var anotherSubjectSelect = document.getElementById('anotherSubjectSelect');
+  var fullNameInput = document.getElementById('fullName');
+  var jambRegInput = document.getElementById('jambRegNo');
+  var examSeatInput = document.getElementById('examSeat');
+  var restartExamBtn = document.getElementById('restartExamBtn');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var submitExamBtn = document.getElementById('submitExamBtn');
+  var startAnotherExamBtn = document.getElementById('startAnotherExamBtn');
+  var exitExamBtn = document.getElementById('exitExamBtn');
+  var printResultsBtn = document.getElementById('printResultsBtn');
+  var reviewLastExamBtn = document.getElementById('reviewLastExamBtn');
+  var finalReturnHomeBtn = document.getElementById('finalReturnHomeBtn');
+  var questionContainer = document.getElementById('questionContainer');
+  var navControlGroup = document.getElementById('navControlGroup');
+  var statusMsgDiv = document.getElementById('statusMsg');
+  var timerDisplaySpan = document.getElementById('timerDisplay');
+  var answeredCountSpan = document.getElementById('answeredCount');
+  var progressFillBar = document.getElementById('progressFillBar');
+  var setupWarning = document.getElementById('setupWarning');
+  var resultsTableBody = document.getElementById('resultsTableBody');
+  var totalExamsTaken = document.getElementById('totalExamsTaken');
+  var overallScore = document.getElementById('overallScore');
+  var bestSubject = document.getElementById('bestSubject');
+  var candidateSummaryName = document.getElementById('candidateSummaryName');
+
+  var subjectMap = {
     science: ['biology', 'chemistry', 'physics', 'mathematics', 'english'],
     art: ['government', 'crs', 'literature', 'mathematics', 'english'],
     commercial: ['economics', 'commerce', 'financial accounting', 'mathematics', 'english']
   };
 
   deptSelect.addEventListener('change', () => {
-    const dept = deptSelect.value;
+    var dept = deptSelect.value;
     subjectSelect.innerHTML = '<option value="">Choose subject</option>';
     if (dept && subjectMap[dept]) {
       subjectMap[dept].forEach(sub => {
-        let display = sub.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
+        var display = sub.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
         subjectSelect.innerHTML += `<option value="${sub}">${display}</option>`;
       });
       subjectSelect.disabled = false;
@@ -5205,9 +5804,25 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     }
   });
 
-  beginBtn.addEventListener('click', () => {
-    introScreen.classList.add('hidden');
-    setupPanel.classList.remove('hidden');
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!introScreen || !setupPanel) {
+      console.error('Intro or setup panel missing', { introScreen, setupPanel });
+      return;
+    }
+    if (beginBtn) {
+      beginBtn.addEventListener('click', () => {
+        console.log('Begin mock exam clicked');
+        openSetupPanel();
+      });
+      beginBtn.addEventListener('mousedown', () => {
+        console.log('Begin mock exam mousedown');
+      });
+      beginBtn.addEventListener('touchstart', () => {
+        console.log('Begin mock exam touchstart');
+      });
+    } else {
+      console.error('Begin mock exam button not found');
+    }
   });
 
   function validateDetails() {
@@ -5220,19 +5835,19 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
   }
 
   function loadExamQuestions(subjectKey) {
-    let bank = JAMB_QUESTION_BANKS[subjectKey.toLowerCase()];
+    var bank = JAMB_QUESTION_BANKS[subjectKey.toLowerCase()];
     if(!bank) bank = JAMB_QUESTION_BANKS.english;
-    let totalNeeded = 100;
+    var totalNeeded = 100;
     // Now that each bank has 400 questions, shuffle all of them and take the first 100
-    let seedRandom = Math.floor(Math.random() * 1000000);
-    let shuffled = seededShuffle([...bank], seedRandom).slice(0, totalNeeded);
+    var seedRandom = Math.floor(Math.random() * 1000000);
+    var shuffled = seededShuffle([...bank], seedRandom).slice(0, totalNeeded);
 
     // Shuffle each question's options to avoid correct answer clustering at A
     return shuffled.map((q, idx) => {
-      let optionsWithIndex = q.opts.map((opt, i) => ({opt, i}));
-      let optionSeed = seedRandom + idx * 37;
-      let shuffledOptions = seededShuffle(optionsWithIndex, optionSeed);
-      let newCorrectIndex = shuffledOptions.findIndex(item => item.i === q.correctIdx);
+      var optionsWithIndex = q.opts.map((opt, i) => ({opt, i}));
+      var optionSeed = seedRandom + idx * 37;
+      var shuffledOptions = seededShuffle(optionsWithIndex, optionSeed);
+      var newCorrectIndex = shuffledOptions.findIndex(item => item.i === q.correctIdx);
       return {
         ...q,
         opts: shuffledOptions.map(item => item.opt),
@@ -5243,19 +5858,19 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
 
   function renderCurrentQuestion() {
     if(!currentExamQuestions.length) return;
-    const q = currentExamQuestions[currentQIndex];
-    const selectedIdx = userSelections[currentQIndex];
-    let optionsHtml = '';
+    var q = currentExamQuestions[currentQIndex];
+    var selectedIdx = userSelections[currentQIndex];
+    var optionsHtml = '';
     q.opts.forEach((opt, idx) => {
-      let letter = String.fromCharCode(65+idx);
-      let isChecked = (selectedIdx === idx);
-      let isCorrect = (q.correctIdx === idx);
-      let toneClass = '';
+      var letter = String.fromCharCode(65+idx);
+      var isChecked = (selectedIdx === idx);
+      var isCorrect = (q.correctIdx === idx);
+      var toneClass = '';
       if(reviewMode) {
         if(isCorrect) toneClass = 'correct';
         else if(isChecked && !isCorrect) toneClass = 'wrong';
       }
-      let disabledAttribute = (reviewMode || !examActive) ? 'disabled' : '';
+      var disabledAttribute = (reviewMode || !examActive) ? 'disabled' : '';
       optionsHtml += `
         <div class="opt-item ${isChecked ? 'selected' : ''} ${toneClass}" data-opt-index="${idx}">
           <label style="display:flex; align-items:center; gap:12px; cursor:${reviewMode || !examActive ? 'not-allowed' : 'pointer'};">
@@ -5265,21 +5880,21 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
         </div>
       `;
     });
-    let reviewExplanationHtml = "";
+    var reviewExplanationHtml = "";
     if(reviewMode) {
-      const correctLetter = String.fromCharCode(65 + q.correctIdx);
-      const selectedLetter = (selectedIdx !== null && selectedIdx !== undefined) ? String.fromCharCode(65 + selectedIdx) : null;
-      const correctOptionText = q.opts[q.correctIdx] || "(correct option)";
-      const baseExplanation = q.explanation ? q.explanation
+      var correctLetter = String.fromCharCode(65 + q.correctIdx);
+      var selectedLetter = (selectedIdx !== null && selectedIdx !== undefined) ? String.fromCharCode(65 + selectedIdx) : null;
+      var correctOptionText = q.opts[q.correctIdx] || "(correct option)";
+      var baseExplanation = q.explanation ? q.explanation
         : `The correct answer is <strong>${correctLetter}. ${correctOptionText}</strong>. Focus on ${q.topic || "JAMB syllabus"}.`;
 
-      let feedbackText = "";
+      var feedbackText = "";
       if(selectedIdx === null || selectedIdx === undefined) {
         feedbackText = `⚠️ Unanswered. Correct answer: <strong>${correctLetter}. ${correctOptionText}</strong>.`;
       } else if(selectedIdx === q.correctIdx) {
         feedbackText = `✅ Correct. Answer: <strong>${correctLetter}. ${correctOptionText}</strong>.`;
       } else {
-        const wrongOptionText = q.opts[selectedIdx] || "(selected option)";
+        var wrongOptionText = q.opts[selectedIdx] || "(selected option)";
         feedbackText = `❌ Wrong. Your answer: <strong>${selectedLetter}. ${wrongOptionText}</strong>. Correct answer: <strong>${correctLetter}. ${correctOptionText}</strong>.`;
       }
 
@@ -5304,7 +5919,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     if(!reviewMode && examActive) {
       document.querySelectorAll('.opt-radio').forEach(radio => {
         radio.addEventListener('change', (e) => {
-          let val = parseInt(e.target.value);
+          var val = parseInt(e.target.value);
           userSelections[currentQIndex] = val;
           updateProgressStats();
           renderCurrentQuestion();  // re-render to show selected style
@@ -5312,10 +5927,10 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
       });
     }
     if(reviewMode) {
-      const showExplanationBtn = questionContainer.querySelector('.show-explanation-btn');
+      var showExplanationBtn = questionContainer.querySelector('.show-explanation-btn');
       if(showExplanationBtn) {
         showExplanationBtn.addEventListener('click', () => {
-          const explanationDiv = questionContainer.querySelector('.explanation-text');
+          var explanationDiv = questionContainer.querySelector('.explanation-text');
           if(explanationDiv.classList.contains('hidden')) {
             explanationDiv.classList.remove('hidden');
             showExplanationBtn.textContent = '🙈 Hide Explanation';
@@ -5338,10 +5953,10 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
   }
 
   function updateProgressStats() {
-    let answered = userSelections.filter(s => s !== null && s !== undefined).length;
-    let total = currentExamQuestions.length;
+    var answered = userSelections.filter(s => s !== null && s !== undefined).length;
+    var total = currentExamQuestions.length;
     answeredCountSpan.innerText = `${answered}/${total}`;
-    let percent = (answered/total)*100;
+    var percent = (answered/total)*100;
     progressFillBar.style.width = `${percent}%`;
     if(examActive) {
       statusMsgDiv.innerText = `📌 JAMB CBT: ${answered} answered | Time remaining: ${Math.floor(timeSeconds/60)}:${(timeSeconds%60).toString().padStart(2,'0')}`;
@@ -5366,8 +5981,8 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
         submitExamFinal("TIME EXPIRED");
       } else {
         timeSeconds--;
-        let mins = Math.floor(timeSeconds/60);
-        let secs = timeSeconds%60;
+        var mins = Math.floor(timeSeconds/60);
+        var secs = timeSeconds%60;
         timerDisplaySpan.innerText = `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
         updateProgressStats();
       }
@@ -5378,24 +5993,24 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     if(!examActive) return;
     examActive = false;
     if(timerInterval) clearInterval(timerInterval);
-    let total = currentExamQuestions.length;
-    let correct = 0;
-    let failedTopicsSet = new Set();
-    for(let i=0; i<total; i++) {
-      let userAns = userSelections[i];
-      let correctAns = currentExamQuestions[i].correctIdx;
+    var total = currentExamQuestions.length;
+    var correct = 0;
+    var failedTopicsSet = new Set();
+    for(var i=0; i<total; i++) {
+      var userAns = userSelections[i];
+      var correctAns = currentExamQuestions[i].correctIdx;
       if(userAns !== null && userAns === correctAns) {
         correct++;
       } else {
-        let topicName = currentExamQuestions[i].topic ? currentExamQuestions[i].topic : "General";
+        var topicName = currentExamQuestions[i].topic ? currentExamQuestions[i].topic : "General";
         failedTopicsSet.add(topicName);
       }
     }
-    let failedTopics = Array.from(failedTopicsSet).sort();
+    var failedTopics = Array.from(failedTopicsSet).sort();
     
     // Save exam result
-    let percent = Math.round((correct/total)*100);
-    let resultEntry = {
+    var percent = Math.round((correct/total)*100);
+    var resultEntry = {
       subject: currentSubjectTaken,
       score: correct,
       total: total,
@@ -5405,8 +6020,8 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     };
     examResults.push(resultEntry);
     
-    let name = fullNameInput.value.trim() || "Candidate";
-    let reg = jambRegInput.value.trim();
+    var name = fullNameInput.value.trim() || "Candidate";
+    var reg = jambRegInput.value.trim();
     statusMsgDiv.innerHTML = `✅ EXAM ${reason.toUpperCase()} — ${name} (${reg}) | Score: ${correct}/${total} (${percent}%) | JAMB Simulation Complete.`;
     navControlGroup.classList.add("hidden");
     reviewMode = true;
@@ -5422,13 +6037,13 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
   }
 
   function displayFailedTopicsForLastExam() {
-    const failedTopicsPanel = document.getElementById('failedTopicsPanel');
-    const failedTopicsText = document.getElementById('failedTopicsText');
+    var failedTopicsPanel = document.getElementById('failedTopicsPanel');
+    var failedTopicsText = document.getElementById('failedTopicsText');
     if(examResults.length === 0) {
       failedTopicsPanel.classList.add('hidden');
       return;
     }
-    const latestResult = examResults[examResults.length - 1];
+    var latestResult = examResults[examResults.length - 1];
     if(latestResult.failedTopics && latestResult.failedTopics.length > 0) {
       failedTopicsPanel.classList.remove('hidden');
       failedTopicsText.innerHTML = latestResult.failedTopics.map(topic => `<li>${topic}</li>`).join('');
@@ -5440,24 +6055,24 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
 
   function populateAnotherSubjectDropdown() {
     anotherSubjectSelect.innerHTML = '<option value="">📚 Choose another subject</option>';
-    let dept = deptSelect.value;
+    var dept = deptSelect.value;
     if(dept && subjectMap[dept]) {
       subjectMap[dept].forEach(sub => {
-        let display = sub.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
+        var display = sub.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
         anotherSubjectSelect.innerHTML += `<option value="${sub}">${display}</option>`;
       });
     }
   }
 
   function startAnotherExam() {
-    let subjectKey = anotherSubjectSelect.value;
+    var subjectKey = anotherSubjectSelect.value;
     if(!subjectKey) {
       alert("Please select a subject");
       return;
     }
     currentSubjectTaken = subjectKey;
     reviewMode = false;
-    let questionBank = loadExamQuestions(subjectKey);
+    var questionBank = loadExamQuestions(subjectKey);
     currentExamQuestions = questionBank;
     userSelections = new Array(currentExamQuestions.length).fill(null);
     currentQIndex = 0;
@@ -5475,8 +6090,8 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
 
   function showResultsSummary() {
     // Display candidate info
-    let name = fullNameInput.value.trim() || "Candidate";
-    let reg = jambRegInput.value.trim();
+    var name = fullNameInput.value.trim() || "Candidate";
+    var reg = jambRegInput.value.trim();
     candidateSummaryName.innerText = `Candidate: ${name} (${reg})`;
     
     // Display total exams
@@ -5484,25 +6099,25 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     
     // Calculate overall score
     if(examResults.length > 0) {
-      let totalScore = examResults.reduce((sum, r) => sum + r.score, 0);
-      let totalQuestions = examResults.reduce((sum, r) => sum + r.total, 0);
-      let overallPercent = Math.round((totalScore / totalQuestions) * 100);
+      var totalScore = examResults.reduce((sum, r) => sum + r.score, 0);
+      var totalQuestions = examResults.reduce((sum, r) => sum + r.total, 0);
+      var overallPercent = Math.round((totalScore / totalQuestions) * 100);
       overallScore.innerText = overallPercent + "%";
       
       // Find best subject
-      let bestResult = examResults.reduce((max, r) => r.percentage > max.percentage ? r : max);
-      let display = bestResult.subject.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
+      var bestResult = examResults.reduce((max, r) => r.percentage > max.percentage ? r : max);
+      var display = bestResult.subject.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
       bestSubject.innerText = display + " (" + bestResult.percentage + "%)";
     }
     
     // Populate results table
     resultsTableBody.innerHTML = "";
     examResults.forEach((result, idx) => {
-      let subjectDisplay = result.subject.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
-      let percentClass = result.percentage >= 70 ? 'percentage-excellent' : 
+      var subjectDisplay = result.subject.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
+      var percentClass = result.percentage >= 70 ? 'percentage-excellent' : 
                          result.percentage >= 50 ? 'percentage-good' : 
                          result.percentage >= 40 ? 'percentage-fair' : 'percentage-poor';
-      let row = document.createElement('tr');
+      var row = document.createElement('tr');
       row.innerHTML = `
         <td>${subjectDisplay}</td>
         <td class="score-cell">${result.score}/${result.total}</td>
@@ -5511,10 +6126,10 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
       resultsTableBody.appendChild(row);
     });
     
-    const failedTopicsSummary = document.getElementById('failedTopicsSummary');
-    const failedTopicsSummaryList = document.getElementById('failedTopicsSummaryList');
+    var failedTopicsSummary = document.getElementById('failedTopicsSummary');
+    var failedTopicsSummaryList = document.getElementById('failedTopicsSummaryList');
     if(examResults.length > 0) {
-      const latestResult = examResults[examResults.length - 1];
+      var latestResult = examResults[examResults.length - 1];
       if(latestResult.failedTopics && latestResult.failedTopics.length > 0) {
         failedTopicsSummary.style.display = 'block';
         failedTopicsSummaryList.innerHTML = latestResult.failedTopics.map(topic => `<li>${topic}</li>`).join('');
@@ -5545,7 +6160,7 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
   }
 
   function disableAllOptions() {
-    let radios = document.querySelectorAll('.opt-radio');
+    var radios = document.querySelectorAll('.opt-radio');
     radios.forEach(r => r.disabled = true);
   }
 
@@ -5578,12 +6193,12 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
   }
 
   confirmStart.addEventListener('click', () => {
-    let err = validateDetails();
+    var err = validateDetails();
     if(err) { setupWarning.innerText = err; return; }
     setupWarning.innerText = "";
-    let subjectKey = subjectSelect.value;
+    var subjectKey = subjectSelect.value;
     currentSubjectTaken = subjectKey;
-    let questionBank = loadExamQuestions(subjectKey);
+    var questionBank = loadExamQuestions(subjectKey);
     currentExamQuestions = questionBank;
     userSelections = new Array(currentExamQuestions.length).fill(null);
     currentQIndex = 0;
