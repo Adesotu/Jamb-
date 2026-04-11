@@ -685,7 +685,7 @@
         </div>
       </div>
       <div id="setupWarning" style="color:#b91c1c; margin: 12px 0;"></div>
-      <button id="confirmStartExam" class="start-btn" style="background:#0a5c2e;">🚀 START EXAMINATION</button>
+      <button id="confirmStartExam" type="button" class="start-btn" style="background:#0a5c2e;" disabled title="Fill all fields to start">🚀 START EXAMINATION</button>
     </div>
 
     <!-- SUBJECT SELECTION AFTER EXAM -->
@@ -3241,297 +3241,445 @@ qs.push(makeQ("The concept of \"whistleblowing\" means", ["reporting misconduct"
     return qs;
   }
 
-  function generateLiteratureBank() {
-    var qs=[];
-    qs.push(makeQ("The protagonist of a literary work is the", ["antagonist", "narrator", "main character", "foil"], 2, "Literature"));
-    qs.push(makeQ("A play that ends in disaster is a", ["comedy", "farce", "tragedy", "melodrama"], 2, "Literature"));
-    qs.push(makeQ("“O death, where is thy sting?” is an example of", ["apostrophe", "simile", "metaphor", "irony"], 0, "Literature"));
-    qs.push(makeQ("The character who opposes the hero is the", ["protagonist", "antagonist", "confidante", "chorus"], 1, "Literature"));
-    qs.push(makeQ("“The pen is mightier than the sword” illustrates", ["hyperbole", "metonymy", "paradox", "oxymoron"], 2, "Literature"));
-    qs.push(makeQ("A short poem expressing personal emotion is a", ["sonnet", "ode", "lyric", "epic"], 2, "Literature"));
-    qs.push(makeQ("In drama, the denouement is the", ["introduction of characters", "climax", "final resolution", "conflict"], 2, "Literature"));
-    qs.push(makeQ("Which literary device is used in “the wind whispered through the trees”?", ["simile", "metaphor", "personification", "alliteration"], 2, "Literature"));
-    qs.push(makeQ("A character who is fully developed and complex is", ["flat", "round", "static", "minor"], 1, "Literature"));
-    qs.push(makeQ("A fourteen-line poem in iambic pentameter is a", ["haiku", "sonnet", "limerick", "ballad"], 1, "Literature"));
-    qs.push(makeQ("The use of exaggerated statements for emphasis is", ["irony", "hyperbole", "understatement", "sarcasm"], 1, "Literature"));
-    qs.push(makeQ("“He was a lion in the fight” is an example of", ["simile", "metaphor", "personification", "apostrophe"], 1, "Literature"));
-    qs.push(makeQ("The person telling the story is the", ["author", "narrator", "protagonist", "critic"], 1, "Literature"));
-    qs.push(makeQ("A play is divided into", ["chapters", "stanzas", "acts and scenes", "verses"], 2, "Literature"));
-    qs.push(makeQ("The feeling created in the reader is called", ["theme", "mood", "tone", "plot"], 1, "Literature"));
-    qs.push(makeQ("“The sun smiled down on the children” contains", ["metaphor", "simile", "personification", "paradox"], 2, "Literature"));
-    qs.push(makeQ("The sequence of events in a story is the", ["plot", "theme", "character", "setting"], 0, "Literature"));
-    qs.push(makeQ("A character who remains unchanged throughout the story is", ["dynamic", "static", "round", "antagonist"], 1, "Literature"));
-    qs.push(makeQ("“And beauty born of murmuring sound” illustrates", ["alliteration", "onomatopoeia", "assonance", "consonance"], 1, "Literature"));
-    qs.push(makeQ("A drama that mixes tragic and comic elements is a", ["comedy", "tragicomedy", "farce", "melodrama"], 1, "Literature"));
-    qs.push(makeQ("The use of words that imitate sounds is called", ["alliteration", "onomatopoeia", "assonance", "repetition"], 1, "Literature"));
-    qs.push(makeQ("A group of lines in a poem is a", ["stanza", "paragraph", "scene", "act"], 0, "Literature"));
-    qs.push(makeQ("The writer’s attitude toward the subject is the", ["mood", "tone", "theme", "style"], 1, "Literature"));
-    qs.push(makeQ("“The boy is as cunning as a fox” is a", ["metaphor", "simile", "personification", "hyperbole"], 1, "Literature"));
-    qs.push(makeQ("The opposite of prose is", ["drama", "poetry", "fiction", "nonfiction"], 1, "Literature"));
-    qs.push(makeQ("The character who provides comic relief in a tragedy is called", ["antagonist", "foil", "clown", "chorus"], 2, "Literature"));
-    qs.push(makeQ("A literary work that ridicules human vice is a", ["satire", "elegy", "epic", "romance"], 0, "Literature"));
-    qs.push(makeQ("The time and place of a story is the", ["plot", "setting", "theme", "style"], 1, "Literature"));
-    qs.push(makeQ("“Parting is such sweet sorrow” is an example of", ["paradox", "oxymoron", "irony", "simile"], 1, "Literature"));
-    qs.push(makeQ("A character who serves as a contrast to another character is a", ["foil", "flat character", "stock character", "protagonist"], 0, "Literature"));
-    qs.push(makeQ("The repetition of initial consonant sounds is", ["assonance", "alliteration", "consonance", "rhyme"], 1, "Literature"));
-    qs.push(makeQ("A short story that teaches a moral lesson, often with animals, is a", ["fable", "parable", "myth", "legend"], 0, "Literature"));
-    qs.push(makeQ("A novel that focuses on the psychological growth of the protagonist is a", ["bildungsroman", "picaresque", "epistolary", "gothic"], 0, "Literature"));
-    qs.push(makeQ("The central idea or insight of a literary work is the", ["plot", "theme", "conflict", "setting"], 1, "Literature"));
-    qs.push(makeQ("The character who is the source of conflict for the protagonist is the", ["antagonist", "narrator", "hero", "confidante"], 0, "Literature"));
-    qs.push(makeQ("The use of an object or idea to represent something else is", ["simile", "metaphor", "symbolism", "allegory"], 2, "Literature"));
-    qs.push(makeQ("A narrative in which characters and events represent abstract ideas is an", ["allegory", "epic", "ode", "satire"], 0, "Literature"));
-    qs.push(makeQ("The point of view where the narrator knows everything about all characters is", ["first person", "limited omniscient", "omniscient", "objective"], 2, "Literature"));
-    qs.push(makeQ("A speech by a character alone on stage, revealing inner thoughts, is a", ["soliloquy", "aside", "monologue", "dialogue"], 0, "Literature"));
-    qs.push(makeQ("A humorous imitation of a serious literary work is a", ["parody", "satire", "farce", "burlesque"], 0, "Literature"));
-    qs.push(makeQ("The line “Water, water, everywhere, nor any drop to drink” contains", ["paradox", "irony", "hyperbole", "simile"], 1, "Literature"));
-    qs.push(makeQ("A character who is one-dimensional and represents a single idea is", ["round", "flat", "dynamic", "protagonist"], 1, "Literature"));
-    qs.push(makeQ("The main character’s adversary is the", ["hero", "villain", "antagonist", "foil"], 2, "Literature"));
-    qs.push(makeQ("The pattern of rhyme at the end of lines in a poem is the", ["rhyme scheme", "rhythm", "meter", "stanza"], 0, "Literature"));
-    qs.push(makeQ("A poem that mourns the dead is an", ["elegy", "ode", "epic", "sonnet"], 0, "Literature"));
-    qs.push(makeQ("The struggle between opposing forces in a story is the", ["climax", "conflict", "theme", "setting"], 1, "Literature"));
-    qs.push(makeQ("A speech of a character that is heard by the audience but not by other characters is an", ["aside", "soliloquy", "monologue", "dialogue"], 0, "Literature"));
-    qs.push(makeQ("The time and place of the action in a literary work is the", ["plot", "setting", "atmosphere", "mood"], 1, "Literature"));
-    qs.push(makeQ("A literary technique that hints at future events is", ["flashback", "foreshadowing", "in medias res", "cliffhanger"], 1, "Literature"));
-    qs.push(makeQ("A reference to a well-known person, event, or work is an", ["allusion", "illusion", "allegory", "analogy"], 0, "Literature"));
-    qs.push(makeQ("The use of contradictory terms together, e.g., “deafening silence,” is", ["paradox", "oxymoron", "irony", "antithesis"], 1, "Literature"));
-    qs.push(makeQ("A character who undergoes a significant change in the story is", ["static", "dynamic", "flat", "stock"], 1, "Literature"));
-    qs.push(makeQ("The main character in a tragedy who has a flaw leading to his downfall is the", ["tragic hero", "villain", "comic hero", "protagonist"], 0, "Literature"));
-    qs.push(makeQ("A novel written in the form of letters is an", ["epistolary novel", "picaresque novel", "gothic novel", "historical novel"], 0, "Literature"));
-    qs.push(makeQ("The narrative technique of starting the story in the middle of events is", ["flashback", "in medias res", "foreshadowing", "deus ex machina"], 1, "Literature"));
-    qs.push(makeQ("A long narrative poem celebrating heroic deeds is an", ["epic", "elegy", "ode", "lyric"], 0, "Literature"));
-    qs.push(makeQ("A character who is the voice of the author is the", ["protagonist", "narrator", "chorus", "foil"], 1, "Literature"));
-    qs.push(makeQ("The use of a mild or indirect expression instead of a harsh one is", ["euphemism", "hyperbole", "understatement", "irony"], 0, "Literature"));
-    qs.push(makeQ("A group of eight lines in a sonnet is an", ["octave", "sestet", "quatrain", "couplet"], 0, "Literature"));
-    qs.push(makeQ("The last two lines of a Shakespearean sonnet form a", ["couplet", "quatrain", "octave", "sestet"], 0, "Literature"));
-    qs.push(makeQ("A character who is the same at the end of the story as at the beginning is", ["static", "dynamic", "round", "protagonist"], 0, "Literature"));
-    qs.push(makeQ("The central character in a story is the", ["protagonist", "antagonist", "foil", "narrator"], 0, "Literature"));
-    qs.push(makeQ("A drama that is meant to be performed without words is", ["mime", "pantomime", "farce", "comedy"], 0, "Literature"));
-    qs.push(makeQ("The use of words to create sensory impressions is", ["imagery", "symbolism", "metaphor", "simile"], 0, "Literature"));
-    qs.push(makeQ("A character who is the confidant of the protagonist is often a", ["flat character", "round character", "foil", "narrator"], 0, "Literature"));
-    qs.push(makeQ("The part of a plot that introduces characters and setting is the", ["exposition", "rising action", "climax", "denouement"], 0, "Literature"));
-    qs.push(makeQ("The highest point of tension in a story is the", ["climax", "falling action", "exposition", "resolution"], 0, "Literature"));
-    qs.push(makeQ("A short, witty saying is an", ["aphorism", "epigram", "proverb", "maxim"], 0, "Literature"));
-    qs.push(makeQ("A work that uses humour to criticize society is a", ["satire", "comedy", "farce", "parody"], 0, "Literature"));
-    qs.push(makeQ("The voice that speaks in a poem is the", ["speaker", "author", "narrator", "persona"], 0, "Literature"));
-    qs.push(makeQ("A four-line stanza is a", ["quatrain", "couplet", "tercet", "sestet"], 0, "Literature"));
-    qs.push(makeQ("The emotional atmosphere of a work is the", ["mood", "tone", "theme", "style"], 0, "Literature"));
-    qs.push(makeQ("A character who is the opposite of the protagonist is the", ["antagonist", "foil", "rival", "villain"], 0, "Literature"));
-    qs.push(makeQ("A play that is exaggerated and absurd, often with physical humour, is a", ["farce", "tragedy", "melodrama", "comedy of manners"], 0, "Literature"));
-    qs.push(makeQ("A narrative that uses animals to teach moral lessons is a", ["fable", "parable", "myth", "legend"], 0, "Literature"));
-    qs.push(makeQ("A story that explains the origin of natural phenomena is a", ["myth", "legend", "fable", "folklore"], 0, "Literature"));
-    qs.push(makeQ("A character who does not change in the story is", ["static", "dynamic", "round", "protagonist"], 0, "Literature"));
-    qs.push(makeQ("A play that is light and humorous is a", ["comedy", "tragedy", "tragicomedy", "history"], 0, "Literature"));
-    qs.push(makeQ("The use of a part to represent the whole, e.g., “all hands on deck,” is", ["synecdoche", "metonymy", "metaphor", "irony"], 0, "Literature"));
-    qs.push(makeQ("The repetition of vowel sounds within words is", ["assonance", "alliteration", "consonance", "rhyme"], 0, "Literature"));
-    qs.push(makeQ("The dominant theme in William Blake’s “The School Boy” is", ["joy of learning", "oppression of childhood", "nature’s beauty", "parental love"], 1, "Literature"));
-    qs.push(makeQ("In “The School Boy,” the child compares himself to a bird", ["in a cage", "in the sky", "singing freely", "learning to fly"], 0, "Literature"));
-    qs.push(makeQ("The line “But to go to school in a summer morn” in Blake’s poem suggests", ["excitement", "reluctance", "happiness", "curiosity"], 1, "Literature"));
-    qs.push(makeQ("The rhyme scheme of “The School Boy” is", ["ABABCC", "AABBCC", "ABBAAB", "ABCABC"], 0, "Literature"));
-    qs.push(makeQ("In “The School Boy,” the poet uses the child’s voice to", ["praise education", "criticize forced learning", "describe nature", "advocate for freedom"], 1, "Literature"));
-    qs.push(makeQ("The persona in “The School Boy” is", ["an adult", "a teacher", "a child", "a parent"], 2, "Literature"));
-    qs.push(makeQ("The mood of “The School Boy” is one of", ["joy", "sorrow and frustration", "excitement", "calm"], 1, "Literature"));
-    qs.push(makeQ("In Blake’s poem, the phrase “the little ones spend the day / In sighing and dismay” suggests", ["boredom", "illness", "unhappiness", "playfulness"], 2, "Literature"));
-    qs.push(makeQ("The poet’s attitude toward formal education in “The School Boy” is", ["supportive", "critical", "neutral", "indifferent"], 1, "Literature"));
-    qs.push(makeQ("The poem “The School Boy” is from Blake’s collection", ["Songs of Innocence", "Songs of Experience", "The Marriage of Heaven and Hell", "Poetical Sketches"], 1, "Literature"));
-    qs.push(makeQ("In George Herbert’s “The Pulley,” God’s gift that is withheld is", ["strength", "wisdom", "rest", "beauty"], 2, "Literature"));
-    qs.push(makeQ("“The Pulley” is a poem about", ["human greed", "divine wisdom in giving", "technological progress", "love"], 1, "Literature"));
-    qs.push(makeQ("The central metaphor in “The Pulley” is", ["a pulley system", "a glass of blessings", "a treasure chest", "a journey"], 0, "Literature"));
-    qs.push(makeQ("In “The Pulley,” God gives man all except", ["beauty", "wisdom", "honour", "rest"], 3, "Literature"));
-    qs.push(makeQ("The theme of “The Pulley” can be summarised as", ["human perfection", "God’s way of drawing man to Himself", "the danger of riches", "the importance of labour"], 1, "Literature"));
-    qs.push(makeQ("The tone of “The Pulley” is", ["angry", "reflective and reverent", "humorous", "sarcastic"], 1, "Literature"));
-    qs.push(makeQ("In “The Pulley,” the phrase “rest in the bottom” refers to", ["physical rest", "spiritual peace in God", "death", "sleep"], 1, "Literature"));
-    qs.push(makeQ("The structure of “The Pulley” is", ["three stanzas of six lines each", "four stanzas of varying length", "a single stanza", "free verse"], 0, "Literature"));
-    qs.push(makeQ("The word “pulley” in the title symbolizes", ["a machine", "the means by which God draws man upward", "a burden", "a gift"], 1, "Literature"));
-    qs.push(makeQ("The poet’s view of God in “The Pulley” is that God is", ["selfish", "wise and loving", "indifferent", "cruel"], 1, "Literature"));
-    qs.push(makeQ("In John Donne’s “The Good-Morrow,” the lovers wake to find", ["the sun shining", "their souls unified", "the world new", "each other’s eyes"], 1, "Literature"));
-    qs.push(makeQ("“The Good-Morrow” explores the theme of", ["spiritual love", "physical attraction", "betrayal", "death"], 0, "Literature"));
-    qs.push(makeQ("The line “My face in thine eye, thine in mine appears” illustrates", ["mutual love", "narcissism", "deception", "jealousy"], 0, "Literature"));
-    qs.push(makeQ("The metaphysical conceit in “The Good-Morrow” is the comparison of", ["lovers to hemispheres", "love to a journey", "eyes to stars", "faces to maps"], 0, "Literature"));
-    qs.push(makeQ("In Donne’s poem, the phrase “var us possess one world, each hath one, and is one” suggests", ["independence", "unity", "rivalry", "separation"], 1, "Literature"));
-    qs.push(makeQ("The tone of “The Good-Morrow” is", ["melancholic", "joyous and reflective", "angry", "sarcastic"], 1, "Literature"));
-    qs.push(makeQ("The rhyme scheme of each stanza in “The Good-Morrow” is", ["ABABCCCDD", "ABBAAB", "ABABCDCD", "AABBCC"], 0, "Literature"));
-    qs.push(makeQ("The word “morrow” in the title means", ["morning", "tomorrow", "farewell", "greeting"], 0, "Literature"));
-    qs.push(makeQ("In “The Good-Morrow,” the lovers’ discovery of their love is compared to", ["waking from sleep", "finding treasure", "a new world", "waking from sleep and finding treasure"], 3, "Literature"));
-    qs.push(makeQ("The metaphysical poets are known for", ["simple language", "elaborate conceits", "pastoral themes", "political commentary"], 1, "Literature"));
-    qs.push(makeQ("In Alfred Tennyson’s “Crossing the Bar,” the “bar” symbolizes", ["a barrier between life and death", "a sandbank", "a legal obstacle", "a musical instrument"], 0, "Literature"));
-    qs.push(makeQ("The central theme of “Crossing the Bar” is", ["old age", "death and transition", "sea voyage", "love"], 1, "Literature"));
-    qs.push(makeQ("The phrase “one clear call for me” suggests", ["a summons to death", "a telephone call", "a musical note", "a command"], 0, "Literature"));
-    qs.push(makeQ("The mood of “Crossing the Bar” is", ["fearful", "peaceful and hopeful", "angry", "sorrowful"], 1, "Literature"));
-    qs.push(makeQ("In the poem, the speaker hopes to meet his “Pilot” face to face. The “Pilot” refers to", ["the ship captain", "God", "death", "a friend"], 1, "Literature"));
-    qs.push(makeQ("The rhyme scheme of “Crossing the Bar” is", ["ABAB", "AABB", "ABBA", "ABCB"], 0, "Literature"));
-    qs.push(makeQ("The phrase “sunset and evening star” in the first line signifies", ["end of day", "end of life", "beginning of night", "end of day and end of life"], 3, "Literature"));
-    qs.push(makeQ("The tone of “Crossing the Bar” is", ["despairing", "calm and accepting", "defiant", "celebratory"], 1, "Literature"));
-    qs.push(makeQ("Tennyson uses the sea as a metaphor for", ["life", "death", "the afterlife", "life and death"], 3, "Literature"));
-    qs.push(makeQ("The poem “Crossing the Bar” is often considered a", ["love poem", "elegy", "ode", "dramatic monologue"], 1, "Literature"));
-    qs.push(makeQ("In Christopher Okigbo’s “The Passage,” the poet explores the theme of", ["political oppression", "spiritual journey", "romantic love", "childhood"], 1, "Literature"));
-    qs.push(makeQ("The imagery in “The Passage” is heavily drawn from", ["Nigerian traditional religion", "Christian liturgy", "Greek mythology", "science"], 0, "Literature"));
-    qs.push(makeQ("In “The Passage,” the speaker’s journey represents", ["physical travel", "the soul’s passage through life", "a historical event", "a dream"], 1, "Literature"));
-    qs.push(makeQ("The poem “The Passage” is from Okigbo’s collection", ["Labyrinths", "Heavensgate", "Path of Thunder", "Idoto"], 1, "Literature"));
-    qs.push(makeQ("The tone of “The Passage” is", ["joyful", "solemn and introspective", "angry", "humorous"], 1, "Literature"));
-    qs.push(makeQ("In “The Passage,” water imagery often symbolises", ["death", "cleansing and transition", "life", "destruction"], 1, "Literature"));
-    qs.push(makeQ("The phrase “before you, mother Idoto” in Okigbo’s “Idoto” shows reverence for", ["a river goddess", "the poet’s mother", "the Christian God", "nature"], 0, "Literature"));
-    qs.push(makeQ("The structure of “The Passage” is", ["regular stanzas", "free verse with short lines", "sonnet form", "dramatic monologue"], 1, "Literature"));
-    qs.push(makeQ("The central metaphor in “The Passage” is", ["a journey", "a tree", "a bridge", "a mask"], 0, "Literature"));
-    qs.push(makeQ("Okigbo’s poetry often blends", ["Christianity and traditional Igbo religion", "Islam and Christianity", "science and art", "politics and economics"], 0, "Literature"));
-    qs.push(makeQ("In Wole Soyinka’s “Telephone Conversation,” the speaker’s primary concern is", ["the cost of the call", "racial prejudice", "the quality of the phone", "the landlady’s voice"], 1, "Literature"));
-    qs.push(makeQ("The tone of “Telephone Conversation” is", ["sad", "ironic and satirical", "angry", "joyful"], 1, "Literature"));
-    qs.push(makeQ("The landlady’s question “HOW DARK?” reveals her", ["curiosity", "racism", "friendliness", "ignorance"], 1, "Literature"));
-    qs.push(makeQ("In the poem, the speaker’s response “West African sepia” is", ["a geographical location", "a self-deprecating joke", "a political statement", "a threat"], 1, "Literature"));
-    qs.push(makeQ("“Telephone Conversation” criticises", ["poor telephone services", "racial discrimination", "urban housing", "colonialism"], 1, "Literature"));
-    qs.push(makeQ("The setting of “Telephone Conversation” is", ["a house", "a telephone booth", "a public square", "an office"], 1, "Literature"));
-    qs.push(makeQ("The landlady’s statement “I’m a Christian” is ironic because", ["she is not religious", "her actions contradict Christian love", "she is Muslim", "she is lying"], 1, "Literature"));
-    qs.push(makeQ("The poem’s structure is", ["a single stanza", "free verse with varied line lengths", "a sonnet", "a ballad"], 1, "Literature"));
-    qs.push(makeQ("The phrase “button B” in the poem refers to", ["a coin return", "a racial slur", "a doorbell", "a musical note"], 0, "Literature"));
-    qs.push(makeQ("The speaker’s use of humour in the poem serves to", ["mock the landlady", "cope with racism", "entertain the reader", "all of the above"], 3, "Literature"));
-    qs.push(makeQ("In John Keats’ “Ode to a Nightingale,” the bird symbolises", ["death", "immortality and art", "sorrow", "nature"], 1, "Literature"));
-    qs.push(makeQ("The theme of escapism is evident in the speaker’s desire to", ["join the nightingale", "drink wine", "die", "all of the above"], 3, "Literature"));
-    qs.push(makeQ("The phrase “light-winged Dryad of the trees” describes the nightingale as", ["a tree spirit", "a bird", "a human", "a god"], 0, "Literature"));
-    qs.push(makeQ("The mood of the ode shifts from", ["joy to despair", "melancholy to ecstasy to reflection", "anger to peace", "calm to chaos"], 1, "Literature"));
-    qs.push(makeQ("The nightingale’s song is contrasted with human", ["mortality", "happiness", "love", "art"], 0, "Literature"));
-    qs.push(makeQ("The structure of “Ode to a Nightingale” is", ["8 stanzas of 10 lines each", "5 stanzas of 14 lines each", "6 stanzas of 12 lines each", "free verse"], 0, "Literature"));
-    qs.push(makeQ("The phrase “forlorn” at the end of stanza 7 acts as", ["a turning point", "a conclusion", "a repetition", "a climax"], 0, "Literature"));
-    qs.push(makeQ("The use of the word “immortal” to describe the bird’s song implies", ["the bird lives forever", "art transcends mortality", "the song is magical", "the poet is jealous"], 1, "Literature"));
-    qs.push(makeQ("In the ode, the speaker’s desire to “fade far away” indicates", ["a wish to die", "a wish to travel", "a wish to forget sorrow", "a wish to die and forget sorrow"], 3, "Literature"));
-    qs.push(makeQ("The nightingale’s song is heard from the past, suggesting", ["history", "timelessness", "memory", "change"], 1, "Literature"));
-    qs.push(makeQ("In Lenrie Peters’ “We Have Come Home,” the theme of homecoming is", ["joyous", "ambivalent and complex", "triumphant", "tragic"], 1, "Literature"));
-    qs.push(makeQ("The phrase “we have come home” is repeated to emphasise", ["a physical return", "a psychological and cultural return", "a political victory", "a religious experience"], 1, "Literature"));
-    qs.push(makeQ("The poem’s tone is", ["celebratory", "reflective and sombre", "angry", "humorous"], 1, "Literature"));
-    qs.push(makeQ("“We Have Come Home” reflects the experience of", ["post-independence Africans", "slaves", "explorers", "tourists"], 0, "Literature"));
-    qs.push(makeQ("The poet uses images of", ["city life", "the sea and nature", "technology", "war"], 1, "Literature"));
-    qs.push(makeQ("The structure of the poem is", ["regular rhyme and metre", "free verse with irregular stanzas", "sonnet form", "haiku"], 1, "Literature"));
-    qs.push(makeQ("The line “we have come home / to the green plains” suggests", ["agricultural prosperity", "a return to roots", "peace", "all of the above"], 3, "Literature"));
-    qs.push(makeQ("The mood of the poem can be described as", ["optimistic", "nostalgic and questioning", "joyful", "angry"], 1, "Literature"));
-    qs.push(makeQ("The speaker’s identity is that of", ["an African returning after colonial education", "a tourist", "a refugee", "a trader"], 0, "Literature"));
-    qs.push(makeQ("The poem’s title “We Have Come Home” implies", ["finality", "a cyclical journey", "abandonation", "defeat"], 1, "Literature"));
-    qs.push(makeQ("In Leopold Senghor’s “Black Woman,” the woman symbolises", ["the speaker’s lover", "Africa", "nature", "Africa and nature"], 3, "Literature"));
-    qs.push(makeQ("The poem celebrates", ["African beauty and identity", "European culture", "urban life", "political struggle"], 0, "Literature"));
-    qs.push(makeQ("The phrase “naked woman, black woman” is an example of", ["apostrophe", "repetition", "personification", "simile"], 0, "Literature"));
-    qs.push(makeQ("The tone of “Black Woman” is", ["angry", "adoring and reverent", "sorrowful", "humorous"], 1, "Literature"));
-    qs.push(makeQ("The imagery in the poem is primarily", ["visual and tactile", "auditory", "olfactory", "gustatory"], 0, "Literature"));
-    qs.push(makeQ("The line “Firm-fleshed ripe fruit” uses", ["metaphor", "simile", "hyperbole", "paradox"], 0, "Literature"));
-    qs.push(makeQ("The poem is written in", ["free verse", "sonnet form", "regular rhyme", "blank verse"], 0, "Literature"));
-    qs.push(makeQ("The “black woman” is compared to", ["the savannah", "the gazelle", "oil", "all of the above"], 3, "Literature"));
-    qs.push(makeQ("The poet’s attitude toward Africa is", ["critical", "nostalgic and proud", "indifferent", "fearful"], 1, "Literature"));
-    qs.push(makeQ("“Black Woman” is a key poem of the", ["Negritude movement", "Harlem Renaissance", "Beat generation", "Romantic movement"], 0, "Literature"));
-    qs.push(makeQ("In Gabriel Okara’s “Piano and Drums,” the piano represents", ["African culture", "Western culture", "nature", "modernity"], 1, "Literature"));
-    qs.push(makeQ("The drums in the poem symbolise", ["African tradition", "war", "joy", "music"], 0, "Literature"));
-    qs.push(makeQ("The speaker’s dilemma is", ["choosing between two cultures", "learning music", "poverty", "love"], 0, "Literature"));
-    qs.push(makeQ("The tone of “Piano and Drums” is", ["joyful", "contemplative and uncertain", "angry", "humorous"], 1, "Literature"));
-    qs.push(makeQ("The phrase “at the river path I wander” suggests", ["a journey", "confusion", "exploration", "a journey and confusion"], 3, "Literature"));
-    qs.push(makeQ("The poem uses", ["regular rhyme", "free verse", "blank verse", "sonnet form"], 1, "Literature"));
-    qs.push(makeQ("The imagery of the drums is described as", ["wild and primal", "gentle and soft", "mechanical", "foreign"], 0, "Literature"));
-    qs.push(makeQ("The piano’s music is described as", ["complex and sophisticated", "simple", "noisy", "soothing"], 0, "Literature"));
-    qs.push(makeQ("The speaker’s final question “where the secret lies” reveals", ["his desire for unity", "his confusion", "his acceptance of both cultures", "all of the above"], 3, "Literature"));
-    qs.push(makeQ("The poem reflects the theme of", ["cultural conflict", "love", "death", "nature"], 0, "Literature"));
-    qs.push(makeQ("In John Donne’s “The Good-Morrow,” the phrase “sea-discoverers” refers to", ["explorers", "lovers discovering each other", "sailors", "merchants"], 1, "Literature"));
-    qs.push(makeQ("In “The Pulley,” the phrase “var the world’s riches, which dispersèd lie, / Contract into a span” means", ["gather wealth", "concentrate all gifts into one", "spread gifts", "limit gifts"], 1, "Literature"));
-    qs.push(makeQ("In “Crossing the Bar,” the “tide” is described as “too full for sound or foam” which suggests", ["calmness", "violence", "depth", "noise"], 0, "Literature"));
-    qs.push(makeQ("In “Black Woman,” the phrase “your beauty strikes me to the heart” is an example of", ["hyperbole", "litotes", "understatement", "paradox"], 0, "Literature"));
-    qs.push(makeQ("In “We Have Come Home,” the line “we have come home / to the deep-fleshed earth” uses", ["personification", "metaphor", "alliteration", "simile"], 1, "Literature"));
-    qs.push(makeQ("In “Telephone Conversation,” the phrase “indifferent” in the landlady’s voice is ironic because", ["she is very interested", "she is pretending", "she is angry", "she is kind"], 0, "Literature"));
-    qs.push(makeQ("In “Piano and Drums,” the phrase “mystic rhythm” refers to", ["the piano", "the drums", "nature", "the speaker"], 1, "Literature"));
-    qs.push(makeQ("In “The School Boy,” the line “O father and mother, if buds are nip’d” uses the metaphor of", ["plants for children", "birds for parents", "school for garden", "summer for joy"], 0, "Literature"));
-    qs.push(makeQ("In “The Passage,” the phrase “Mother Idoto” is a", ["Christian reference", "traditional deity", "historical figure", "literary character"], 1, "Literature"));
-    qs.push(makeQ("In “Ode to a Nightingale,” the phrase “the viewless wings of Poesy” means", ["invisible imagination", "poetry’s wings", "the bird’s wings", "invisible imagination and poetry’s wings"], 3, "Literature"));
-    qs.push(makeQ("In “Crossing the Bar,” the phrase “moaning of the bar” suggests", ["sadness", "a sound of waves", "a barrier", "all of the above"], 3, "Literature"));
-    qs.push(makeQ("In “The Good-Morrow,” the phrase “where can we find two better hemispheres” compares", ["lovers to hemispheres", "the world to lovers", "geography to love", "eyes to globes"], 0, "Literature"));
-    qs.push(makeQ("In “Black Woman,” the line “Your colour is life, your form is beauty!” is an example of", ["apostrophe", "hyperbole", "metaphor", "simile"], 0, "Literature"));
-    qs.push(makeQ("In “Telephone Conversation,” the speaker’s description of his skin colour as “plain black” is", ["factual", "ironic", "poetic", "humorous"], 1, "Literature"));
-    qs.push(makeQ("In “We Have Come Home,” the phrase “the waves / That brought us” symbolises", ["the Middle Passage", "colonial education", "travel", "the Middle Passage and colonial education"], 3, "Literature"));
-    qs.push(makeQ("In “Piano and Drums,” the speaker’s “wandering” is a metaphor for", ["cultural confusion", "physical travel", "aimlessness", "exploration"], 0, "Literature"));
-    qs.push(makeQ("In “The Pulley,” the “glass of blessings” refers to", ["all gifts given to man", "a mirror", "a drinking cup", "wealth"], 0, "Literature"));
-    qs.push(makeQ("In “The School Boy,” the line “I love to rise in a summer morn” shows", ["the child’s love of nature", "the child’s hate of school", "the child’s laziness", "the child’s obedience"], 0, "Literature"));
-    qs.push(makeQ("In “Ode to a Nightingale,” the phrase “the weariness, the fever, and the fret” describes", ["human suffering", "the bird’s song", "nature", "art"], 0, "Literature"));
-    qs.push(makeQ("In “The Passage,” the journey is a metaphor for", ["life", "death", "the search for identity", "all of the above"], 3, "Literature"));
-    qs.push(makeQ("The earliest form of drama in Greece was associated with", ["Dionysus", "Apollo", "Zeus", "Athena"], 0, "Literature"));
-    qs.push(makeQ("The unities of time, place, and action were advocated by", ["Aristotle", "Plato", "Sophocles", "Euripides"], 0, "Literature"));
-    qs.push(makeQ("The tragic hero’s downfall is often due to a", ["tragic flaw", "villain", "fate", "accident"], 0, "Literature"));
-    qs.push(makeQ("The character who explains the action in a Greek tragedy is the", ["chorus", "protagonist", "antagonist", "messenger"], 0, "Literature"));
-    qs.push(makeQ("The play “Oedipus Rex” was written by", ["Sophocles", "Aeschylus", "Euripides", "Aristophanes"], 0, "Literature"));
-    qs.push(makeQ("In “Oedipus Rex,” the protagonist’s tragic flaw is", ["pride", "greed", "anger", "love"], 0, "Literature"));
-    qs.push(makeQ("The genre that uses exaggerated and improbable situations for humour is", ["farce", "comedy of manners", "tragedy", "melodrama"], 0, "Literature"));
-    qs.push(makeQ("A play that is intended to be read rather than performed is a", ["closet drama", "masque", "pageant", "musical"], 0, "Literature"));
-    qs.push(makeQ("The literary device where a character speaks to the audience while other characters are on stage is", ["aside", "soliloquy", "monologue", "dialogue"], 0, "Literature"));
-    qs.push(makeQ("The plot structure that begins in the middle of the action is", ["linear", "in medias res", "episodic", "circular"], 1, "Literature"));
-    qs.push(makeQ("The playwright who wrote “The Trials of Brother Jero” is", ["Wole Soyinka", "Ola Rotimi", "John Pepper Clark", "Femi Osofisan"], 0, "Literature"));
-    qs.push(makeQ("“The Trials of Brother Jero” is a", ["comedy", "tragedy", "tragicomedy", "melodrama"], 0, "Literature"));
-    qs.push(makeQ("Brother Jero is a", ["prophet", "teacher", "politician", "businessman"], 0, "Literature"));
-    qs.push(makeQ("The central theme of “The Trials of Brother Jero” is", ["religious hypocrisy", "political corruption", "family values", "education"], 0, "Literature"));
-    qs.push(makeQ("In “The Trials of Brother Jero,” the character Chume is", ["Jero’s disciple", "Jero’s rival", "a government official", "a fisherman"], 0, "Literature"));
-    qs.push(makeQ("The setting of “The Trials of Brother Jero” is", ["Lagos", "Ibadan", "Abeokuta", "a coastal village"], 0, "Literature"));
-    qs.push(makeQ("The playwright who wrote “The Lion and the Jewel” is", ["Wole Soyinka", "Chinua Achebe", "John Pepper Clark", "Ola Rotimi"], 0, "Literature"));
-    qs.push(makeQ("“The Lion and the Jewel” is set in the village of", ["Ilujinle", "Ibadan", "Lagos", "Oyo"], 0, "Literature"));
-    qs.push(makeQ("The “lion” in “The Lion and the Jewel” refers to", ["Baroka", "Lakunle", "Sidi", "Sadiku"], 0, "Literature"));
-    qs.push(makeQ("The “jewel” in “The Lion and the Jewel” is", ["Sidi", "the stranger", "the magazine", "the village"], 0, "Literature"));
-    qs.push(makeQ("The conflict in “The Lion and the Jewel” is between", ["tradition and modernity", "old age and youth", "men and women", "rich and poor"], 0, "Literature"));
-    qs.push(makeQ("The character who represents modern Western values is", ["Lakunle", "Baroka", "Sidi", "Sadiku"], 0, "Literature"));
-    qs.push(makeQ("The playwright who wrote “A Raisin in the Sun” is", ["Lorraine Hansberry", "Arthur Miller", "Tennessee Williams", "August Wilson"], 0, "Literature"));
-    qs.push(makeQ("“A Raisin in the Sun” explores the dreams of a", ["African American family", "immigrant family", "Southern family", "wealthy family"], 0, "Literature"));
-    qs.push(makeQ("The matriarch of the Younger family is", ["Lena (Mama)", "Ruth", "Beneatha", "Travis"], 0, "Literature"));
-    qs.push(makeQ("The character who wants to become a doctor is", ["Beneatha", "Walter Lee", "George", "Asagai"], 0, "Literature"));
-    qs.push(makeQ("The theme of “A Raisin in the Sun” includes", ["racial discrimination", "family unity", "the American Dream", "all of the above"], 3, "Literature"));
-    qs.push(makeQ("The play “The Strong Breed” was written by", ["Wole Soyinka", "John Pepper Clark", "Ola Rotimi", "Femi Osofisan"], 0, "Literature"));
-    qs.push(makeQ("“The Strong Breed” explores the ritual of", ["sacrifice", "marriage", "harvest", "initiation"], 0, "Literature"));
-    qs.push(makeQ("The protagonist of “The Strong Breed” is", ["Eman", "Oma", "Jaguna", "Sunma"], 0, "Literature"));
-    qs.push(makeQ("The setting of “The Strong Breed” is", ["a village during New Year", "a city", "a forest", "a school"], 0, "Literature"));
-    qs.push(makeQ("The theme of “The Strong Breed” includes", ["communal responsibility", "alienation", "sacrifice", "all of the above"], 3, "Literature"));
-    qs.push(makeQ("In “The Strong Breed,” the “carrier” is a person who", ["takes away the village’s evil", "leads the procession", "is a stranger", "is a chief"], 0, "Literature"));
-    qs.push(makeQ("The play “Women of Owu” was written by", ["Femi Osofisan", "Wole Soyinka", "Ola Rotimi", "Zulu Sofola"], 0, "Literature"));
-    qs.push(makeQ("“Women of Owu” is based on the historical event of the", ["Owu siege", "Yoruba civil war", "Fulani jihad", "colonial invasion"], 0, "Literature"));
-    qs.push(makeQ("The character who leads the women in “Women of Owu” is", ["Erelu", "Anlugbua", "Okunade", "Iyunloye"], 0, "Literature"));
-    qs.push(makeQ("The play explores themes of", ["war and its aftermath", "women’s resilience", "power", "all of the above"], 3, "Literature"));
-    qs.push(makeQ("The genre of “Women of Owu” is", ["tragedy", "comedy", "tragicomedy", "farce"], 0, "Literature"));
-    qs.push(makeQ("The playwright who wrote “Death and the King’s Horseman” is", ["Wole Soyinka", "Ola Rotimi", "John Pepper Clark", "Femi Osofisan"], 0, "Literature"));
-    qs.push(makeQ("The central ritual in “Death and the King’s Horseman” is", ["ritual suicide", "coronation", "marriage", "harvest"], 0, "Literature"));
-    qs.push(makeQ("The character who prevents the horseman from fulfilling his duty is", ["Pilkings", "Olunde", "Jane", "Iyaloja"], 0, "Literature"));
-    qs.push(makeQ("The conflict in “Death and the King’s Horseman” is between", ["African tradition and British colonialism", "father and son", "love and duty", "life and death"], 0, "Literature"));
-    qs.push(makeQ("The horseman’s name is", ["Elesin", "Olunde", "Iyaloja", "Pilkings"], 0, "Literature"));
-    qs.push(makeQ("The play “The Marriage of Anansewa” was written by", ["Efua Sutherland", "Ama Ata Aidoo", "Ngũgĩ wa Thiong’o", "Athol Fugard"], 0, "Literature"));
-    qs.push(makeQ("“The Marriage of Anansewa” is based on", ["Ghanaian oral tradition", "Nigerian folktales", "South African history", "Caribbean culture"], 0, "Literature"));
-    qs.push(makeQ("Anansewa’s father, Ananse, is a", ["trickster", "chief", "merchant", "teacher"], 0, "Literature"));
-    qs.push(makeQ("The play uses the technique of", ["storytelling within a play", "direct address to audience", "music and dance", "all of the above"], 3, "Literature"));
-    qs.push(makeQ("In “The Marriage of Anansewa,” the suitors are", ["chiefs", "traders", "foreigners", "spirits"], 0, "Literature"));
-    qs.push(makeQ("The playwright who wrote “var Me Die Alone” is", ["John Kolosa Kargbo", "Wole Soyinka", "Ola Rotimi", "Femi Osofisan"], 0, "Literature"));
-    qs.push(makeQ("“var Me Die Alone” is set during the", ["Sierra Leone civil war", "Nigerian civil war", "Liberian war", "colonial era"], 0, "Literature"));
-    qs.push(makeQ("The protagonist of “var Me Die Alone” is", ["Yoko", "Madam", "Gbanya", "Lamboi"], 0, "Literature"));
-    qs.push(makeQ("The play explores the theme of", ["women’s leadership", "colonial oppression", "betrayal", "all of the above"], 3, "Literature"));
-    qs.push(makeQ("The character Yoko is based on a historical", ["Mende queen", "British governor", "missionary", "trader"], 0, "Literature"));
-    qs.push(makeQ("The dramatic irony in “Oedipus Rex” occurs when", ["Oedipus curses the murderer not knowing it is himself", "Oedipus saves Thebes", "Jocasta kills herself", "the messenger arrives"], 0, "Literature"));
-    qs.push(makeQ("The tragic hero in “Oedipus Rex” is", ["Oedipus", "Creon", "Tiresias", "Jocasta"], 0, "Literature"));
-    qs.push(makeQ("In “The Trials of Brother Jero,” the character Amope is", ["Jero’s wife", "Chume’s wife", "a trader", "Chume’s wife and a trader"], 3, "Literature"));
-    qs.push(makeQ("In “The Lion and the Jewel,” the stranger who takes Sidi’s photograph is", ["the magazine editor", "the photographer", "Lakunle", "Baroka"], 0, "Literature"));
-    qs.push(makeQ("In “A Raisin in the Sun,” Walter Lee’s dream is to", ["own a liquor store", "become a doctor", "buy a house", "travel"], 0, "Literature"));
-    qs.push(makeQ("In “The Strong Breed,” the stranger who becomes the carrier is", ["Eman", "Jaguna", "Oroge", "Ifada"], 0, "Literature"));
-    qs.push(makeQ("In “Women of Owu,” the city of Owu is destroyed by", ["Ife and Ijebu forces", "British forces", "Fulani forces", "internal rebellion"], 0, "Literature"));
-    qs.push(makeQ("In “Death and the King’s Horseman,” the character who commits suicide to restore order is", ["Olunde", "Elesin", "Iyaloja", "Pilkings"], 0, "Literature"));
-    qs.push(makeQ("In “The Marriage of Anansewa,” Ananse tricks the chiefs into", ["offering more gifts", "leaving the village", "fighting each other", "accepting his daughter"], 0, "Literature"));
-    qs.push(makeQ("In “var Me Die Alone,” Yoko’s conflict with the colonial authorities arises from", ["her resistance to British rule", "her trade", "her marriage", "her religious beliefs"], 0, "Literature"));
-    qs.push(makeQ("The comic character in “The Trials of Brother Jero” is often", ["Chume", "Jero", "Amope", "the drummer"], 0, "Literature"));
-    qs.push(makeQ("The use of dance and song in African drama serves to", ["entertain", "advance the plot", "comment on action", "all of the above"], 3, "Literature"));
-    qs.push(makeQ("The protagonist of “The Lion and the Jewel” is", ["Sidi", "Lakunle", "Baroka", "Sadiku"], 0, "Literature"));
-    qs.push(makeQ("The theme of generational conflict is evident in", ["The Lion and the Jewel", "A Raisin in the Sun", "The Trials of Brother Jero", "The Lion and the Jewel and A Raisin in the Sun"], 3, "Literature"));
-    qs.push(makeQ("The character who serves as a foil to Baroka in “The Lion and the Jewel” is", ["Lakunle", "Sidi", "Sadiku", "the stranger"], 0, "Literature"));
-    qs.push(makeQ("In “A Raisin in the Sun,” the character who is a Nigerian student is", ["Joseph Asagai", "George Murchison", "Karl Lindner", "Bobo"], 0, "Literature"));
-    qs.push(makeQ("In “Death and the King’s Horseman,” the colonial officer’s name is", ["Pilkings", "Simon", "William", "Johnson"], 0, "Literature"));
-    qs.push(makeQ("The structure of “The Strong Breed” is", ["linear with flashbacks", "episodic", "circular", "stream of consciousness"], 0, "Literature"));
-    qs.push(makeQ("The character who represents the voice of tradition in “Death and the King’s Horseman” is", ["Iyaloja", "Elesin", "Olunde", "the Praise-singer"], 0, "Literature"));
-    qs.push(makeQ("In “The Marriage of Anansewa,” the mother of Anansewa is", ["not present (deceased)", "a market woman", "a chief", "a spirit"], 0, "Literature"));
-    qs.push(makeQ("The humour in “The Trials of Brother Jero” comes from", ["Jero’s manipulation", "Chume’s simplicity", "Amope’s persistence", "all of the above"], 3, "Literature"));
-    qs.push(makeQ("In “Women of Owu,” the character who narrates the history is", ["the Dirge Singer", "Erelu", "Anlugbua", "the Messenger"], 0, "Literature"));
-    qs.push(makeQ("The play “The Lion and the Jewel” ends with", ["Sidi choosing Baroka", "Lakunle winning Sidi", "the village rejecting Baroka", "Sidi leaving the village"], 0, "Literature"));
-    qs.push(makeQ("In “A Raisin in the Sun,” the family’s new house is in", ["Clybourne Park", "Chicago", "Harlem", "the South Side"], 0, "Literature"));
-    qs.push(makeQ("The tragic flaw of Elesin in “Death and the King’s Horseman” is", ["his love for life", "his pride", "his greed", "his cowardice"], 0, "Literature"));
-    qs.push(makeQ("The role of the praise-singer in “Death and the King’s Horseman” is to", ["encourage Elesin", "mock Elesin", "narrate history", "represent the king"], 0, "Literature"));
-    qs.push(makeQ("In “The Marriage of Anansewa,” the mother of Anansewa is", ["not present (deceased)", "a market woman", "a chief", "a spirit"], 0, "Literature"));
-    qs.push(makeQ("The humour in “The Trials of Brother Jero” comes from", ["Jero’s manipulation", "Chume’s simplicity", "Amope’s persistence", "all of the above"], 3, "Literature"));
-    qs.push(makeQ("In “Women of Owu,” the character who narrates the history is", ["the Dirge Singer", "Erelu", "Anlugbua", "the Messenger"], 0, "Literature"));
-    qs.push(makeQ("The play “The Lion and the Jewel” ends with", ["Sidi choosing Baroka", "Lakunle winning Sidi", "the village rejecting Baroka", "Sidi leaving the village"], 0, "Literature"));
-    qs.push(makeQ("In “A Raisin in the Sun,” the family’s new house is in", ["Clybourne Park", "Chicago", "Harlem", "the South Side"], 0, "Literature"));
-    qs.push(makeQ("The tragic flaw of Elesin in “Death and the King’s Horseman” is", ["his love for life", "his pride", "his greed", "his cowardice"], 0, "Literature"));
-    qs.push(makeQ("The role of the praise-singer in “Death and the King’s Horseman” is to", ["encourage Elesin", "mock Elesin", "narrate history", "represent the king"], 0, "Literature"));
-    qs.push(makeQ("The overall message of “The Strong Breed” is", ["the importance of self-sacrifice", "the futility of tradition", "the power of the individual", "the evil of the community"], 0, "Literature"));
+function generateLiteratureBank() {
+    var qs = [];
+
+    // SECTION A: GENERAL LITERARY PRINCIPLES (1-80)
+    qs.push(makeQ("The protagonist of a literary work is the", ["antagonist", "narrator", "main character", "foil"], 2, "Literary Principles"));
+    qs.push(makeQ("A play that ends in disaster is a", ["comedy", "farce", "tragedy", "melodrama"], 2, "Literary Principles"));
+    qs.push(makeQ("\"O death, where is thy sting?\" is an example of", ["apostrophe", "simile", "metaphor", "irony"], 0, "Literary Principles"));
+    qs.push(makeQ("The character who opposes the hero is the", ["protagonist", "antagonist", "confidante", "chorus"], 1, "Literary Principles"));
+    qs.push(makeQ("\"The pen is mightier than the sword\" illustrates", ["hyperbole", "metonymy", "paradox", "oxymoron"], 2, "Literary Principles"));
+    qs.push(makeQ("A short poem expressing personal emotion is a", ["sonnet", "ode", "lyric", "epic"], 2, "Literary Principles"));
+    qs.push(makeQ("In drama, the denouement is the", ["introduction of characters", "climax", "final resolution", "conflict"], 2, "Literary Principles"));
+    qs.push(makeQ("Which literary device is used in \"the wind whispered through the trees\"?", ["simile", "metaphor", "personification", "alliteration"], 2, "Literary Principles"));
+    qs.push(makeQ("A character who is fully developed and complex is", ["flat", "round", "static", "minor"], 1, "Literary Principles"));
+    qs.push(makeQ("A fourteen-line poem in iambic pentameter is a", ["haiku", "sonnet", "limerick", "ballad"], 1, "Literary Principles"));
+    qs.push(makeQ("The use of exaggerated statements for emphasis is", ["irony", "hyperbole", "understatement", "sarcasm"], 1, "Literary Principles"));
+    qs.push(makeQ("\"He was a lion in the fight\" is an example of", ["simile", "metaphor", "personification", "apostrophe"], 1, "Literary Principles"));
+    qs.push(makeQ("The person telling the story is the", ["author", "narrator", "protagonist", "critic"], 1, "Literary Principles"));
+    qs.push(makeQ("A play is divided into", ["chapters", "stanzas", "acts and scenes", "verses"], 2, "Literary Principles"));
+    qs.push(makeQ("The feeling created in the reader is called", ["theme", "mood", "tone", "plot"], 1, "Literary Principles"));
+    qs.push(makeQ("\"The sun smiled down on the children\" contains", ["metaphor", "simile", "personification", "paradox"], 2, "Literary Principles"));
+    qs.push(makeQ("The sequence of events in a story is the", ["plot", "theme", "character", "setting"], 0, "Literary Principles"));
+    qs.push(makeQ("A character who remains unchanged throughout the story is", ["dynamic", "static", "round", "antagonist"], 1, "Literary Principles"));
+    qs.push(makeQ("\"And beauty born of murmuring sound\" illustrates", ["alliteration", "onomatopoeia", "assonance", "consonance"], 1, "Literary Principles"));
+    qs.push(makeQ("A drama that mixes tragic and comic elements is a", ["comedy", "tragicomedy", "farce", "melodrama"], 1, "Literary Principles"));
+    qs.push(makeQ("The use of words that imitate sounds is called", ["alliteration", "onomatopoeia", "assonance", "repetition"], 1, "Literary Principles"));
+    qs.push(makeQ("A group of lines in a poem is a", ["stanza", "paragraph", "scene", "act"], 0, "Literary Principles"));
+    qs.push(makeQ("The writer's attitude toward the subject is the", ["mood", "tone", "theme", "style"], 1, "Literary Principles"));
+    qs.push(makeQ("\"The boy is as cunning as a fox\" is a", ["metaphor", "simile", "personification", "hyperbole"], 1, "Literary Principles"));
+    qs.push(makeQ("The opposite of prose is", ["drama", "poetry", "fiction", "nonfiction"], 1, "Literary Principles"));
+    qs.push(makeQ("The character who provides comic relief in a tragedy is called", ["antagonist", "foil", "clown", "chorus"], 2, "Literary Principles"));
+    qs.push(makeQ("A literary work that ridicules human vice is a", ["satire", "elegy", "epic", "romance"], 0, "Literary Principles"));
+    qs.push(makeQ("The time and place of a story is the", ["plot", "setting", "theme", "style"], 1, "Literary Principles"));
+    qs.push(makeQ("\"Parting is such sweet sorrow\" is an example of", ["paradox", "oxymoron", "irony", "simile"], 1, "Literary Principles"));
+    qs.push(makeQ("A character who serves as a contrast to another character is a", ["foil", "flat character", "stock character", "protagonist"], 0, "Literary Principles"));
+    qs.push(makeQ("The repetition of initial consonant sounds is", ["assonance", "alliteration", "consonance", "rhyme"], 1, "Literary Principles"));
+    qs.push(makeQ("A short story that teaches a moral lesson, often with animals, is a", ["fable", "parable", "myth", "legend"], 0, "Literary Principles"));
+    qs.push(makeQ("A novel that focuses on the psychological growth of the protagonist is a", ["bildungsroman", "picaresque", "epistolary", "gothic"], 0, "Literary Principles"));
+    qs.push(makeQ("The central idea or insight of a literary work is the", ["plot", "theme", "conflict", "setting"], 1, "Literary Principles"));
+    qs.push(makeQ("The character who is the source of conflict for the protagonist is the", ["antagonist", "narrator", "hero", "confidante"], 0, "Literary Principles"));
+    qs.push(makeQ("The use of an object or idea to represent something else is", ["simile", "metaphor", "symbolism", "allegory"], 2, "Literary Principles"));
+    qs.push(makeQ("A narrative in which characters and events represent abstract ideas is an", ["allegory", "epic", "ode", "satire"], 0, "Literary Principles"));
+    qs.push(makeQ("The point of view where the narrator knows everything about all characters is", ["first person", "limited omniscient", "omniscient", "objective"], 2, "Literary Principles"));
+    qs.push(makeQ("A speech by a character alone on stage, revealing inner thoughts, is a", ["soliloquy", "aside", "monologue", "dialogue"], 0, "Literary Principles"));
+    qs.push(makeQ("A humorous imitation of a serious literary work is a", ["parody", "satire", "farce", "burlesque"], 0, "Literary Principles"));
+    qs.push(makeQ("The line \"Water, water, everywhere, nor any drop to drink\" contains", ["paradox", "irony", "hyperbole", "simile"], 1, "Literary Principles"));
+    qs.push(makeQ("A character who is one-dimensional and represents a single idea is", ["round", "flat", "dynamic", "protagonist"], 1, "Literary Principles"));
+    qs.push(makeQ("The main character's adversary is the", ["hero", "villain", "antagonist", "foil"], 2, "Literary Principles"));
+    qs.push(makeQ("The pattern of rhyme at the end of lines in a poem is the", ["rhyme scheme", "rhythm", "meter", "stanza"], 0, "Literary Principles"));
+    qs.push(makeQ("A poem that mourns the dead is an", ["elegy", "ode", "epic", "sonnet"], 0, "Literary Principles"));
+    qs.push(makeQ("The struggle between opposing forces in a story is the", ["climax", "conflict", "theme", "setting"], 1, "Literary Principles"));
+    qs.push(makeQ("A speech of a character that is heard by the audience but not by other characters is an", ["aside", "soliloquy", "monologue", "dialogue"], 0, "Literary Principles"));
+    qs.push(makeQ("The time and place of the action in a literary work is the", ["plot", "setting", "atmosphere", "mood"], 1, "Literary Principles"));
+    qs.push(makeQ("A literary technique that hints at future events is", ["flashback", "foreshadowing", "in medias res", "cliffhanger"], 1, "Literary Principles"));
+    qs.push(makeQ("A reference to a well-known person, event, or work is an", ["allusion", "illusion", "allegory", "analogy"], 0, "Literary Principles"));
+    qs.push(makeQ("The use of contradictory terms together, e.g., \"deafening silence,\" is", ["paradox", "oxymoron", "irony", "antithesis"], 1, "Literary Principles"));
+    qs.push(makeQ("A character who undergoes a significant change in the story is", ["static", "dynamic", "flat", "stock"], 1, "Literary Principles"));
+    qs.push(makeQ("The main character in a tragedy who has a flaw leading to his downfall is the", ["tragic hero", "villain", "comic hero", "protagonist"], 0, "Literary Principles"));
+    qs.push(makeQ("A novel written in the form of letters is an", ["epistolary novel", "picaresque novel", "gothic novel", "historical novel"], 0, "Literary Principles"));
+    qs.push(makeQ("The narrative technique of starting the story in the middle of events is", ["flashback", "in medias res", "foreshadowing", "deus ex machina"], 1, "Literary Principles"));
+    qs.push(makeQ("A long narrative poem celebrating heroic deeds is an", ["epic", "elegy", "ode", "lyric"], 0, "Literary Principles"));
+    qs.push(makeQ("A character who is the voice of the author is the", ["protagonist", "narrator", "chorus", "foil"], 1, "Literary Principles"));
+    qs.push(makeQ("The use of a mild or indirect expression instead of a harsh one is", ["euphemism", "hyperbole", "understatement", "irony"], 0, "Literary Principles"));
+    qs.push(makeQ("A group of eight lines in a sonnet is an", ["octave", "sestet", "quatrain", "couplet"], 0, "Literary Principles"));
+    qs.push(makeQ("The last two lines of a Shakespearean sonnet form a", ["couplet", "quatrain", "octave", "sestet"], 0, "Literary Principles"));
+    qs.push(makeQ("A character who is the same at the end of the story as at the beginning is", ["static", "dynamic", "round", "protagonist"], 0, "Literary Principles"));
+    qs.push(makeQ("The central character in a story is the", ["protagonist", "antagonist", "foil", "narrator"], 0, "Literary Principles"));
+    qs.push(makeQ("A drama that is meant to be performed without words is", ["mime", "pantomime", "farce", "comedy"], 0, "Literary Principles"));
+    qs.push(makeQ("The use of words to create sensory impressions is", ["imagery", "symbolism", "metaphor", "simile"], 0, "Literary Principles"));
+    qs.push(makeQ("A character who is the confidant of the protagonist is often a", ["flat character", "round character", "foil", "narrator"], 0, "Literary Principles"));
+    qs.push(makeQ("The part of a plot that introduces characters and setting is the", ["exposition", "rising action", "climax", "denouement"], 0, "Literary Principles"));
+    qs.push(makeQ("The highest point of tension in a story is the", ["climax", "falling action", "exposition", "resolution"], 0, "Literary Principles"));
+    qs.push(makeQ("A short, witty saying is an", ["aphorism", "epigram", "proverb", "maxim"], 0, "Literary Principles"));
+    qs.push(makeQ("A work that uses humour to criticise society is a", ["satire", "comedy", "farce", "parody"], 0, "Literary Principles"));
+    qs.push(makeQ("The voice that speaks in a poem is the", ["speaker", "author", "narrator", "persona"], 0, "Literary Principles"));
+    qs.push(makeQ("A four-line stanza is a", ["quatrain", "couplet", "tercet", "sestet"], 0, "Literary Principles"));
+    qs.push(makeQ("The emotional atmosphere of a work is the", ["mood", "tone", "theme", "style"], 0, "Literary Principles"));
+    qs.push(makeQ("A character who is the opposite of the protagonist is the", ["antagonist", "foil", "rival", "villain"], 0, "Literary Principles"));
+    qs.push(makeQ("A play that is exaggerated and absurd, often with physical humour, is a", ["farce", "tragedy", "melodrama", "comedy of manners"], 0, "Literary Principles"));
+    qs.push(makeQ("A narrative that uses animals to teach moral lessons is a", ["fable", "parable", "myth", "legend"], 0, "Literary Principles"));
+    qs.push(makeQ("A story that explains the origin of natural phenomena is a", ["myth", "legend", "fable", "folklore"], 0, "Literary Principles"));
+    qs.push(makeQ("A character who does not change in the story is", ["static", "dynamic", "round", "protagonist"], 0, "Literary Principles"));
+    qs.push(makeQ("A play that is light and humorous is a", ["comedy", "tragedy", "tragicomedy", "history"], 0, "Literary Principles"));
+    qs.push(makeQ("The use of a part to represent the whole, e.g., \"all hands on deck,\" is", ["synecdoche", "metonymy", "metaphor", "irony"], 0, "Literary Principles"));
+    qs.push(makeQ("The repetition of vowel sounds within words is", ["assonance", "alliteration", "consonance", "rhyme"], 0, "Literary Principles"));
+
+    // SECTION B: DRAMA – African Drama: The Marriage of Anansewa (81-120)
+    qs.push(makeQ("The play The Marriage of Anansewa was written by", ["Efua Sutherland", "Wole Soyinka", "Ama Ata Aidoo", "Ngũgĩ wa Thiong'o"], 0, "Drama"));
+    qs.push(makeQ("The central character Ananse is best described as a", ["trickster", "king", "merchant", "priest"], 0, "Drama"));
+    qs.push(makeQ("The play is based on the oral tradition of which cultural group?", ["Yoruba", "Igbo", "Akan (Ghanaian)", "Hausa"], 2, "Drama"));
+    qs.push(makeQ("Anansewa's father, Ananse, arranges her marriage to", ["one suitor only", "multiple suitors simultaneously", "the chief of the village", "a foreign merchant"], 1, "Drama"));
+    qs.push(makeQ("The technique of \"storytelling within a play\" is prominently used in", ["The Marriage of Anansewa", "Antony and Cleopatra", "Redemption Road", "So the Path Does Not Die"], 0, "Drama"));
+    qs.push(makeQ("The character who acts as the \"spokesperson\" or \"narrator\" in the play is", ["Ananse", "Anansewa", "The Property Woman", "Chief-Who-Is-Chief"], 2, "Drama"));
+    qs.push(makeQ("Ananse's main motivation for arranging his daughter's marriage is", ["love for his daughter", "poverty and desire for wealth", "political ambition", "tradition"], 1, "Drama"));
+    qs.push(makeQ("The suitors who come to ask for Anansewa's hand include", ["chiefs and wealthy men", "only young warriors", "foreign princes", "priests"], 0, "Drama"));
+    qs.push(makeQ("The character of Anansewa is portrayed as", ["passive and obedient", "rebellious and outspoken", "intelligent and dutiful", "naive and foolish"], 2, "Drama"));
+    qs.push(makeQ("The play uses humour and satire to criticise", ["colonialism", "greed and exploitation", "traditional marriage", "the youth"], 1, "Drama"));
+    qs.push(makeQ("The \"Property Woman\" in the play represents", ["the voice of reason", "the community's conscience", "both A and B", "the antagonist"], 2, "Drama"));
+    qs.push(makeQ("Ananse's scheme involves making each suitor believe he is", ["the only one", "the richest", "the most powerful", "the chosen one"], 0, "Drama"));
+    qs.push(makeQ("The play ends with", ["Anansewa marrying the richest suitor", "Anansewa refusing all suitors", "a compromise where Anansewa marries one suitor and Ananse gains wealth", "Ananse's death"], 2, "Drama"));
+    qs.push(makeQ("The theme of \"appearance versus reality\" is evident in", ["Ananse's false letters", "the gifts from suitors", "the stage setting", "the songs"], 0, "Drama"));
+    qs.push(makeQ("The role of music and dance in the play serves to", ["entertain the audience", "advance the plot", "comment on the action", "all of the above"], 3, "Drama"));
+    qs.push(makeQ("The character \"Chief-Who-Is-Chief\" is", ["a suitor", "Ananse's friend", "the village head", "a spirit"], 0, "Drama"));
+    qs.push(makeQ("Ananse's trickery is finally exposed when", ["the suitors meet each other", "Anansewa confesses", "the Property Woman reveals the truth", "a letter is intercepted"], 0, "Drama"));
+    qs.push(makeQ("The play's setting is", ["a modern city", "a traditional Akan village", "a European palace", "a forest"], 1, "Drama"));
+    qs.push(makeQ("The theme of parental responsibility is shown through", ["Ananse's desire to secure his daughter's future", "Anansewa's disobedience", "the suitors' generosity", "the Property Woman's advice"], 0, "Drama"));
+    qs.push(makeQ("The play can be classified as a", ["tragedy", "comedy", "tragicomedy", "historical drama"], 1, "Drama"));
+    qs.push(makeQ("The playwright uses the \"Ananse\" character to represent", ["the cunning of the weak", "the greed of the powerful", "the wisdom of the old", "the innocence of the young"], 0, "Drama"));
+    qs.push(makeQ("Anansewa's attitude toward her father's plan is", ["resistance and anger", "acceptance and trust", "indifference", "fear"], 1, "Drama"));
+    qs.push(makeQ("The suitors' gifts are a symbol of", ["love", "wealth and power", "tradition", "deception"], 1, "Drama"));
+    qs.push(makeQ("The play's title The Marriage of Anansewa is ironic because", ["no marriage actually takes place", "Anansewa does not choose her husband", "Ananse is the one who benefits", "all of the above"], 3, "Drama"));
+    qs.push(makeQ("The character of the \"Property Woman\" is unique because she", ["breaks the fourth wall", "sings throughout", "is invisible to other characters", "represents the author"], 0, "Drama"));
+    qs.push(makeQ("The play critiques the practice of", ["bride price", "arranged marriage", "polygamy", "all of the above"], 3, "Drama"));
+    qs.push(makeQ("Ananse's poverty is contrasted with", ["his cunning", "his generosity", "his laziness", "his honesty"], 0, "Drama"));
+    qs.push(makeQ("The resolution of the play suggests that", ["greed is punished", "trickery can lead to positive outcomes", "tradition must be abolished", "women should have no choice"], 1, "Drama"));
+    qs.push(makeQ("The playwright uses dramatic irony when", ["the audience knows about the multiple suitors but the suitors do not", "Anansewa knows the truth", "the Property Woman reveals secrets", "the suitors arrive"], 0, "Drama"));
+    qs.push(makeQ("The role of the \"Chief's Messenger\" is to", ["deliver letters", "announce the suitors", "threaten Ananse", "dance"], 0, "Drama"));
+    qs.push(makeQ("The language of the play is", ["purely English", "a blend of English and Akan proverbs", "only Akan", "archaic English"], 1, "Drama"));
+    qs.push(makeQ("The play's structure is", ["linear with flashbacks", "episodic with songs and dances", "a single act", "a soliloquy"], 1, "Drama"));
+    qs.push(makeQ("The theme of \"greed\" is most associated with", ["Ananse", "Anansewa", "the Property Woman", "the suitors"], 0, "Drama"));
+    qs.push(makeQ("The play's message about marriage is that", ["love should be the only basis", "economic considerations are important", "parents should not interfere", "tradition is outdated"], 1, "Drama"));
+    qs.push(makeQ("The character who provides moral guidance is", ["the Property Woman", "Ananse", "Anansewa", "the Chief"], 0, "Drama"));
+    qs.push(makeQ("The play's ending is", ["tragic", "happy and reconciliatory", "unresolved", "ironic"], 1, "Drama"));
+    qs.push(makeQ("Ananse's trickery is reminiscent of", ["folk tales of the spider Ananse", "Greek myths", "Shakespearean comedy", "modern satire"], 0, "Drama"));
+    qs.push(makeQ("The play's relevance to contemporary Ghana includes commentary on", ["corruption and materialism", "political instability", "colonial legacy", "religious conflict"], 0, "Drama"));
+    qs.push(makeQ("The stage directions in the play indicate", ["elaborate sets", "minimal props and reliance on storytelling", "realistic costumes", "special effects"], 1, "Drama"));
+    qs.push(makeQ("The overall tone of the play is", ["sombre", "humorous and light-hearted", "angry", "didactic"], 1, "Drama"));
+
+    // SECTION B2: Non-African Drama – Antony and Cleopatra (121-160)
+    qs.push(makeQ("Antony and Cleopatra is a play by", ["Christopher Marlowe", "William Shakespeare", "Ben Jonson", "John Webster"], 1, "Drama"));
+    qs.push(makeQ("The play is set in the historical context of the", ["Roman Republic", "Roman Empire", "Greek city-states", "Egyptian Old Kingdom"], 0, "Drama"));
+    qs.push(makeQ("The protagonist, Mark Antony, is a member of the", ["First Triumvirate", "Second Triumvirate", "Roman Senate", "Egyptian court"], 0, "Drama"));
+    qs.push(makeQ("Cleopatra is the Queen of", ["Egypt", "Rome", "Syria", "Greece"], 0, "Drama"));
+    qs.push(makeQ("The other two members of the Triumvirate are", ["Octavius Caesar and Lepidus", "Brutus and Cassius", "Pompey and Crassus", "Agrippa and Maecenas"], 0, "Drama"));
+    qs.push(makeQ("The play opens with Antony being criticized by Roman leaders for", ["neglecting his duties in Egypt", "waging war on Persia", "assassinating Caesar", "betraying the Senate"], 0, "Drama"));
+    qs.push(makeQ("Cleopatra's character is often described as", ["noble and selfless", "manipulative and theatrical", "weak and passive", "virtuous and chaste"], 1, "Drama"));
+    qs.push(makeQ("The central conflict of the play is between", ["love and duty", "Rome and Egypt", "Antony and Octavius", "all of the above"], 3, "Drama"));
+    qs.push(makeQ("The battle that decides the fate of Antony and Cleopatra is the", ["Battle of Actium", "Battle of Philippi", "Battle of Alexandria", "Battle of Carthage"], 0, "Drama"));
+    qs.push(makeQ("During the Battle of Actium, Cleopatra's ships", ["fight bravely", "flee the battle", "are destroyed", "capture Octavius's flagship"], 1, "Drama"));
+    qs.push(makeQ("Antony's response to Cleopatra's flight is", ["admiration", "rage and shame", "indifference", "relief"], 1, "Drama"));
+    qs.push(makeQ("The character of Octavius Caesar is portrayed as", ["emotional and impulsive", "cold, calculating, and ambitious", "cowardly and weak", "humorous and witty"], 1, "Drama"));
+    qs.push(makeQ("The theme of \"honour\" is most associated with", ["Antony's Roman identity", "Cleopatra's Egyptian identity", "Octavius's ambition", "Enobarbus's loyalty"], 0, "Drama"));
+    qs.push(makeQ("The famous description of Cleopatra's barge is given by", ["Enobarbus", "Antony", "Octavius", "Lepidus"], 0, "Drama"));
+    qs.push(makeQ("Enobarbus's role in the play is that of", ["a loyal friend and commentator", "a traitor", "a comic relief", "a messenger"], 0, "Drama"));
+    qs.push(makeQ("Enobarbus deserts Antony because", ["he believes Antony is losing", "he is bribed by Octavius", "he is in love with Cleopatra", "he fears for his life"], 0, "Drama"));
+    qs.push(makeQ("Enobarbus's death is caused by", ["grief and remorse", "battle wounds", "poison", "a snakebite"], 0, "Drama"));
+    qs.push(makeQ("Antony's suicide occurs after he", ["mistakenly believes Cleopatra is dead", "loses the final battle", "is captured by Octavius", "is betrayed by his own men"], 0, "Drama"));
+    qs.push(makeQ("Cleopatra's death is by", ["the bite of an asp (snake)", "a dagger", "poison", "drowning"], 0, "Drama"));
+    qs.push(makeQ("The play's genre is", ["comedy", "tragedy", "history", "tragicomedy"], 1, "Drama"));
+    qs.push(makeQ("The famous line \"Age cannot wither her, nor custom stale / Her infinite variety\" refers to", ["Cleopatra", "Octavia", "Charmian", "Iras"], 0, "Drama"));
+    qs.push(makeQ("Octavia, Octavius's sister, is married to Antony as a", ["political alliance", "love match", "hostage", "peace offering"], 0, "Drama"));
+    qs.push(makeQ("Antony's sword is a symbol of his", ["military honour", "love for Cleopatra", "wealth", "betrayal"], 0, "Drama"));
+    qs.push(makeQ("The play's use of the \"messenger\" serves to", ["advance the plot", "create dramatic irony", "provide commentary", "all of the above"], 3, "Drama"));
+    qs.push(makeQ("The theme of \"empire and power\" is explored through", ["Octavius's ambition", "Antony's decline", "Cleopatra's kingdom", "all of the above"], 3, "Drama"));
+    qs.push(makeQ("The soothsayer warns Antony that he should", ["stay away from Octavius", "return to Rome", "marry Cleopatra", "kill Octavius"], 0, "Drama"));
+    qs.push(makeQ("Antony's decision to fight by sea rather than land is a", ["strategic mistake", "clever plan", "sign of his courage", "order from Octavius"], 0, "Drama"));
+    qs.push(makeQ("The character of Cleopatra is often interpreted as", ["a tragic heroine", "a manipulative queen", "a symbol of Egypt", "all of the above"], 3, "Drama"));
+    qs.push(makeQ("The play's final image is of", ["Octavius ruling over a united empire", "Cleopatra's death and Antony's memory", "Roman soldiers celebrating", "the death of the triumvirate"], 1, "Drama"));
+    qs.push(makeQ("The motif of \"serpents\" appears in connection with", ["Cleopatra's suicide", "Antony's dream", "the Egyptian gods", "the battle standards"], 0, "Drama"));
+    qs.push(makeQ("The play's setting shifts between", ["Rome and Egypt", "Greece and Egypt", "Rome and Greece", "Egypt and Syria"], 0, "Drama"));
+    qs.push(makeQ("The character of Lepidus is portrayed as", ["weak and easily manipulated", "strong and decisive", "cunning and ambitious", "loyal and honourable"], 0, "Drama"));
+    qs.push(makeQ("The theme of \"betrayal\" is evident in", ["Enobarbus's desertion", "Cleopatra's flight", "Antony's marriage to Octavia", "all of the above"], 3, "Drama"));
+    qs.push(makeQ("Antony's famous speech \"Let Rome in Tiber melt\" expresses his", ["rejection of Roman values for love", "hatred of Rome", "desire for power", "fear of Octavius"], 0, "Drama"));
+    qs.push(makeQ("Cleopatra's reaction to Antony's death is", ["grief and determination to die", "relief and joy", "indifference", "anger"], 0, "Drama"));
+    qs.push(makeQ("The play is based on historical accounts from", ["Plutarch's Lives", "Livy's History of Rome", "Suetonius's Twelve Caesars", "Herodotus's Histories"], 0, "Drama"));
+    qs.push(makeQ("The character of Eros, Antony's servant, kills himself rather than", ["kill Antony", "betray Antony", "flee the battle", "join Octavius"], 0, "Drama"));
+    qs.push(makeQ("The play's tragic flaw (hamartia) for Antony is", ["his excessive passion for Cleopatra", "his military pride", "his trust in Octavius", "his fear of death"], 0, "Drama"));
+    qs.push(makeQ("The play's tragic flaw for Cleopatra is", ["her manipulative nature", "her fear of being paraded in Rome", "her love for Antony", "her pride"], 1, "Drama"));
+    qs.push(makeQ("The play's final words are spoken by", ["Octavius Caesar", "Cleopatra", "Charmian", "Antony"], 0, "Drama"));
+
+    // SECTION C1a: So the Path Does Not Die (161-190)
+    qs.push(makeQ("So the Path Does Not Die is a novel by", ["Pede Hollist", "Elma Shaw", "Susanna Bellefeuille", "Efua Sutherland"], 0, "Prose"));
+    qs.push(makeQ("The protagonist of the novel is", ["Fina", "Kumba", "Aminata", "Sia"], 0, "Prose"));
+    qs.push(makeQ("The novel explores the theme of", ["migration and identity", "war and violence", "colonialism", "supernatural"], 0, "Prose"));
+    qs.push(makeQ("The story follows the protagonist's journey from", ["Sierra Leone to the United States", "Ghana to England", "Nigeria to Canada", "Liberia to France"], 0, "Prose"));
+    qs.push(makeQ("The title \"So the Path Does Not Die\" suggests", ["continuity of culture and tradition", "death of the protagonist", "end of a journey", "loss of identity"], 0, "Prose"));
+    qs.push(makeQ("The novel's narrative style is", ["first-person retrospective", "third-person omniscient", "epistolary", "stream of consciousness"], 0, "Prose"));
+    qs.push(makeQ("The protagonist's relationship with her mother is characterized by", ["tension and distance", "closeness and understanding", "indifference", "rivalry"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"belonging\" is explored through", ["the protagonist's struggle to adapt in America", "the mother's traditional values", "both A and B", "the father's absence"], 2, "Prose"));
+    qs.push(makeQ("The novel highlights the challenges of", ["immigration and cultural dislocation", "poverty and hunger", "political corruption", "environmental degradation"], 0, "Prose"));
+    qs.push(makeQ("The character of the mother represents", ["tradition and resistance to change", "modernity and progress", "weakness and submission", "greed and selfishness"], 0, "Prose"));
+    qs.push(makeQ("The novel's setting includes", ["Sierra Leone and the United States", "Ghana and England", "Nigeria and Canada", "Liberia and France"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"education\" is portrayed as", ["a means of empowerment", "a source of conflict", "both A and B", "irrelevant"], 2, "Prose"));
+    qs.push(makeQ("The protagonist's name \"Fina\" is significant because", ["it means \"hope\" in Mende", "it is a family name", "it was given by an American", "it has no meaning"], 0, "Prose"));
+    qs.push(makeQ("The novel's title is taken from", ["a proverb", "a song", "a poem", "a prayer"], 0, "Prose"));
+    qs.push(makeQ("The role of memory in the novel is to", ["connect the protagonist to her homeland", "cause her pain", "help her forget", "create fantasy"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"sacrifice\" is evident in", ["the mother's efforts for Fina's education", "Fina's decision to leave home", "the father's absence", "all of the above"], 3, "Prose"));
+    qs.push(makeQ("The novel critiques", ["the American dream as an illusion", "the value of traditional education", "the role of women", "the immigrant experience"], 0, "Prose"));
+    qs.push(makeQ("The character of the father is", ["absent and mysterious", "supportive and present", "abusive", "comic"], 0, "Prose"));
+    qs.push(makeQ("The novel's tone is", ["nostalgic and reflective", "angry and confrontational", "humorous and light", "tragic and hopeless"], 0, "Prose"));
+    qs.push(makeQ("The protagonist's journey symbolizes", ["the search for identity", "the pursuit of wealth", "escape from poverty", "the loss of culture"], 0, "Prose"));
+    qs.push(makeQ("The novel uses flashbacks to", ["reveal the protagonist's childhood in Sierra Leone", "foreshadow the ending", "create suspense", "introduce new characters"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"gender roles\" is explored through", ["expectations placed on Fina", "the mother's sacrifices", "the father's absence", "all of the above"], 3, "Prose"));
+    qs.push(makeQ("The novel's resolution shows Fina", ["reconciling her two identities", "rejecting her African heritage", "staying permanently in America", "returning to Sierra Leone for good"], 0, "Prose"));
+    qs.push(makeQ("The title suggests that", ["cultural paths can be maintained despite distance", "all paths lead to death", "the protagonist will die", "the novel is about hiking"], 0, "Prose"));
+    qs.push(makeQ("The role of community in the novel is", ["both supportive and restrictive", "entirely positive", "entirely negative", "absent"], 0, "Prose"));
+    qs.push(makeQ("The novel's style is", ["realistic and lyrical", "purely journalistic", "experimental", "epistolary"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"loss\" includes", ["loss of language", "loss of family", "loss of cultural practices", "all of the above"], 3, "Prose"));
+    qs.push(makeQ("The protagonist's relationship with her American peers is", ["strained due to cultural differences", "warm and accepting", "hostile", "romantic"], 0, "Prose"));
+    qs.push(makeQ("The novel ends with", ["a sense of hope and continuity", "tragedy and despair", "a cliffhanger", "the protagonist's death"], 0, "Prose"));
+    qs.push(makeQ("The significance of the title is reinforced by the", ["protagonist's final understanding of her heritage", "mother's death", "father's return", "move to a new country"], 0, "Prose"));
+
+    // SECTION C1b: Redemption Road (191-230)
+    qs.push(makeQ("Redemption Road is a novel by", ["Elma Shaw", "Pede Hollist", "Susanna Bellefeuille", "Efua Sutherland"], 0, "Prose"));
+    qs.push(makeQ("The novel is set in", ["Liberia during the civil war", "Sierra Leone during the war", "Nigeria during military rule", "Ghana after independence"], 0, "Prose"));
+    qs.push(makeQ("The central theme of the novel is", ["the trauma of war and the possibility of redemption", "romantic love", "economic development", "political corruption"], 0, "Prose"));
+    qs.push(makeQ("The protagonist, Thomas, is a", ["former child soldier", "teacher", "politician", "doctor"], 0, "Prose"));
+    qs.push(makeQ("The novel's title \"Redemption Road\" refers to", ["a physical road in Liberia", "the journey to forgiveness and healing", "a Christian concept", "the path to wealth"], 1, "Prose"));
+    qs.push(makeQ("The character of Agnes is", ["a victim of war seeking justice", "Thomas's wife", "a rebel leader", "a foreign journalist"], 0, "Prose"));
+    qs.push(makeQ("The novel explores the theme of", ["forgiveness versus revenge", "colonialism", "environmentalism", "family planning"], 0, "Prose"));
+    qs.push(makeQ("The setting of the novel includes", ["Monrovia and rural Liberia", "Freetown and the provinces", "Lagos and the creeks", "Accra and the coast"], 0, "Prose"));
+    qs.push(makeQ("The narrative structure is", ["linear with flashbacks", "entirely chronological", "epistolary", "stream of consciousness"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"guilt\" is most associated with", ["Thomas's past actions", "Agnes's family", "the rebel commanders", "the international community"], 0, "Prose"));
+    qs.push(makeQ("The novel's point of view is primarily", ["third-person limited following Thomas", "first-person from Agnes", "omniscient", "second person"], 0, "Prose"));
+    qs.push(makeQ("The character of the \"Pastor\" represents", ["the possibility of spiritual redemption", "religious hypocrisy", "political power", "foreign intervention"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"child soldiers\" is central to", ["Thomas's backstory", "Agnes's childhood", "the rebel movement", "the peace talks"], 0, "Prose"));
+    qs.push(makeQ("The novel's tone is", ["sombre and hopeful", "comedic and light", "angry and vengeful", "romantic and joyful"], 0, "Prose"));
+    qs.push(makeQ("The role of the Truth and Reconciliation Commission (TRC) in the novel is to", ["provide a platform for confession and healing", "punish war criminals", "replace the government", "investigate corruption"], 0, "Prose"));
+    qs.push(makeQ("The relationship between Thomas and Agnes evolves from", ["distrust to mutual understanding", "love to hate", "friendship to rivalry", "indifference to love"], 0, "Prose"));
+    qs.push(makeQ("The novel criticizes", ["the failure of justice systems in post-conflict societies", "the role of foreign aid", "traditional religion", "urban migration"], 0, "Prose"));
+    qs.push(makeQ("The symbol of the \"road\" in the title represents", ["the journey toward healing", "a physical escape", "economic progress", "the path to death"], 0, "Prose"));
+    qs.push(makeQ("The character of the rebel commander is portrayed as", ["brutal but also a product of the war", "purely evil", "heroic", "comic relief"], 0, "Prose"));
+    qs.push(makeQ("The novel's ending suggests that", ["redemption is possible but difficult", "no one can be forgiven", "Thomas dies unrepentant", "Agnes achieves revenge"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"memory\" is important because", ["the characters must confront painful pasts", "forgetting is easy", "memory is always accurate", "the past does not matter"], 0, "Prose"));
+    qs.push(makeQ("The role of women in the novel includes", ["victims and agents of change", "only passive sufferers", "only rebel fighters", "only caregivers"], 0, "Prose"));
+    qs.push(makeQ("The novel uses the backdrop of the Liberian civil war to", ["explore universal themes of trauma and recovery", "criticize a specific government", "promote tourism", "celebrate violence"], 0, "Prose"));
+    qs.push(makeQ("The character of Thomas's mother is", ["a source of moral guidance", "a victim of war", "a rebel leader", "a foreigner"], 0, "Prose"));
+    qs.push(makeQ("The novel's style is", ["realistic and accessible", "highly poetic and abstract", "experimental", "epistolary"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"community\" is shown through", ["the support networks that help survivors", "the destruction of families", "the absence of any community", "the international community"], 0, "Prose"));
+    qs.push(makeQ("The novel's title is metaphorical because", ["redemption is a process, not a place", "there is a real road called Redemption", "the characters drive on a road", "the road is a character"], 0, "Prose"));
+    qs.push(makeQ("The character of the international aid worker is portrayed as", ["well-intentioned but sometimes misguided", "corrupt and self-serving", "heroic and perfect", "absent"], 0, "Prose"));
+    qs.push(makeQ("The novel's climax occurs when", ["Thomas publicly confesses his crimes", "Agnes forgives Thomas", "the rebel commander is captured", "the war ends"], 0, "Prose"));
+    qs.push(makeQ("The novel's resolution emphasizes", ["the possibility of new beginnings", "the impossibility of change", "the need for revenge", "the return to violence"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"justice\" is explored through", ["the TRC process versus retributive justice", "vigilante killings", "international tribunals", "traditional courts"], 0, "Prose"));
+    qs.push(makeQ("The character of the \"child soldier\" is used to", ["highlight the innocence lost in war", "glorify violence", "promote military service", "criticize parents"], 0, "Prose"));
+    qs.push(makeQ("The novel's use of flashbacks helps to", ["reveal the characters' traumatic experiences", "create confusion", "slow the plot", "introduce new characters"], 0, "Prose"));
+    qs.push(makeQ("The novel's message about war is that", ["it leaves deep scars but healing is possible", "it is necessary for progress", "it is always avoidable", "it leads to wealth"], 0, "Prose"));
+    qs.push(makeQ("The role of religion in the novel is", ["a source of comfort and a call to forgiveness", "a cause of conflict", "absent", "satirized"], 0, "Prose"));
+    qs.push(makeQ("The novel ends with Thomas", ["beginning a new life with Agnes's forgiveness", "being imprisoned", "committing suicide", "returning to the battlefield"], 0, "Prose"));
+    qs.push(makeQ("The significance of the title \"Redemption Road\" is that", ["the characters must travel a difficult path to find redemption", "there is a literal road named Redemption", "the novel is about road construction", "redemption is easy"], 0, "Prose"));
+    qs.push(makeQ("The novel's overall tone is one of", ["cautious optimism", "despair", "cynicism", "anger"], 0, "Prose"));
+    qs.push(makeQ("The character of the \"TRC commissioner\" represents", ["the state's attempt at healing", "government corruption", "foreign influence", "traditional authority"], 0, "Prose"));
+    qs.push(makeQ("The novel's portrayal of the war is", ["graphic but not gratuitous", "sanitized", "glorified", "ignored"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"motherhood\" is explored through", ["the loss of children in the war", "the nurturing role of women", "both A and B", "the absence of mothers"], 2, "Prose"));
+    qs.push(makeQ("The novel's title suggests that", ["redemption is a journey, not an event", "the road is a character", "the novel is a travelogue", "redemption is impossible"], 0, "Prose"));
+    qs.push(makeQ("The character of the \"rebel commander\" is humanized to show", ["that evil is often a product of circumstances", "that rebels are heroes", "that war is good", "that commanders should be forgiven"], 0, "Prose"));
+    qs.push(makeQ("The novel's use of local languages and customs", ["grounds the story in Liberian reality", "makes it inaccessible", "is superficial", "is purely decorative"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"survival\" is evident in", ["Thomas's struggle to live with his past", "Agnes's fight for justice", "the community's rebuilding", "all of the above"], 3, "Prose"));
+    qs.push(makeQ("The novel's climax is emotionally powerful because", ["it involves a direct confrontation with the past", "it is a battle scene", "it is a love scene", "it is a death scene"], 0, "Prose"));
+    qs.push(makeQ("The novel's resolution leaves the reader with", ["a sense of hope for the characters", "despair", "uncertainty", "anger"], 0, "Prose"));
+    qs.push(makeQ("The character of Thomas is a tragic figure because", ["he committed atrocities but seeks forgiveness", "he is a hero", "he is a villain", "he dies"], 0, "Prose"));
+    qs.push(makeQ("The novel's message about forgiveness is that", ["it is difficult but necessary for healing", "it is easy and immediate", "it should never be given", "it is irrelevant"], 0, "Prose"));
+    qs.push(makeQ("The novel's final image is", ["of a road leading into the future", "of a grave", "of a battlefield", "of a wedding"], 0, "Prose"));
+
+    // SECTION C2: Path of Lucas (241-280)
+    qs.push(makeQ("Path of Lucas: The Journey He Endured is a novel by", ["Susanna Bellefeuille", "Pede Hollist", "Elma Shaw", "Efua Sutherland"], 0, "Prose"));
+    qs.push(makeQ("The protagonist of the novel is", ["Lucas", "Thomas", "Fina", "Agnes"], 0, "Prose"));
+    qs.push(makeQ("The novel's genre is best described as", ["historical fiction", "science fiction", "romance", "thriller"], 0, "Prose"));
+    qs.push(makeQ("The central theme of the novel is", ["resilience and the human spirit in the face of adversity", "political intrigue", "supernatural events", "romantic love"], 0, "Prose"));
+    qs.push(makeQ("The novel follows Lucas's journey from", ["childhood to adulthood, overcoming hardships", "one country to another", "poverty to wealth", "illness to health"], 0, "Prose"));
+    qs.push(makeQ("The setting of the novel is primarily", ["North America (Canada/United States)", "Europe", "Africa", "Asia"], 0, "Prose"));
+    qs.push(makeQ("The novel explores the theme of", ["family, loss, and perseverance", "war and violence", "colonialism", "environmental degradation"], 0, "Prose"));
+    qs.push(makeQ("The character of Lucas is portrayed as", ["resilient and determined", "weak and passive", "evil and manipulative", "comic and foolish"], 0, "Prose"));
+    qs.push(makeQ("The novel's narrative style is", ["third-person omniscient with a focus on Lucas", "first-person diary", "epistolary", "stream of consciousness"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"loss\" is evident in", ["the death of loved ones", "the loss of wealth", "the loss of home", "all of the above"], 3, "Prose"));
+    qs.push(makeQ("The novel's title \"Path of Lucas\" suggests", ["a journey or life path", "a literal road", "a career", "a game"], 0, "Prose"));
+    qs.push(makeQ("The role of family in the novel is", ["both a source of support and conflict", "entirely positive", "entirely negative", "absent"], 0, "Prose"));
+    qs.push(makeQ("The novel's tone is", ["inspirational and heartfelt", "cynical and bitter", "humorous and light", "tragic and hopeless"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"adversity\" is central because", ["Lucas faces numerous challenges", "the novel has no conflict", "the characters are all wealthy", "the setting is peaceful"], 0, "Prose"));
+    qs.push(makeQ("The novel's use of flashbacks helps to", ["reveal Lucas's past experiences", "create suspense", "introduce new characters", "foreshadow the ending"], 0, "Prose"));
+    qs.push(makeQ("The character of Lucas's mother is", ["a nurturing but flawed figure", "absent", "villainous", "comic"], 0, "Prose"));
+    qs.push(makeQ("The novel's resolution shows Lucas", ["achieving a sense of peace and understanding", "dying tragically", "remaining in conflict", "losing everything"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"hope\" is portrayed as", ["a sustaining force through hardship", "an illusion", "irrelevant", "a cause of suffering"], 0, "Prose"));
+    qs.push(makeQ("The novel's style is", ["descriptive and emotionally engaging", "dry and academic", "highly experimental", "minimalist"], 0, "Prose"));
+    qs.push(makeQ("The significance of the subtitle \"The Journey He Endured\" emphasizes", ["the suffering and perseverance of Lucas", "a physical journey", "a spiritual journey", "a romantic journey"], 0, "Prose"));
+    qs.push(makeQ("The novel explores the theme of", ["identity and self-discovery", "political revolution", "scientific discovery", "environmental conservation"], 0, "Prose"));
+    qs.push(makeQ("The character of Lucas's father is portrayed as", ["a complex figure with strengths and weaknesses", "a perfect hero", "a complete villain", "absent"], 0, "Prose"));
+    qs.push(makeQ("The novel's setting in North America provides a backdrop for", ["the immigrant or outsider experience", "colonial history", "tropical landscapes", "ancient ruins"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"forgiveness\" is explored through", ["Lucas's relationships with family members", "legal battles", "political negotiations", "supernatural events"], 0, "Prose"));
+    qs.push(makeQ("The novel's use of dialogue is", ["naturalistic and revealing of character", "minimal", "highly stylized", "purely expository"], 0, "Prose"));
+    qs.push(makeQ("The novel's ending is", ["hopeful and uplifting", "tragic", "ambiguous", "unresolved"], 0, "Prose"));
+    qs.push(makeQ("The role of memory in the novel is to", ["show how past events shape the present", "create confusion", "provide comic relief", "slow the plot"], 0, "Prose"));
+    qs.push(makeQ("The novel's title is symbolic of", ["the unique journey each person must take", "a literal path in a forest", "a career path", "a religious path"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"resilience\" is most associated with", ["Lucas's ability to keep going despite setbacks", "the antagonist's cruelty", "the setting's harshness", "the supporting characters' weakness"], 0, "Prose"));
+    qs.push(makeQ("The novel's pacing is", ["varied, with moments of tension and reflection", "uniformly fast", "uniformly slow", "erratic"], 0, "Prose"));
+    qs.push(makeQ("The character of the \"mentor\" figure in Lucas's life is", ["a source of wisdom and guidance", "a villain", "a love interest", "a comic figure"], 0, "Prose"));
+    qs.push(makeQ("The novel's message about suffering is that", ["it can lead to growth and strength", "it is meaningless", "it should be avoided at all costs", "it is always deserved"], 0, "Prose"));
+    qs.push(makeQ("The novel's use of descriptive imagery helps to", ["create a vivid sense of time and place", "confuse the reader", "reduce emotional impact", "speed up the narrative"], 0, "Prose"));
+    qs.push(makeQ("The theme of \"love\" in the novel includes", ["familial love, romantic love, and self-love", "only romantic love", "only parental love", "only friendship"], 0, "Prose"));
+    qs.push(makeQ("The novel's title \"Path of Lucas\" emphasizes", ["the individual's journey", "the collective journey", "a physical road", "a career path"], 0, "Prose"));
+    qs.push(makeQ("The novel's resolution involves Lucas", ["coming to terms with his past and looking to the future", "dying alone", "achieving revenge", "losing his mind"], 0, "Prose"));
+    qs.push(makeQ("The role of the antagonist in the novel is to", ["create obstacles for Lucas", "help Lucas", "be absent", "provide comic relief"], 0, "Prose"));
+    qs.push(makeQ("The novel's use of symbolism includes", ["the road as a symbol of life's journey", "the sea as a symbol of death", "the sun as a symbol of evil", "the moon as a symbol of madness"], 0, "Prose"));
+    qs.push(makeQ("The novel's tone is consistent in its", ["earnest and compassionate approach", "cynical detachment", "sarcastic humour", "tragic despair"], 0, "Prose"));
+    qs.push(makeQ("The novel's overall impact is to", ["inspire readers to persevere through their own hardships", "depress readers", "entertain without substance", "confuse readers"], 0, "Prose"));
+
+    // SECTION D1: African Poetry (281-340) – 6 poems, 10 each
+    // Poem 1: Gabriel Okara – "Once Upon a Time" (281-290)
+    qs.push(makeQ("The poem \"Once Upon a Time\" is written by", ["Gabriel Okara", "Wole Soyinka", "Niyi Osundare", "Elizabeth L.A. Kamara"], 0, "Poetry"));
+    qs.push(makeQ("The central theme of the poem is", ["the loss of innocence and authenticity in modern society", "romantic love", "nature", "political corruption"], 0, "Poetry"));
+    qs.push(makeQ("The speaker addresses the poem to", ["his son", "his wife", "a friend", "society"], 0, "Poetry"));
+    qs.push(makeQ("The phrase \"once upon a time\" is an allusion to", ["fairy tales and childhood innocence", "the Bible", "Greek myths", "Nigerian folklore"], 0, "Poetry"));
+    qs.push(makeQ("The poem contrasts", ["the sincerity of the past with the hypocrisy of the present", "city and village life", "youth and old age", "wealth and poverty"], 0, "Poetry"));
+    qs.push(makeQ("The expression \"they used to laugh with their hearts\" suggests", ["genuine emotion", "fake laughter", "sadness", "anger"], 0, "Poetry"));
+    qs.push(makeQ("The speaker wishes to learn to laugh again", ["\"like I used to laugh\"", "like a child", "like a politician", "like a robot"], 0, "Poetry"));
+    qs.push(makeQ("The tone of the poem is", ["nostalgic and regretful", "joyful", "angry", "sarcastic"], 0, "Poetry"));
+    qs.push(makeQ("The line \"I have learned to wear many faces\" refers to", ["hypocrisy and insincerity", "acting skills", "masks in rituals", "multiple personalities"], 0, "Poetry"));
+    qs.push(makeQ("The poem's structure is", ["free verse with irregular stanzas", "a sonnet", "a villanelle", "regular rhyme and metre"], 0, "Poetry"));
+
+    // Poem 2: Elizabeth L.A. Kamara – "New Tongue" (291-300)
+    qs.push(makeQ("The poem \"New Tongue\" is written by", ["Elizabeth L.A. Kamara", "Gabriel Okara", "Wole Soyinka", "S.O.H. Afriyie-Vidza"], 0, "Poetry"));
+    qs.push(makeQ("The central theme of the poem is", ["the loss of indigenous language and identity", "the joy of learning a new language", "travel", "nature"], 0, "Poetry"));
+    qs.push(makeQ("The \"new tongue\" refers to", ["a colonial/foreign language", "a child's first words", "a secret code", "a poetic style"], 0, "Poetry"));
+    qs.push(makeQ("The speaker expresses", ["sadness at the erosion of mother tongue", "excitement about learning English", "indifference", "anger at parents"], 0, "Poetry"));
+    qs.push(makeQ("The poem critiques", ["the dominance of Western culture and language", "the use of local languages", "bilingualism", "education"], 0, "Poetry"));
+    qs.push(makeQ("The tone of the poem is", ["mournful and reflective", "celebratory", "humorous", "sarcastic"], 0, "Poetry"));
+    qs.push(makeQ("The \"new tongue\" is described as", ["\"not the language of my mother\"", "\"sweet and melodious\"", "\"the language of the gods\"", "\"easy to learn\""], 0, "Poetry"));
+    qs.push(makeQ("The poem suggests that language is tied to", ["identity and culture", "economics", "politics", "religion"], 0, "Poetry"));
+    qs.push(makeQ("The imagery of the poem is", ["personal and domestic", "grand and epic", "scientific", "abstract"], 0, "Poetry"));
+    qs.push(makeQ("The poem's structure is", ["free verse with short lines", "a sonnet", "a ballad", "haiku"], 0, "Poetry"));
+
+    // Poem 3: Wole Soyinka – "Night" (301-310)
+    qs.push(makeQ("The poem \"Night\" is written by", ["Wole Soyinka", "Gabriel Okara", "Niyi Osundare", "S.O.H. Afriyie-Vidza"], 0, "Poetry"));
+    qs.push(makeQ("The central theme of the poem is", ["the mystery and power of the night", "romantic love", "political oppression", "nature's beauty"], 0, "Poetry"));
+    qs.push(makeQ("The poet uses imagery of", ["darkness, shadows, and the supernatural", "bright sunlight", "urban life", "mechanical objects"], 0, "Poetry"));
+    qs.push(makeQ("The tone of the poem is", ["solemn and mystical", "joyful", "angry", "humorous"], 0, "Poetry"));
+    qs.push(makeQ("The night is personified as", ["a powerful, almost sentient force", "a kind mother", "a cruel enemy", "a lover"], 0, "Poetry"));
+    qs.push(makeQ("The poem explores", ["the contrast between light and darkness", "the beauty of daytime", "the fear of the unknown", "the joy of sleep"], 0, "Poetry"));
+    qs.push(makeQ("The line \"Night, the sable tyrant\" suggests", ["the oppressive nature of darkness", "the kindness of night", "the beauty of night", "the end of day"], 0, "Poetry"));
+    qs.push(makeQ("The poem's imagery is drawn from", ["African cosmology and nature", "European mythology", "urban landscapes", "industrial settings"], 0, "Poetry"));
+    qs.push(makeQ("The poem's structure is", ["free verse with irregular rhythm", "a sonnet", "a villanelle", "regular rhyme"], 0, "Poetry"));
+    qs.push(makeQ("The overall mood of the poem is", ["dark and contemplative", "light and cheerful", "frantic and energetic", "romantic and tender"], 0, "Poetry"));
+
+    // Poem 4: Niyi Osundare – "Not My Business" (311-320)
+    qs.push(makeQ("The poem \"Not My Business\" is written by", ["Niyi Osundare", "Wole Soyinka", "Gabriel Okara", "Syl Cheney-Coker"], 0, "Poetry"));
+    qs.push(makeQ("The central theme of the poem is", ["political apathy and its consequences", "romantic love", "nature", "the joy of work"], 0, "Poetry"));
+    qs.push(makeQ("The poem's speaker repeatedly says \"Not my business\" to", ["atrocities committed by the state", "family problems", "economic issues", "personal failures"], 0, "Poetry"));
+    qs.push(makeQ("The poem is a critique of", ["citizens who remain silent in the face of injustice", "the government only", "foreign intervention", "the media"], 0, "Poetry"));
+    qs.push(makeQ("The tone of the poem is", ["ironic and accusatory", "joyful", "mournful", "angry"], 0, "Poetry"));
+    qs.push(makeQ("The speaker's indifference eventually leads to", ["his own victimization", "the improvement of society", "the arrest of the oppressors", "a revolution"], 0, "Poetry"));
+    qs.push(makeQ("The poem uses", ["a repetitive refrain to emphasize apathy", "complex metaphors", "elaborate rhyme schemes", "archaic language"], 0, "Poetry"));
+    qs.push(makeQ("The poem's structure is", ["stanzas with a recurring line", "a sonnet", "a ballad", "free verse without repetition"], 0, "Poetry"));
+    qs.push(makeQ("The phrase \"Not my business\" becomes ironic because", ["eventually the speaker is affected", "it is his business all along", "the speaker is lying", "the government listens"], 0, "Poetry"));
+    qs.push(makeQ("The poem's message is that", ["silence in the face of evil makes one complicit", "one should mind one's own business", "politics is irrelevant", "the government is always right"], 0, "Poetry"));
+
+    // Poem 5: S.O.H. Afriyie-Vidza – "Hearty Garlands" (321-330)
+    qs.push(makeQ("The poem \"Hearty Garlands\" is written by", ["S.O.H. Afriyie-Vidza", "Niyi Osundare", "Gabriel Okara", "Syl Cheney-Coker"], 0, "Poetry"));
+    qs.push(makeQ("The central theme of the poem is", ["love, memory, and the passage of time", "political protest", "nature's beauty", "religious devotion"], 0, "Poetry"));
+    qs.push(makeQ("The \"hearty garlands\" symbolize", ["tokens of affection and remembrance", "crowns of victory", "funeral wreaths", "flowers in a garden"], 0, "Poetry"));
+    qs.push(makeQ("The tone of the poem is", ["nostalgic and tender", "angry", "humorous", "sarcastic"], 0, "Poetry"));
+    qs.push(makeQ("The poem addresses", ["a loved one", "a political leader", "the public", "nature"], 0, "Poetry"));
+    qs.push(makeQ("The imagery of the poem includes", ["flowers, seasons, and natural cycles", "urban decay", "industrial machines", "weapons"], 0, "Poetry"));
+    qs.push(makeQ("The poem's structure is", ["free verse with lyrical qualities", "a sonnet", "a villanelle", "a haiku sequence"], 0, "Poetry"));
+    qs.push(makeQ("The theme of \"memory\" is explored through", ["the keeping of garlands as mementos", "forgetting the past", "historical events", "future hopes"], 0, "Poetry"));
+    qs.push(makeQ("The poet's use of the word \"hearty\" suggests", ["sincerity and warmth", "sickness", "coldness", "indifference"], 0, "Poetry"));
+    qs.push(makeQ("The overall mood of the poem is", ["gentle and reflective", "violent", "chaotic", "celebratory"], 0, "Poetry"));
+
+    // Poem 6: Syl Cheney-Coker – "The Breast of the Sea" (331-340)
+    qs.push(makeQ("The poem \"The Breast of the Sea\" is written by", ["Syl Cheney-Coker", "S.O.H. Afriyie-Vidza", "Niyi Osundare", "Gabriel Okara"], 0, "Poetry"));
+    qs.push(makeQ("The central theme of the poem is", ["the relationship between humans and the sea, and the sea as a source of life and mystery", "political revolution", "romantic love", "death"], 0, "Poetry"));
+    qs.push(makeQ("The \"breast of the sea\" is a metaphor for", ["the nurturing and life-giving aspect of the ocean", "a woman's breast", "a ship", "a storm"], 0, "Poetry"));
+    qs.push(makeQ("The tone of the poem is", ["awe-inspired and reverent", "angry", "humorous", "sarcastic"], 0, "Poetry"));
+    qs.push(makeQ("The poem uses imagery of", ["waves, tides, and marine life", "mountains and forests", "cities and factories", "deserts"], 0, "Poetry"));
+    qs.push(makeQ("The poem explores the theme of", ["the connection between human life and the natural world", "urban alienation", "technological progress", "war"], 0, "Poetry"));
+    qs.push(makeQ("The poet's use of the word \"breast\" evokes", ["nourishment and motherhood", "violence", "sexuality", "illness"], 0, "Poetry"));
+    qs.push(makeQ("The poem's structure is", ["free verse with rhythmic lines", "a sonnet", "a ballad", "a limerick"], 0, "Poetry"));
+    qs.push(makeQ("The sea is portrayed as", ["a powerful and sacred entity", "an enemy", "a mere backdrop", "a source of danger only"], 0, "Poetry"));
+    qs.push(makeQ("The overall mood of the poem is", ["majestic and contemplative", "sad", "joyful", "angry"], 0, "Poetry"));
+
+    // SECTION D2: Non-African Poetry (341-400) – 4 poems, 15 each
+    // Poem 7: Lord Byron – "She Walks in Beauty" (341-355)
+    qs.push(makeQ("\"She Walks in Beauty\" is written by", ["Lord Byron", "Geoffrey Chaucer", "Fleur Adcock", "Wilfred Wilson Gibson"], 0, "Poetry"));
+    qs.push(makeQ("The poem describes", ["a woman's physical and inner beauty", "a landscape", "a political event", "a religious experience"], 0, "Poetry"));
+    qs.push(makeQ("The central theme is", ["the harmony of inner and outer beauty", "the tragedy of lost love", "the corruption of beauty", "the power of nature"], 0, "Poetry"));
+    qs.push(makeQ("The poem's tone is", ["admiring and reverent", "critical", "humorous", "sarcastic"], 0, "Poetry"));
+    qs.push(makeQ("The woman's beauty is compared to", ["the night and stars", "the sun", "a flower", "a diamond"], 0, "Poetry"));
+    qs.push(makeQ("The line \"One shade the more, one ray the less\" suggests", ["perfect balance", "imperfection", "excess", "lack"], 0, "Poetry"));
+    qs.push(makeQ("The poem is written in", ["iambic tetrameter with rhyme", "free verse", "blank verse", "spondaic metre"], 0, "Poetry"));
+    qs.push(makeQ("The rhyme scheme of each stanza is", ["ABABAB", "ABBAAB", "AABBCC", "ABCABC"], 0, "Poetry"));
+    qs.push(makeQ("The woman's beauty is linked to", ["her innocence and goodness", "her wealth", "her social status", "her age"], 0, "Poetry"));
+    qs.push(makeQ("The phrase \"the smiles that win\" suggests", ["charm and grace", "manipulation", "sadness", "anger"], 0, "Poetry"));
+    qs.push(makeQ("The poem celebrates", ["the ideal of feminine beauty", "political leadership", "military victory", "religious faith"], 0, "Poetry"));
+    qs.push(makeQ("The imagery of light and dark is used to", ["highlight contrasts and harmony", "create confusion", "symbolize good and evil", "represent day and night"], 0, "Poetry"));
+    qs.push(makeQ("The poem's structure is", ["three stanzas of six lines each", "two stanzas of eight lines", "a single sonnet", "four quatrains"], 0, "Poetry"));
+    qs.push(makeQ("The speaker's attitude is one of", ["respectful admiration", "lust", "jealousy", "indifference"], 0, "Poetry"));
+    qs.push(makeQ("The poem ends with the woman's", ["\"heart whose love is innocent\"", "death", "marriage", "departure"], 0, "Poetry"));
+
+    // Poem 8: Geoffrey Chaucer – "The Nun's Priest's Tale" (356-370)
+    qs.push(makeQ("\"The Nun's Priest's Tale\" is part of", ["The Canterbury Tales", "Troilus and Criseyde", "The House of Fame", "The Legend of Good Women"], 0, "Poetry"));
+    qs.push(makeQ("The tale is a", ["beast fable", "romance", "tragedy", "epic"], 0, "Poetry"));
+    qs.push(makeQ("The protagonist of the tale is", ["Chanticleer (a rooster)", "the Nun's Priest", "a fox", "a hen"], 0, "Poetry"));
+    qs.push(makeQ("The central theme of the tale is", ["the dangers of pride and flattery", "the power of love", "the inevitability of death", "the value of wealth"], 0, "Poetry"));
+    qs.push(makeQ("The tale is told by", ["the Nun's Priest", "the Wife of Bath", "the Knight", "the Pardoner"], 0, "Poetry"));
+    qs.push(makeQ("The character of Chanticleer is", ["proud and easily flattered", "humble and wise", "cowardly", "evil"], 0, "Poetry"));
+    qs.push(makeQ("The antagonist is", ["a fox named Russell", "a wolf", "a farmer", "another rooster"], 0, "Poetry"));
+    qs.push(makeQ("The moral of the tale is often summarised as", ["\"pride comes before a fall\"", "\"honesty is the best policy\"", "\"haste makes waste\"", "\"love conquers all\""], 0, "Poetry"));
+    qs.push(makeQ("The tale is an example of a", ["beast epic", "romance", "lyric poem", "elegy"], 0, "Poetry"));
+    qs.push(makeQ("Chaucer uses the tale to", ["satirize human foolishness", "praise the clergy", "criticize the monarchy", "describe nature"], 0, "Poetry"));
+    qs.push(makeQ("The language of the original poem is", ["Middle English", "Old English", "Modern English", "Latin"], 0, "Poetry"));
+    qs.push(makeQ("The narrative style is", ["mock-heroic (grand style for trivial subject)", "simple and plain", "lyrical", "dramatic"], 0, "Poetry"));
+    qs.push(makeQ("The tale ends with", ["Chanticleer outsmarting the fox", "the fox eating Chanticleer", "the Nun's Priest apologizing", "a moral lesson"], 0, "Poetry"));
+    qs.push(makeQ("The character of Pertelote is", ["Chanticleer's favourite hen", "the fox's wife", "the farmer's daughter", "a nun"], 0, "Poetry"));
+    qs.push(makeQ("The tale's humour comes from", ["the contrast between the grand style and the barnyard setting", "the violence", "the romance", "the religious references"], 0, "Poetry"));
+
+    // Poem 9: Fleur Adcock – "The Telephone Call" (371-385)
+    qs.push(makeQ("\"The Telephone Call\" is written by", ["Fleur Adcock", "Lord Byron", "Geoffrey Chaucer", "Wilfred Wilson Gibson"], 0, "Poetry"));
+    qs.push(makeQ("The central theme of the poem is", ["the deceptive nature of unexpected good news", "romantic love", "the importance of technology", "loneliness"], 0, "Poetry"));
+    qs.push(makeQ("The speaker receives a call informing her that", ["she has won a prize", "a loved one has died", "she has lost her job", "her house is on fire"], 0, "Poetry"));
+    qs.push(makeQ("The tone of the poem is", ["ironic and sceptical", "joyful", "mournful", "angry"], 0, "Poetry"));
+    qs.push(makeQ("The caller is described as", ["a \"brisk, businesslike voice\"", "a friend", "a family member", "a robot"], 0, "Poetry"));
+    qs.push(makeQ("The speaker's reaction is", ["suspicious and questioning", "grateful and excited", "indifferent", "fearful"], 0, "Poetry"));
+    qs.push(makeQ("The poem critiques", ["the emptiness of materialism and false promises", "the telephone company", "modern technology", "competition"], 0, "Poetry"));
+    qs.push(makeQ("The prize turns out to be", ["not real or meaningful", "a car", "a house", "a holiday"], 0, "Poetry"));
+    qs.push(makeQ("The poem's structure is", ["free verse with conversational language", "a sonnet", "a villanelle", "regular rhyme and metre"], 0, "Poetry"));
+    qs.push(makeQ("The phrase \"You have won\" is repeated to", ["emphasize the emptiness of the promise", "celebrate the win", "create rhythm", "confuse the reader"], 0, "Poetry"));
+    qs.push(makeQ("The speaker's scepticism is shown by her", ["asking \"What's the catch?\"", "crying with joy", "hanging up", "calling back"], 0, "Poetry"));
+    qs.push(makeQ("The poem's ending suggests", ["the offer is a scam or illusion", "the speaker accepts the prize", "the caller is arrested", "the speaker wins a fortune"], 0, "Poetry"));
+    qs.push(makeQ("The poem uses irony to", ["expose the hollowness of consumer culture", "celebrate good fortune", "mock the speaker", "praise the caller"], 0, "Poetry"));
+    qs.push(makeQ("The tone shifts from", ["initial excitement to sceptical resignation", "sadness to joy", "anger to calm", "indifference to passion"], 0, "Poetry"));
+    qs.push(makeQ("The poem's final lines reveal that", ["\"the prize is life\" but it is already possessed", "the speaker wins nothing", "the caller apologises", "the speaker hangs up"], 0, "Poetry"));
+
+    // Poem 10: Wilfred Wilson Gibson – "The Stone" (386-400)
+    qs.push(makeQ("\"The Stone\" is written by", ["Wilfred Wilson Gibson", "Fleur Adcock", "Lord Byron", "Geoffrey Chaucer"], 0, "Poetry"));
+    qs.push(makeQ("The central theme of the poem is", ["the devastating impact of war on ordinary people", "the beauty of nature", "romantic love", "religious faith"], 0, "Poetry"));
+    qs.push(makeQ("The poem tells the story of", ["a man who throws a stone and kills someone", "a stonecutter", "a child playing with stones", "a stone wall"], 0, "Poetry"));
+    qs.push(makeQ("The tone of the poem is", ["tragic and poignant", "joyful", "sarcastic", "humorous"], 0, "Poetry"));
+    qs.push(makeQ("The poem is written in", ["dramatic monologue", "sonnet form", "ballad form", "free verse"], 0, "Poetry"));
+    qs.push(makeQ("The speaker is", ["a man reflecting on an accidental killing", "a soldier in battle", "a judge", "a victim"], 0, "Poetry"));
+    qs.push(makeQ("The stone is a symbol of", ["the random and senseless violence of war", "childhood innocence", "nature's power", "construction"], 0, "Poetry"));
+    qs.push(makeQ("The poem's language is", ["simple and direct", "ornate and complex", "archaic", "abstract"], 0, "Poetry"));
+    qs.push(makeQ("The speaker's guilt is evident when he", ["cannot forget the face of the man he killed", "celebrates his action", "blames others", "feels no remorse"], 0, "Poetry"));
+    qs.push(makeQ("The poem's structure is", ["a series of quatrains with a regular rhyme scheme", "free verse", "a sonnet", "a villanelle"], 0, "Poetry"));
+    qs.push(makeQ("The theme of \"consequences\" is central because", ["one small action leads to irreversible tragedy", "the stone is harmless", "the speaker escapes punishment", "the victim survives"], 0, "Poetry"));
+    qs.push(makeQ("The poem's setting is", ["a rural landscape", "a city street", "a battlefield", "a courtroom"], 0, "Poetry"));
+    qs.push(makeQ("The phrase \"the stone that killed him\" is", ["a refrain that emphasizes the finality of death", "a metaphor for war", "a description of a weapon", "a joke"], 0, "Poetry"));
+    qs.push(makeQ("The speaker's psychological state is one of", ["haunted remorse", "pride", "indifference", "joy"], 0, "Poetry"));
+    qs.push(makeQ("The poem's overall message is that", ["war and violence leave lasting scars on both victims and perpetrators", "stones are dangerous", "killing is sometimes justified", "nature is cruel"], 0, "Poetry"));
+
     return qs;
-  }
+}
 
   function generateEconomicsBank() {
     var qs=[];
@@ -8245,8 +8393,7 @@ SECTION Q: INFORMATION TECHNOLOGY IN ACCOUNTING (10 QUESTIONS)
     });
   }
 
-  function generateEnglishBank() {
-    var qs=[];
+  function generateEnglishBank() {  var qs=[];
     qs.push(makeQ("The committee _______ its report before the deadline.", ["submit", "submits", "submitted", "submitting"], 2, "Grammar"));
     qs.push(makeQ("Neither the teacher nor the students _______ present at the assembly.", ["was", "is", "were", "are"], 2, "Grammar"));
     qs.push(makeQ("The **indolent** boy failed the examination. (Choose opposite)", ["hardworking", "lazy", "brilliant", "careless"], 1, "Vocabulary"));
@@ -8617,6 +8764,32 @@ SECTION Q: INFORMATION TECHNOLOGY IN ACCOUNTING (10 QUESTIONS)
       setupPanel.classList.remove('hidden');
     }
   };
+
+  window.startExamination = function() {
+    var err = validateDetails();
+    if (err) {
+      setupWarning.innerText = err;
+      return;
+    }
+    setupWarning.innerText = "";
+    var subjectKey = subjectSelect.value;
+    currentSubjectTaken = subjectKey;
+    var questionBank = loadExamQuestions(subjectKey);
+    currentExamQuestions = questionBank;
+    userSelections = new Array(currentExamQuestions.length).fill(null);
+    currentQIndex = 0;
+    examActive = true;
+    timeSeconds = 35 * 60;
+    timerDisplaySpan.innerText = "35:00";
+    startTimerAndExam();
+    setupPanel.classList.add("hidden");
+    examAreaDiv.classList.remove("hidden");
+    navControlGroup.classList.remove("hidden");
+    renderCurrentQuestion();
+    updateProgressStats();
+    restartExamBtn.classList.add("hidden");
+  };
+
   var anotherSubjectSelect = document.getElementById('anotherSubjectSelect');
   var fullNameInput = document.getElementById('fullName');
   var jambRegInput = document.getElementById('jambRegNo');
@@ -8649,28 +8822,42 @@ SECTION Q: INFORMATION TECHNOLOGY IN ACCOUNTING (10 QUESTIONS)
     commercial: ['economics', 'commerce', 'financial accounting', 'mathematics', 'english']
   };
 
-  deptSelect.addEventListener('change', () => {
-    var dept = deptSelect.value;
-    subjectSelect.innerHTML = '<option value="">Choose subject</option>';
-    if (dept && subjectMap[dept]) {
-      subjectMap[dept].forEach(sub => {
-        var display = sub.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
-        subjectSelect.innerHTML += `<option value="${sub}">${display}</option>`;
-      });
-      subjectSelect.disabled = false;
-    } else {
-      subjectSelect.disabled = true;
-    }
-  });
+  function updateConfirmStartState() {
+    if (!confirmStart) return;
+    var allFieldsFilled = fullNameInput && jambRegInput && examSeatInput && deptSelect && subjectSelect &&
+      fullNameInput.value.trim() && jambRegInput.value.trim() && examSeatInput.value.trim() &&
+      deptSelect.value && subjectSelect.value;
+    confirmStart.disabled = !allFieldsFilled;
+    confirmStart.style.opacity = allFieldsFilled ? '1' : '0.65';
+  }
 
-  document.addEventListener('DOMContentLoaded', () => {
+  function setupEventListeners() {
     if (!introScreen || !setupPanel) {
       console.error('Intro or setup panel missing', { introScreen, setupPanel });
       return;
     }
+
+    if (deptSelect) {
+      deptSelect.addEventListener('change', () => {
+        var dept = deptSelect.value;
+        subjectSelect.innerHTML = '<option value="">Choose subject</option>';
+        if (dept && subjectMap[dept]) {
+          subjectMap[dept].forEach(sub => {
+            var display = sub.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+            subjectSelect.innerHTML += `<option value="${sub}">${display}</option>`;
+          });
+          subjectSelect.disabled = false;
+        } else {
+          subjectSelect.disabled = true;
+        }
+        updateConfirmStartState();
+      });
+    } else {
+      console.error('Department selector not found');
+    }
+
     if (beginBtn) {
       beginBtn.addEventListener('click', () => {
-        console.log('Begin mock exam clicked');
         openSetupPanel();
       });
       beginBtn.addEventListener('mousedown', () => {
@@ -8682,7 +8869,29 @@ SECTION Q: INFORMATION TECHNOLOGY IN ACCOUNTING (10 QUESTIONS)
     } else {
       console.error('Begin mock exam button not found');
     }
-  });
+
+    if (confirmStart) {
+      confirmStart.addEventListener('click', startExamination);
+    } else {
+      console.error('Confirm start exam button not found');
+    }
+
+    [fullNameInput, jambRegInput, examSeatInput].forEach(function(input) {
+      if (input) input.addEventListener('input', updateConfirmStartState);
+    });
+
+    if (subjectSelect) {
+      subjectSelect.addEventListener('change', updateConfirmStartState);
+    }
+
+    updateConfirmStartState();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupEventListeners);
+  } else {
+    setupEventListeners();
+  }
 
   function validateDetails() {
     if(!fullNameInput.value.trim()) return "Full name required";
@@ -9051,27 +9260,7 @@ SECTION Q: INFORMATION TECHNOLOGY IN ACCOUNTING (10 QUESTIONS)
     currentSubjectTaken = "";
   }
 
-  confirmStart.addEventListener('click', () => {
-    var err = validateDetails();
-    if(err) { setupWarning.innerText = err; return; }
-    setupWarning.innerText = "";
-    var subjectKey = subjectSelect.value;
-    currentSubjectTaken = subjectKey;
-    var questionBank = loadExamQuestions(subjectKey);
-    currentExamQuestions = questionBank;
-    userSelections = new Array(currentExamQuestions.length).fill(null);
-    currentQIndex = 0;
-    examActive = true;
-    timeSeconds = 35*60;
-    timerDisplaySpan.innerText = "35:00";
-    startTimerAndExam();
-    setupPanel.classList.add("hidden");
-    examAreaDiv.classList.remove("hidden");
-    navControlGroup.classList.remove("hidden");
-    renderCurrentQuestion();
-    updateProgressStats();
-    restartExamBtn.classList.add("hidden");
-  });
+
 
   prevBtn.addEventListener('click', () => {
     if(!examActive && !reviewMode) return;
