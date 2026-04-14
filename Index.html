@@ -244,6 +244,25 @@
     margin-bottom: 32px;
   }
 
+  .poem-title {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    color: #4b2e83;
+    font-style: italic;
+  }
+
+  .poetry-flag {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 10px 16px;
+    border-radius: 18px;
+    background: #fff4e5;
+    border: 1px solid #f0c988;
+    color: #9b4d12;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+  }
+
   .options-list {
     display: flex;
     flex-direction: column;
@@ -666,7 +685,7 @@
     <div id="introScreen" class="intro-panel">
       <div class="jamb-logo">🎓 JAMB MOCK 2025</div>
       <p style="margin: 12px 0 24px; color: #2c5e2e;">CBT simulation • 100 objective questions • 35 minutes</p>
-      <button id="beginMockBtn" type="button" class="start-btn" onclick="document.getElementById('introScreen').classList.add('hidden'); document.getElementById('setupPanel').classList.remove('hidden');">▶ START MOCK EXAM</button>
+      <button id="beginMockBtn" type="button" class="start-btn">▶ START MOCK EXAM</button>
       <p style="margin-top: 24px; font-size:0.8rem;">✔️ JAMB syllabus compliant ✔️ 2025/2026 curriculum ✔️ Randomized per attempt</p>
     </div>
 
@@ -797,7 +816,7 @@
   };
 
   // helper to create question object (auto template explanation if omitted)
-  function makeQ(questionText, optionsArray, correctIndex, topicName, explanationText = "") {
+  function makeQ(questionText, optionsArray, correctIndex, topicName, explanationText = "", extraMeta = {}) {
     var correctOption, correctLetter;
     if (Array.isArray(correctIndex)) {
       correctOption = correctIndex.map(i => optionsArray[i]).join(', ');
@@ -809,7 +828,21 @@
     var baseExplanation = `The correct answer is ${correctLetter}. ${correctOption}. ` +
       `This relates to ${topicName || "the tested topic"}. Review this concept to strengthen your understanding.`;
     var explanation = explanationText && explanationText.toString().trim() ? explanationText : baseExplanation;
-    return { text: questionText, opts: optionsArray, correctIdx: correctIndex, topic: topicName, explanation };
+    return Object.assign({ text: questionText, opts: optionsArray, correctIdx: correctIndex, topic: topicName, explanation }, extraMeta);
+  }
+
+  function assignPoemTitle(qs, title, startIndex, count) {
+    var endIndex = startIndex + count;
+    for (var i = startIndex; i < qs.length && i < endIndex; i++) {
+      if (qs[i]) qs[i].poemTitle = title;
+    }
+  }
+
+  function assignSourceTitle(qs, title, startIndex, count) {
+    var endIndex = startIndex + count;
+    for (var i = startIndex; i < qs.length && i < endIndex; i++) {
+      if (qs[i]) qs[i].title = title;
+    }
   }
 
   // ----- BIOLOGY (JAMB CURRICULUM: cell biology, ecology, genetics, reproduction, homeostasis, etc) -----
@@ -3269,7 +3302,7 @@ function generateLiteratureBank() {
     qs.push(makeQ("A group of lines in a poem is a", ["stanza", "paragraph", "scene", "act"], 0, "Literary Principles"));
     qs.push(makeQ("The writer's attitude toward the subject is the", ["mood", "tone", "theme", "style"], 1, "Literary Principles"));
     qs.push(makeQ("\"The boy is as cunning as a fox\" is a", ["metaphor", "simile", "personification", "hyperbole"], 1, "Literary Principles"));
-    qs.push(makeQ("The opposite of prose is", ["drama", "poetry", "fiction", "nonfiction"], 1, "Literary Principles"));
+    qs.push(makeQ("The opposite of prose is", ["drama", "poetry", "fiction", "nonfiction"], 1, "Literary Principles")); 
     qs.push(makeQ("The character who provides comic relief in a tragedy is called", ["antagonist", "foil", "clown", "chorus"], 2, "Literary Principles"));
     qs.push(makeQ("A literary work that ridicules human vice is a", ["satire", "elegy", "epic", "romance"], 0, "Literary Principles"));
     qs.push(makeQ("The time and place of a story is the", ["plot", "setting", "theme", "style"], 1, "Literary Principles"));
@@ -3677,6 +3710,22 @@ function generateLiteratureBank() {
     qs.push(makeQ("The phrase \"the stone that killed him\" is", ["a refrain that emphasizes the finality of death", "a metaphor for war", "a description of a weapon", "a joke"], 0, "Poetry"));
     qs.push(makeQ("The speaker's psychological state is one of", ["haunted remorse", "pride", "indifference", "joy"], 0, "Poetry"));
     qs.push(makeQ("The poem's overall message is that", ["war and violence leave lasting scars on both victims and perpetrators", "stones are dangerous", "killing is sometimes justified", "nature is cruel"], 0, "Poetry"));
+
+    assignSourceTitle(qs, 'The Marriage of Anansewa', 80, 40);
+    assignSourceTitle(qs, 'Antony and Cleopatra', 120, 40);
+    assignSourceTitle(qs, 'So the Path Does Not Die', 160, 30);
+    assignSourceTitle(qs, 'Redemption Road', 190, 40);
+    assignSourceTitle(qs, 'Path of Lucas: The Journey He Endured', 240, 40);
+    assignPoemTitle(qs, 'Once Upon a Time', 280, 10);
+    assignPoemTitle(qs, 'New Tongue', 290, 10);
+    assignPoemTitle(qs, 'Night', 300, 10);
+    assignPoemTitle(qs, 'Not My Business', 310, 10);
+    assignPoemTitle(qs, 'Hearty Garlands', 320, 10);
+    assignPoemTitle(qs, 'The Breast of the Sea', 330, 10);
+    assignPoemTitle(qs, 'She Walks in Beauty', 340, 15);
+    assignPoemTitle(qs, "The Nun's Priest's Tale", 355, 15);
+    assignPoemTitle(qs, 'The Telephone Call', 370, 15);
+    assignPoemTitle(qs, 'The Stone', 385, 15);
 
     return qs;
 }
@@ -8747,15 +8796,8 @@ SECTION Q: INFORMATION TECHNOLOGY IN ACCOUNTING (10 QUESTIONS)
   var currentSubjectTaken = "";        // track current subject being examined
 
   // DOM elements
-  var introScreen = document.getElementById('introScreen');
-  var setupPanel = document.getElementById('setupPanel');
-  var examAreaDiv = document.getElementById('examArea');
-  var subjectSelectPanel = document.getElementById('subjectSelectPanel');
-  var resultsSummaryPanel = document.getElementById('resultsSummaryPanel');
-  var beginBtn = document.getElementById('beginMockBtn');
-  var confirmStart = document.getElementById('confirmStartExam');
-  var deptSelect = document.getElementById('deptSelect');
-  var subjectSelect = document.getElementById('subjectSelect');
+  var introScreen, setupPanel, examAreaDiv, subjectSelectPanel, resultsSummaryPanel, beginBtn, confirmStart, deptSelect, subjectSelect;
+  var anotherSubjectSelect, fullNameInput, jambRegInput, examSeatInput, restartExamBtn, prevBtn, nextBtn, submitExamBtn, startAnotherExamBtn, exitExamBtn, printResultsBtn, reviewLastExamBtn, finalReturnHomeBtn, questionContainer, navControlGroup, statusMsgDiv, timerDisplaySpan, answeredCountSpan, progressFillBar, setupWarning, resultsTableBody, totalExamsTaken, overallScore, bestSubject, candidateSummaryName;
 
   window.openSetupPanel = function() {
     if (introScreen && setupPanel) {
@@ -8768,10 +8810,10 @@ SECTION Q: INFORMATION TECHNOLOGY IN ACCOUNTING (10 QUESTIONS)
   window.startExamination = function() {
     var err = validateDetails();
     if (err) {
-      setupWarning.innerText = err;
+      if (setupWarning) setupWarning.innerText = err;
       return;
     }
-    setupWarning.innerText = "";
+    if (setupWarning) setupWarning.innerText = "";
     var subjectKey = subjectSelect.value;
     currentSubjectTaken = subjectKey;
     var questionBank = loadExamQuestions(subjectKey);
@@ -8780,41 +8822,15 @@ SECTION Q: INFORMATION TECHNOLOGY IN ACCOUNTING (10 QUESTIONS)
     currentQIndex = 0;
     examActive = true;
     timeSeconds = 35 * 60;
-    timerDisplaySpan.innerText = "35:00";
+    if (timerDisplaySpan) timerDisplaySpan.innerText = "35:00";
     startTimerAndExam();
-    setupPanel.classList.add("hidden");
-    examAreaDiv.classList.remove("hidden");
-    navControlGroup.classList.remove("hidden");
+    if (setupPanel) setupPanel.classList.add("hidden");
+    if (examAreaDiv) examAreaDiv.classList.remove("hidden");
+    if (navControlGroup) navControlGroup.classList.remove("hidden");
     renderCurrentQuestion();
     updateProgressStats();
-    restartExamBtn.classList.add("hidden");
+    if (restartExamBtn) restartExamBtn.classList.add("hidden");
   };
-
-  var anotherSubjectSelect = document.getElementById('anotherSubjectSelect');
-  var fullNameInput = document.getElementById('fullName');
-  var jambRegInput = document.getElementById('jambRegNo');
-  var examSeatInput = document.getElementById('examSeat');
-  var restartExamBtn = document.getElementById('restartExamBtn');
-  var prevBtn = document.getElementById('prevBtn');
-  var nextBtn = document.getElementById('nextBtn');
-  var submitExamBtn = document.getElementById('submitExamBtn');
-  var startAnotherExamBtn = document.getElementById('startAnotherExamBtn');
-  var exitExamBtn = document.getElementById('exitExamBtn');
-  var printResultsBtn = document.getElementById('printResultsBtn');
-  var reviewLastExamBtn = document.getElementById('reviewLastExamBtn');
-  var finalReturnHomeBtn = document.getElementById('finalReturnHomeBtn');
-  var questionContainer = document.getElementById('questionContainer');
-  var navControlGroup = document.getElementById('navControlGroup');
-  var statusMsgDiv = document.getElementById('statusMsg');
-  var timerDisplaySpan = document.getElementById('timerDisplay');
-  var answeredCountSpan = document.getElementById('answeredCount');
-  var progressFillBar = document.getElementById('progressFillBar');
-  var setupWarning = document.getElementById('setupWarning');
-  var resultsTableBody = document.getElementById('resultsTableBody');
-  var totalExamsTaken = document.getElementById('totalExamsTaken');
-  var overallScore = document.getElementById('overallScore');
-  var bestSubject = document.getElementById('bestSubject');
-  var candidateSummaryName = document.getElementById('candidateSummaryName');
 
   var subjectMap = {
     science: ['biology', 'chemistry', 'physics', 'mathematics', 'english'],
@@ -8832,6 +8848,41 @@ SECTION Q: INFORMATION TECHNOLOGY IN ACCOUNTING (10 QUESTIONS)
   }
 
   function setupEventListeners() {
+    introScreen = document.getElementById('introScreen');
+    setupPanel = document.getElementById('setupPanel');
+    examAreaDiv = document.getElementById('examArea');
+    subjectSelectPanel = document.getElementById('subjectSelectPanel');
+    resultsSummaryPanel = document.getElementById('resultsSummaryPanel');
+    beginBtn = document.getElementById('beginMockBtn');
+    confirmStart = document.getElementById('confirmStartExam');
+    deptSelect = document.getElementById('deptSelect');
+    subjectSelect = document.getElementById('subjectSelect');
+    anotherSubjectSelect = document.getElementById('anotherSubjectSelect');
+    fullNameInput = document.getElementById('fullName');
+    jambRegInput = document.getElementById('jambRegNo');
+    examSeatInput = document.getElementById('examSeat');
+    restartExamBtn = document.getElementById('restartExamBtn');
+    prevBtn = document.getElementById('prevBtn');
+    nextBtn = document.getElementById('nextBtn');
+    submitExamBtn = document.getElementById('submitExamBtn');
+    startAnotherExamBtn = document.getElementById('startAnotherExamBtn');
+    exitExamBtn = document.getElementById('exitExamBtn');
+    printResultsBtn = document.getElementById('printResultsBtn');
+    reviewLastExamBtn = document.getElementById('reviewLastExamBtn');
+    finalReturnHomeBtn = document.getElementById('finalReturnHomeBtn');
+    questionContainer = document.getElementById('questionContainer');
+    navControlGroup = document.getElementById('navControlGroup');
+    statusMsgDiv = document.getElementById('statusMsg');
+    timerDisplaySpan = document.getElementById('timerDisplay');
+    answeredCountSpan = document.getElementById('answeredCount');
+    progressFillBar = document.getElementById('progressFillBar');
+    setupWarning = document.getElementById('setupWarning');
+    resultsTableBody = document.getElementById('resultsTableBody');
+    totalExamsTaken = document.getElementById('totalExamsTaken');
+    overallScore = document.getElementById('overallScore');
+    bestSubject = document.getElementById('bestSubject');
+    candidateSummaryName = document.getElementById('candidateSummaryName');
+
     if (!introScreen || !setupPanel) {
       console.error('Intro or setup panel missing', { introScreen, setupPanel });
       return;
@@ -8840,15 +8891,17 @@ SECTION Q: INFORMATION TECHNOLOGY IN ACCOUNTING (10 QUESTIONS)
     if (deptSelect) {
       deptSelect.addEventListener('change', () => {
         var dept = deptSelect.value;
-        subjectSelect.innerHTML = '<option value="">Choose subject</option>';
-        if (dept && subjectMap[dept]) {
-          subjectMap[dept].forEach(sub => {
-            var display = sub.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-            subjectSelect.innerHTML += `<option value="${sub}">${display}</option>`;
-          });
-          subjectSelect.disabled = false;
-        } else {
-          subjectSelect.disabled = true;
+        if (subjectSelect) {
+          subjectSelect.innerHTML = '<option value="">Choose subject</option>';
+          if (dept && subjectMap[dept]) {
+            subjectMap[dept].forEach(sub => {
+              var display = sub.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+              subjectSelect.innerHTML += `<option value="${sub}">${display}</option>`;
+            });
+            subjectSelect.disabled = false;
+          } else {
+            subjectSelect.disabled = true;
+          }
         }
         updateConfirmStartState();
       });
@@ -8884,7 +8937,48 @@ SECTION Q: INFORMATION TECHNOLOGY IN ACCOUNTING (10 QUESTIONS)
       subjectSelect.addEventListener('change', updateConfirmStartState);
     }
 
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        if(!examActive && !reviewMode) return;
+        if(currentQIndex > 0) { currentQIndex--; renderCurrentQuestion(); }
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        if(!examActive && !reviewMode) return;
+        if(currentQIndex < currentExamQuestions.length-1) { currentQIndex++; renderCurrentQuestion(); }
+      });
+    }
+    if (submitExamBtn) {
+      submitExamBtn.addEventListener('click', () => {
+        if(reviewMode && !examActive) {
+          showSubjectSelectionPanel();
+        } else {
+          submitExamFinal("submitted");
+        }
+      });
+    }
+    if (restartExamBtn) {
+      restartExamBtn.addEventListener('click', () => restartFull());
+    }
+    if (startAnotherExamBtn) {
+      startAnotherExamBtn.addEventListener('click', () => startAnotherExam());
+    }
+    if (exitExamBtn) {
+      exitExamBtn.addEventListener('click', () => showResultsSummary());
+    }
+    if (reviewLastExamBtn) {
+      reviewLastExamBtn.addEventListener('click', () => showReviewExam());
+    }
+    if (finalReturnHomeBtn) {
+      finalReturnHomeBtn.addEventListener('click', () => restartFull());
+    }
+    if (printResultsBtn) {
+      printResultsBtn.addEventListener('click', () => window.print());
+    }
+
     updateConfirmStartState();
+    restartFull();
   }
 
   if (document.readyState === 'loading') {
@@ -8980,6 +9074,8 @@ SECTION Q: INFORMATION TECHNOLOGY IN ACCOUNTING (10 QUESTIONS)
         <span class="q-num">Question ${currentQIndex+1} of ${currentExamQuestions.length}</span>
         <span class="topic-tag">📖 ${q.topic || "JAMB Syllabus"}</span>
       </div>
+      ${q.topic === 'Poetry' ? `<div class="poetry-flag">📜 Poetry question</div>` : ''}
+      ${q.title ? `<div class="poem-title">📚 Source: "${q.title}"</div>` : q.poemTitle ? `<div class="poem-title">📜 Poem: "${q.poemTitle}"</div>` : ''}
       <div class="question-text">${q.text}</div>
       <div class="options-list" id="optionsList">${optionsHtml}</div>
       ${reviewExplanationHtml}
@@ -9262,30 +9358,6 @@ SECTION Q: INFORMATION TECHNOLOGY IN ACCOUNTING (10 QUESTIONS)
 
 
 
-  prevBtn.addEventListener('click', () => {
-    if(!examActive && !reviewMode) return;
-    if(currentQIndex > 0) { currentQIndex--; renderCurrentQuestion(); }
-  });
-  nextBtn.addEventListener('click', () => {
-    if(!examActive && !reviewMode) return;
-    if(currentQIndex < currentExamQuestions.length-1) { currentQIndex++; renderCurrentQuestion(); }
-  });
-  submitExamBtn.addEventListener('click', () => {
-    if(reviewMode && !examActive) {
-      showSubjectSelectionPanel();
-    } else {
-      submitExamFinal("submitted");
-    }
-  });
-  restartExamBtn.addEventListener('click', () => restartFull());
-  startAnotherExamBtn.addEventListener('click', () => startAnotherExam());
-  exitExamBtn.addEventListener('click', () => showResultsSummary());
-  reviewLastExamBtn.addEventListener('click', () => showReviewExam());
-  finalReturnHomeBtn.addEventListener('click', () => restartFull());
-  printResultsBtn.addEventListener('click', () => window.print());
-
-  // initial setup
-  restartFull();
 </script>
 </body>
 </html>
